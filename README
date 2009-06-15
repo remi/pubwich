@@ -88,10 +88,10 @@ INSTALLATION
 
 [ ] Décider d'un meilleur système de configuration/template. Est-ce que
     lorsqu'on active un service, il se rajoute automatique dans le
-	template? Est-ce qu'on laisse le contrôle total sur le "markup"
-	à l'utilisateur?
+    template? Est-ce qu'on laisse le contrôle total sur le "markup"
+    à l'utilisateur?
 
-[ ] Créer des répertoires `trunk`, `branches` et `tags` dans le dépot.
+[x] Créer des répertoires `trunk`, `branches` et `tags` dans le dépot.
 
 [ ] Apprendre à utiliser les "branches"
 

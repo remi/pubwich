@@ -1,0 +1,25 @@
+License du code source
+============================================================================================
+Pubwich est distribué sous licence Creative Commons BY-SA[1] ce qui signifie que vous
+pouvez l'utiliser (même à des fins commerciales) en indiquant clairement que Pubwich
+a été utilisé. Vous êtes également libre de modifier le code source de l'application.
+Cependant, si vous désirez distribuer vos modifications, vous devrez partager le code
+source modifié sous la même license.
+
+Apparence visuelle
+============================================================================================
+L'apparence visuelle de remiprevost.com est © Copyright 2008-2009 Rémi Prévost.
+Vous pouvez cependant utiliser les fichiers `index.tpl.php` et `screen.css` du dossier
+`themes/default/` pour vous créer un nouveau "thème". Il est d'ailleurs fortement conseillé
+de le faire si vous tenez à ce que votre implémentation soit unique :)
+
+Librairies externes
+============================================================================================
+L'apparence visuelle de remiprevost.com est © Copyright 2008-2009 Rémi Prévost.
+Les librairies Cache_Lite, Savant3, PHP Markdown et PHP Smartypants sont incluses
+avec leurs notices de copyright respectives.
+
+Liens
+============================================================================================
+[1]: http://creativecommons.org/licenses/by-sa/2.0/ca/deed.fr_CA
+

@@ -1,0 +1,2 @@
+# on ne veut pas que quelqu'un bombarde le fichier cron.php
+deny from all

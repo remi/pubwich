@@ -1,0 +1,471 @@
+/*
+
+ @@@ Renommer ce fichier en `screen.css`
+
+*/
+@charset "UTF-8";
+
+/* ****************************************************
+
+	@file:		  screen.css
+	@description: Feuille de style d'écran
+	@author:      remi (exomel.com)
+	@updated:	  20090518
+
+	@notes:       Vous pouvez vous servir de ce fichier
+	              pour créer un nouveau thème pour
+				  Pubwich.
+
+******************************************************/
+
+/**
+ *	Basic
+ ******************************************************************/
+
+@import url(reset.css);
+
+.clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .clearfix {display: inline-block;}
+/* Hides from IE-mac \*/ * html .clearfix {height: 1%;} .clearfix {display: block;} /* End hide from IE-mac */
+
+hr { display: none; } 
+a * { cursor: pointer; }
+
+body {
+	background: #fff;
+	color: #222;
+	font-size: 62.5%;
+	line-height: 1.5;
+	font-family: "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
+				 /* Yay for Liberation! */
+}
+
+#wrap {
+	font-size: 110%;
+	width: 960px;
+	margin: 40px auto 0;
+}
+
+#skip {
+	position: absolute;
+	left: -999px;
+}
+
+a {
+	color: #327e61;
+	text-decoration: none;
+	border-bottom: 1px dotted #327e61;
+}
+
+a:hover {
+	color: #196145;
+	border-color: #196145;
+}
+
+acronym, abbr {
+	cursor: help;
+}
+
+h1 {
+	font-size: 250%;
+	font-weight: normal;
+	text-align: center;
+	padding-bottom: 0.7em;
+	margin-bottom: 0.3em;
+	margin-left: 335px;
+	width: 380px;
+	color: #666;
+}
+
+h1 strong {
+	color: #fafafa;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 140%;
+}
+
+h1 a {
+	color: #666;
+	border: none;
+}
+
+.erreur {
+	background: #fff;
+	opacity: 0.2;
+	padding: 8px 10px;
+}
+
+/**
+ *	Pied de page
+ ******************************************************************/
+ 
+#footer {
+	text-align: center;
+	padding: 1.3em 0 1.9em;
+	color: #777;
+}
+
+#footer .footer-inner {
+	width: 380px;
+	margin: 0 0 0 335px;
+}
+
+#footer a {
+	color: #aaa;
+}
+
+#footer a:hover {
+	color: #fff;
+}
+
+/**
+ *	Colonnes
+ ******************************************************************/
+ 
+.col1 {
+	width: 315px;
+	margin-right: 20px;
+	float: left;
+}
+
+.col2 {
+	width: 380px;
+	margin-right: 20px;
+	float: left;
+}
+
+.col3 {
+	width: 225px;
+	float: left;
+}
+
+/**
+ * Boites
+ ******************************************************************/
+ 
+.boite {
+	margin: 0 0 18px;	
+}
+
+.boite h2 {
+	font-size: 130%;
+	padding: 8px 10px 9px;
+	background: #eee;
+	margin-bottom: 0.3em;
+	color: #333;
+	-moz-border-radius: 0.2em;
+	-webkit-border-radius: 0.2em;
+	line-height: 1.1;
+}
+
+.boite h2 span {
+	font-size: 80%;
+	color: #444;
+	font-weight: normal;
+}
+
+.boite h2 a {
+	text-decoration: none;
+	border: none;
+}
+
+.flickr h2 a {
+	color: #0063DC;
+}
+
+.flickr h2 em {
+	color: #FF0084;
+	font-style: normal;
+}
+
+.lastfm h2 a {
+	color: #DC413A;
+}
+
+.twitter h2 a {
+	color: #33CCFF;
+}
+
+.exomel h2 a {
+	color: #86BAAB;
+}
+
+.delicious h2 a {
+	color: #3274D0;	
+}
+
+.readernaut h2 a {
+	color: #B6C125;
+}
+
+/**
+ *	WTF (aussi appelé "intro")
+ ******************************************************************/
+
+.wtf {
+	margin-bottom: 0;
+}
+
+.wtf div {
+	padding: 5px;
+}
+
+.wtf p {
+	margin: 0 0 1em;
+}
+
+/**
+ *	Flickr
+ ******************************************************************/
+
+.flickr ul {
+	padding-top: 5px;
+}
+
+.flickr li {
+	float: left;
+	display: block;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+.flickr li.derniere {
+	margin-right: 0;
+}
+
+.flickr li a, .flickr li img {
+	float: left;
+	display: block;
+	border: none;
+}
+
+/**
+ *	Twitter
+ ******************************************************************/
+ 
+.twitter {
+	
+}
+
+.twitter li {
+	padding: 5px 10px 7px;
+	margin: 0 0 5px;
+/*	background: #1c1c1c; */
+	background: rgba(230, 230, 230, 0.2);
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+.twitter li span.date {
+	display: block;
+	float: left;
+	width: 85px;
+	margin-right: 10px;
+}
+
+.twitter li span.date a {
+	color: #444;
+	text-decoration: none;
+	border: none;
+}
+
+.twitter li p {
+	float: left;
+	display: block;
+	width: 260px;
+}
+
+.twitter li em.from {
+	display: none;
+}
+
+/**
+ *	del.icio.us
+ ******************************************************************/
+ 
+.delicious {
+	margin-right: 0;
+}
+
+.delicious ul {
+	margin: 0 0 0 19px;
+	padding-top: 5px;
+}
+
+.delicious li {
+	margin: 0 0 5px;
+	padding: 0 0 5px;
+	line-height: 1.4;
+	list-style: circle;
+}
+.delicious a {
+	
+}
+
+/**
+ *	last.fm
+ ******************************************************************/
+
+.lastfm ul {
+	padding-top: 5px;
+}
+ 
+.lastfm li {
+	float: left;
+	margin: 0 0 5px 0;
+	/*background: #1c1c1c;*/
+}
+
+
+.lastfm li a {
+	text-decoration: none;
+	border: none;
+	padding: 5px 0 5px 5px;
+	background: rgba(230, 230, 230, 0.2);
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+.lastfm li a:hover {
+}
+
+.lastfm li img {
+	background: url("img/cover.png");
+}
+
+.lastfm li a, .lastfm li img {
+	display: block;
+	float: left;
+}
+
+.lastfm li a strong {
+	float: left;
+	display: block;
+	width: 231px;
+	font-weight: normal;
+	padding: 8px 5px 8px 10px;
+	color: #777;
+}
+
+.lastfm li a span {
+	font-size: 100%;
+	display: block;
+	font-weight: bold;
+	color: #999;
+	
+}
+
+.lastfm li.premier span {
+	font-size: 145%;
+}
+
+.lastfm li.deuxieme span {
+	font-size: 130%;
+}
+
+.lastfm li.troisieme span {
+	font-size: 120%;
+}
+
+.lastfm li.quatrieme span {
+	font-size: 110%;
+}
+
+.lastfm li.cinquieme span {
+	
+}
+
+/**
+ *	RSS
+ ******************************************************************/
+
+.rss {
+	margin-right: 0;
+}
+
+.rss ul {
+	margin: 0 0 0 19px;
+	padding-top: 5px;
+}
+
+.rss li {
+	margin: 0 0 5px;
+	padding: 0 0 5px;
+	line-height: 1.4;
+	list-style: circle;
+}
+
+.rss li small {
+	color: #666;
+}
+
+
+/**
+ *	Facebook
+ ******************************************************************/
+
+/**
+ *	Readernaut
+ ******************************************************************/
+
+.readernaut ul {
+	padding-top: 5px;
+}
+ 
+.readernaut li {
+	float: left;
+	margin: 0 0 5px 0;
+}
+
+.readernaut li a {
+	text-decoration: none;
+	border: none;
+	/*background: #1c1c1c;*/
+	background: rgba(230, 230, 230, 0.2);
+	padding: 5px 0 5px 5px;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+}
+
+.readernaut li a:hover {
+}
+
+.readernaut li a, .readernaut li img {
+	display: block;
+	float: left;
+}
+
+.readernaut li img {
+	
+}
+
+.readernaut li a strong {
+	float: left;
+	display: block;
+	width: 150px;
+	font-weight: normal;
+	padding: 8px 10px 8px 10px;
+	color: #777;
+}
+
+.readernaut li a span {
+	display: block;
+	font-weight: bold;
+	color: #999;
+	line-height: 1.2;
+	padding-bottom: 0.2em;
+}
+
+/**
+ *	Crédits
+ ******************************************************************/
+ 
+.credits p {
+	padding: 5px;
+	margin: 0 0 0.3em;
+}
+
+.credits a.pubwich {
+}
+
+.credits a.pubwich strong {
+}

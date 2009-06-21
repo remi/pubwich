@@ -8,6 +8,7 @@
 
 	define( 'PUBWICH_LOGLEVEL', 0 );
 
+	define('PUBWICH_URL', 'http://localhost/pubwich/');
 	define('PUBWICH_THEME', 'default');
 
 	// Localisation

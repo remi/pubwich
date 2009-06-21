@@ -48,7 +48,7 @@
 			PubwichLog::log( 1, "Initialisation de l'objet Pubwich" );
 
 			// Assignation du thème
-			self::$theme_url = '/themes/'.PUBWICH_THEME;
+			self::$theme_url = PUBWICH_URL.'themes/'.PUBWICH_THEME;
 			self::$theme_path = dirname(__FILE__).'/../themes/'.PUBWICH_THEME;
 
 			// Création des objets PHP

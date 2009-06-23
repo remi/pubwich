@@ -34,6 +34,9 @@
 	define( 'READERNAUT_USERNAME',   '__________________' );
 	define( 'READERNAUT_TOTAL',      10 );
 
+	define( 'YOUTUBE_USERNAME',      '__________________' );
+	define( 'YOUTUBE_TOTAL',         10 );
+
 	Pubwich::setServices(
 		array(
 			array('Flickr', 'photos', array( FLICKR_KEY, FLICKR_USERID, FLICKR_TOTAL ) ),
@@ -41,7 +44,8 @@
 			array('Delicious', 'liens', array( DELICIOUS_USERNAME, DELICIOUS_TOTAL ) ),
 			array('Twitter', 'etats', array( TWITTER_USERID, TWITTER_TOTAL ) ),
 			array('Readernaut', 'livres', array( READERNAUT_USERNAME, READERNAUT_TOTAL ) ),
-			array('Atom', 'billets', array( 'http://remiprevost.com/atom/', 10 ) )
+			array('Atom', 'billets', array( 'http://remiprevost.com/atom/', 10 ) ),
+			array('Youtube', 'videos', array( YOUTUBE_USERNAME, YOUTUBE_TOTAL ) ),
 		)
 	);
 

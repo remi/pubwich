@@ -172,6 +172,37 @@ echo SmartyPants('
 						</ul>
 <? } ?>
 					</div>
+					<div class="boite youtube" id="youtube">
+					<h2><a rel="me" href="http://youtube.com/user/jonhlocke/">Youtube</a> <span>derniers vidéos ajoutés</span></h2>
+<?php 
+						if ( !$this->videos->getData() ) { ?>
+						<div class="erreur">
+							L’API public de <a href="http://youtube.com/">Youtube</a> semble éprouver des problèmes.
+						</div>				
+<?	
+						} else {
+?>
+						<ul class="clearfix">
+<?php
+								$compteur = 0;
+								foreach ( $this->videos->getData() as $video ) {
+									$compteur++;
+									if ( $compteur > $this->videos->total ) { break; }
+							?>
+							<li>
+							<? 
+								$media = $video->children('http://search.yahoo.com/mrss/');
+								$attrs = $media->group->thumbnail[0]->attributes();
+								$img = $attrs['url'];
+								$title = (string) $media->group->title;
+								$url = (string) $media->group->player;
+							?>
+								<a href="<?=$url?>"><img src="<?=$img?>" alt="<?=htmlspecialchars($title)?>" /><strong><?=$title?></strong></a>
+							</li>
+<? } ?>
+						</ul>
+<? } ?>
+					</div>
 					<div class="boite credits">
 						<h2>Crédits</h2>
 						<p>Propulsé par <a href="http://pubwich.com/" class="pubwich"><strong>Pubwich</strong></a>, <a href="http://php.net">PHP&nbsp;5</a>, <a href="http://ca2.php.net/simplexml">SimpleXML</a>, <a href="http://phpsavant.com/yawiki/index.php?area=Savant3">Savant3</a>, <a href="http://pear.php.net/package/Cache_Lite/">Cache_Lite</a>, <a href="http://michelf.com/projets/php-smartypants/">PHP Smartypants</a> et <a href="http://michelf.com/projets/php-markdown/">PHP Markdown</a>.

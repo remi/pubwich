@@ -36,7 +36,7 @@
 		public function getImage( $album ) {
 			$id = $this->buildAlbumId( $album );
 			$image = $this->albumdata[$id]->album->image[1];
-			return ( $image == '' ) ? '/img/cover.png' : $image;
+			return ( $image == '' ) ? Pubwich::getThemeUrl().'/img/cover.png' : $image;
 		}
 
 		/**

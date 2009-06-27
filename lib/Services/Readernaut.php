@@ -3,11 +3,13 @@
 	class Readernaut extends Service {
 		
 		private $url_template	= 'http://readernaut.com/api/v1/xml/%s/books/?order_by=-created';
+		public $username;
 
 		public function __construct( $config ){
 			list($username, $total) = $config;
 			$this->setURL( sprintf( $this->url_template, $username ) );
 			$this->total = $total;
+			$this->username = $username;
 			parent::__construct();
 		}
 

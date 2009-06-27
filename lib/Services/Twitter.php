@@ -3,10 +3,12 @@
 	class Twitter extends Service {
 
 		private $url_template = 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d';
+		public $username;
 
 		public function __construct( $config ){
-			list($id, $total) = $config;
+			list($id, $username, $total) = $config;
 			$this->setURL( sprintf( $this->url_template, $id, $total ) );
+			$this->username = $username;
 			parent::__construct();
 		}
 

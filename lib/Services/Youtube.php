@@ -1,15 +1,15 @@
 <?php
 
-	class Atom extends Service {
+	class Youtube extends Service {
 	
-		private $url_template = '%s';
-		public $feed_url;
+		private $url_template = 'http://gdata.youtube.com/feeds/api/users/%s/uploads?v=2';
+		public $username;
 
 		public function __construct( $config ){
-			list($url, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $url ) );
-			$this->feed_url = $url;
+			list($username, $total) = $config;
+			$this->setURL( sprintf( $this->url_template, $username ) );
 			$this->total = $total;
+			$this->username = $username;
 			parent::__construct();
 		}
 
@@ -22,5 +22,6 @@
 			$data = parent::getData();
 			return $data->entry;
 		}
-
+			
 	}
+

@@ -28,7 +28,7 @@ echo SmartyPants('
 					</div>
 
 					<div class="boite flickr" id="flickr">
-						<h2><a rel="me" href="http://flickr.com/photos/johnlocke/">Flick<em>r</em></a> <span>dernières photos postées</span></h2>
+						<h2><a rel="me" href="http://flickr.com/photos/<?=$this->photos->username?>/">Flick<em>r</em></a> <span>dernières photos postées</span></h2>
 <?php 
 						if ( !$this->photos->getData() ) { ?>
 						<div class="erreur">
@@ -43,7 +43,7 @@ echo SmartyPants('
 							foreach ($this->photos->getData() as $photo) {
 								$compteur++;
 							?>
-							<li<?=($compteur%4 == 0)?' class="derniere"':''?>><a title="<?=$photo['title']?>" href="http://www.flickr.com/photos/johnlocke/<?=$photo['id']?>"><img alt="<?=$photo['title']?>" src="<?=$this->photos->getAbsoluteUrl($photo)?>" width="75" height="75"></a></li>
+							<li<?=($compteur%4 == 0)?' class="derniere"':''?>><a title="<?=$photo['title']?>" href="http://www.flickr.com/photos/<?=$this->photos->username?>/<?=$photo['id']?>"><img alt="<?=$photo['title']?>" src="<?=$this->photos->getAbsoluteUrl($photo, 's')?>" width="75" height="75"></a></li>
 <? } ?>
 						</ul>
 <?
@@ -52,7 +52,7 @@ echo SmartyPants('
 					</div>
 
 					<div class="boite lastfm" id="lastfm">
-						<h2><a rel="me" href="http://last.fm/user/johnlocke/">last.fm</a> <span>albums les plus écoutés durant la dernière semaine</span></h2>
+						<h2><a rel="me" href="http://last.fm/user/<?=$this->albums->username?>/">last.fm</a> <span>albums les plus écoutés durant la dernière semaine</span></h2>
 <?php 
 						if ( !$this->albums->getData() ) { ?>
 						<div class="erreur">
@@ -81,7 +81,7 @@ echo SmartyPants('
 
 				<div class="col2">
 					<div class="boite twitter" id="twitter">
-						<h2><a rel="me" href="http://twitter.com/johnlocke/">Twitter</a> <span>derniers états postés</span></h2>
+						<h2><a rel="me" href="http://twitter.com/<?=$this->etats->username?>/">Twitter</a> <span>derniers états postés</span></h2>
 <?php 
 						if ( !$this->etats->getData() ) { ?>
 						<div class="erreur">
@@ -97,7 +97,7 @@ echo SmartyPants('
         						$text = $this->etats->filterContent( $etat->text );
 								?>
 							<li class="clearfix">
-								<span class="date"><a href="http://twitter.com/johnlocke/statuses/<?=$etat->id?>"><?=$date?></a></span>
+								<span class="date"><a href="http://twitter.com/<?=$this->etats->username?>/statuses/<?=$etat->id?>"><?=$date?></a></span>
 								<?=$text?>
 							</li>
 <? } ?>
@@ -106,11 +106,11 @@ echo SmartyPants('
 					</div>
 
 					<div class="boite rss" id="rss-1">
-						<h2><a rel="me" href="_________">Fil RSS</a> <span>derniers billets</span></h2>
+						<h2><a rel="me" href="<?=$this->billets->feed_url?>">Fil RSS</a> <span>derniers billets</span></h2>
 <?php 
 						if ( !$this->billets->getData() ) { ?>
 						<div class="erreur">
-							Le fil RSS de __________ semble éprouver des problèmes.
+							Le fil RSS <?=$this->billets->feed_url?> semble éprouver des problèmes.
 						</div>				
 <?	} else { ?>
 						<ul>
@@ -131,7 +131,7 @@ echo SmartyPants('
 
 				<div class="col3">
 					<div class="boite delicious" id="delicious">
-						<h2><a rel="me" href="http://del.icio.us/johnlocke/">del.icio.us</a> <span>derniers liens partagés</span></h2>
+						<h2><a rel="me" href="http://del.icio.us/<?=$this->liens->username?>/">del.icio.us</a> <span>derniers liens partagés</span></h2>
 <?php 
 						if ( !$this->liens->getData() ) { ?>
 						<div class="erreur">
@@ -149,7 +149,7 @@ echo SmartyPants('
 					</div>
 
 					<div class="boite readernaut" id="readernaut">
-					<h2><a rel="me" href="http://readernaut.com/johnlocke/">Readernaut</a> <span>derniers livres ajoutés</span></h2>
+						<h2><a rel="me" href="http://readernaut.com/<?=$this->livres->username?>/">Readernaut</a> <span>derniers livres ajoutés</span></h2>
 <?php 
 						if ( !$this->livres->getData() ) { ?>
 						<div class="erreur">
@@ -167,6 +167,38 @@ echo SmartyPants('
 							?>
 							<li>
 								<a href="<?=$livre->book_edition->permalink?>"><img src="<?=$livre->book_edition->covers->cover_small?>" width="50" alt=""><strong><span><?=Smartypants($livre->book_edition->title)?></span> <?=Smartypants($livre->book_edition->authors->author)?></strong></a>
+							</li>
+<? } ?>
+						</ul>
+<? } ?>
+					</div>
+					<div class="boite youtube" id="youtube">
+						<h2><a rel="me" href="http://youtube.com/user/<?=$this->videos->username?>/">Youtube</a> <span>derniers vidéos ajoutés</span></h2>
+<?php 
+						if ( !$this->videos->getData() ) { ?>
+						<div class="erreur">
+							L’API public de <a href="http://youtube.com/">Youtube</a> semble éprouver des problèmes.
+						</div>				
+<?	
+						} else {
+?>
+						<ul class="clearfix">
+<?php
+								$compteur = 0;
+								foreach ( $this->videos->getData() as $video ) {
+									$compteur++;
+									if ( $compteur > $this->videos->total ) { break; }
+							?>
+							<li>
+							<? 
+								$media = $video->children('http://search.yahoo.com/mrss/');
+								$attrs = $media->group->thumbnail[0]->attributes();
+								$img = $attrs['url'];
+								$title = (string) $media->group->title;
+								$url_attrs = $media->group->player->attributes();
+								$url = $url_attrs['url'];
+							?>
+								<a href="<?=$url?>"><img src="<?=$img?>" alt="<?=htmlspecialchars($title)?>" /><strong><?=$title?></strong></a>
 							</li>
 <? } ?>
 						</ul>

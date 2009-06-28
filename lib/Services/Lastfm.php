@@ -3,11 +3,13 @@
 	class LastFM extends Service {
 
 		private $url_template = 'http://ws.audioscrobbler.com/2.0/?method=user.getweeklyalbumchart&api_key=%s&user=%s';
+		public $username;
 
 		public function __construct( $config ){
 			list($key, $username, $total) = $config;
 			$this->setURL( sprintf( $this->url_template, $key, $username ) );
 			$this->total = $total;
+			$this->username = $username;
 			parent::__construct();
 		}
 
@@ -36,7 +38,7 @@
 		public function getImage( $album ) {
 			$id = $this->buildAlbumId( $album );
 			$image = $this->albumdata[$id]->album->image[1];
-			return ( $image == '' ) ? '/img/cover.png' : $image;
+			return ( $image == '' ) ? Pubwich::getThemeUrl().'/img/cover.png' : $image;
 		}
 
 		/**

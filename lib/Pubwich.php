@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', 0.8 );
+	define( 'PUBWICH_VERSION', 0.95 );
 
 	/**
 	 * @classname Pubwich
@@ -58,7 +58,7 @@
 			require('FileFetcher.php');
 			require('CacheLite/Lite.php');
 
-			if ( !defined('CRON') ) {
+			if ( !defined('PUBWICH_CRON') ) {
 				require_once('Savant/Savant3.php');
 				require('Markup/Markdown.php');
 				require('Markup/Smartypants.php');

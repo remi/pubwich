@@ -1,8 +1,8 @@
 <?php
 
-	class Readernaut extends Service {
-		
-		private $url_template	= 'http://readernaut.com/api/v1/xml/%s/books/?order_by=-created';
+	class Vimeo extends Service {
+	
+		private $url_template = 'http://vimeo.com/api/%s/clips.xml';
 		public $username;
 
 		public function __construct( $config ){
@@ -20,7 +20,8 @@
 		 */
 		public function getData() {
 			$data = parent::getData();
-			return $data->reader_book;
+			return $data->clip;
 		}
 			
 	}
+

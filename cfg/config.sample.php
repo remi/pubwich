@@ -4,7 +4,7 @@
 
 	// À changer en production
 	error_reporting( E_ALL ^ E_NOTICE );
-	// error_reporting( 0 )
+	// error_reporting( 0 );
 
 	define( 'PUBWICH_LOGLEVEL', 0 );
 
@@ -18,7 +18,8 @@
 	// Configuration de Pubwich et des services utilisés
 
 	define( 'FLICKR_KEY',            '__________________' );
-	define( 'FLICKR_USERID',         '__________________' );
+	define( 'FLICKR_USERID',         '__________________' ); // http://idgettr.com
+	define( 'FLICKR_USERNAME'        '__________________' );
 	define( 'FLICKR_TOTAL',          12 );
 
 	define( 'LASTFM_KEY',            '__________________' );
@@ -29,19 +30,24 @@
 	define( 'DELICIOUS_TOTAL',       10 );
 
 	define( 'TWITTER_USERID',        '__________________' ); // cliquer sur le lien "RSS feed of _____'s updates" pour trouver votre identifiant numérique
+	define( 'TWITTER_USERNAME',      '__________________' ); 
 	define( 'TWITTER_TOTAL',         10 ); 
 
 	define( 'READERNAUT_USERNAME',   '__________________' );
 	define( 'READERNAUT_TOTAL',      10 );
 
+	define( 'YOUTUBE_USERNAME',      '__________________' );
+	define( 'YOUTUBE_TOTAL',         10 );
+
 	Pubwich::setServices(
 		array(
-			array('Flickr', 'photos', array( FLICKR_KEY, FLICKR_USERID, FLICKR_TOTAL ) ),
+			array('Flickr', 'photos', array( FLICKR_KEY, FLICKR_USERID, FLICKR_USERNAME, FLICKR_TOTAL ) ),
 			array('Lastfm', 'albums', array ( LASTFM_KEY, LASTFM_USERNAME, LASTFM_TOTAL ) ),
 			array('Delicious', 'liens', array( DELICIOUS_USERNAME, DELICIOUS_TOTAL ) ),
-			array('Twitter', 'etats', array( TWITTER_USERID, TWITTER_TOTAL ) ),
+			array('Twitter', 'etats', array( TWITTER_USERID, TWITTER_USERNAME, TWITTER_TOTAL ) ),
 			array('Readernaut', 'livres', array( READERNAUT_USERNAME, READERNAUT_TOTAL ) ),
-			array('Atom', 'billets', array( 'http://remiprevost.com/atom/', 10 ) )
+			array('Atom', 'billets', array( 'http://remiprevost.com/atom/', 10 ) ),
+			array('Youtube', 'videos', array( YOUTUBE_USERNAME, YOUTUBE_TOTAL ) ),
 		)
 	);
 

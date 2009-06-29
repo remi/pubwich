@@ -2,12 +2,20 @@
 
 	class Readernaut extends Service {
 		
-		private $url_template	= 'http://readernaut.com/api/v1/xml/%s/books/?order_by=-created';
+		public $username;
+		private $size;
 
 		public function __construct( $config ){
-			list($username, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $username ) );
-			$this->total = $total;
+			$this->setURL( sprintf( 'http://readernaut.com/api/v1/xml/%s/books/?order_by=-created', $config['username'] ) );
+			$this->total = $config['total'];
+			$this->username = $config['username'];
+			$this->size = $config['size'];
+
+			$this->title = $config['title'];
+			$this->description = $config['description'];
+			$this->setItemTemplate('<li><a href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
+			$this->setURLTemplate('http://www.readernaut.com/'.$config['username'].'/');
+
 			parent::__construct();
 		}
 
@@ -19,6 +27,16 @@
 		public function getData() {
 			$data = parent::getData();
 			return $data->reader_book;
+		}
+
+		public function populateItemTemplate( &$item ) {
+			return array(
+						'link' => $item->book_edition->permalink, 
+						'title' => SmartyPants( $item->book_edition->title ),
+						'author' => SmartyPants( $item->book_edition->authors->author ), 
+						'image' => $item->book_edition->covers->cover_small,
+						'size' => $this->size
+						);
 		}
 			
 	}

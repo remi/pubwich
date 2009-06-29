@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', 0.8 );
+	define( 'PUBWICH_VERSION', 0.95 );
 
 	/**
 	 * @classname Pubwich
@@ -20,6 +20,8 @@
 		 * @var $classes
 		 */
 		static private $classes;
+
+		static private $columns;
 
 		static private $theme_url;
 		static private $theme_path;
@@ -58,7 +60,7 @@
 			require('FileFetcher.php');
 			require('CacheLite/Lite.php');
 
-			if ( !defined('CRON') ) {
+			if ( !defined('PUBWICH_CRON') ) {
 				require_once('Savant/Savant3.php');
 				require('Markup/Markdown.php');
 				require('Markup/Smartypants.php');
@@ -73,12 +75,20 @@
 		 */
 		static public function setClasses() {
 			require('Services/Service.php');
-			foreach ( self::getServices() as $service ) {
-				list($nom, $variable, $config) = $service;
-				$service_instance = strtolower( $nom . '_' . $variable );
-				${$service_instance} = Pubwich::loadService( $nom, $config );
-				${$service_instance}->variable = $variable;
-				self::$classes[] = ${$service_instance};
+			$columnCounter = 0;
+			foreach ( self::getServices() as $column ) {
+				$columnCounter++;
+				self::$columns[$columnCounter] = array();
+				foreach( $column as $service ) {
+
+					list($nom, $variable, $config) = $service;
+					$service_instance = strtolower( $nom . '_' . $variable );
+					${$service_instance} = Pubwich::loadService( $nom, $config );
+					${$service_instance}->variable = $variable;
+					self::$classes[] = ${$service_instance};
+					self::$columns[$columnCounter][] = &${$service_instance};
+
+				}
 			}
 		}
 
@@ -91,9 +101,15 @@
 
 			// Création de l'objet Savant3
 			$tpl =& new Savant3();
-			$tpl->addPath('template', self::getThemePath());
-			if (!file_exists(self::getThemePath()."/index.tpl.php")) {
+			$tpl->addPath( 'template', self::getThemePath() );
+
+			if ( !file_exists(self::getThemePath()."/index.tpl.php") ) {
 				throw new PubwichErreur('Le fichier <code>/themes/'.PUBWICH_THEME.'/index.tpl.php</code> n\'a pas été trouvé. Il doit être présent.');
+			}
+
+			if ( file_exists( self::getThemePath()."/functions.php" ) ) {
+				require( self::getThemePath()."/functions.php" );
+				self::applyTheme();
 			}
 
 			// Assignation des références aux objets pour utilisation dans le template
@@ -107,10 +123,20 @@
 			$tpl->display('index.tpl.php');
 		}
 
+		/**
+		 * Définit le chemin vers les fichiers du thème
+		 *
+		 * @return string
+		 */
 		static public function getThemePath() {
 			return self::$theme_path;
 		}
 
+		/**
+		 * Définit l'URL  vers les fichiers du thème
+		 *
+		 * @return string
+		 */
 		static public function getThemeUrl() {
 			return self::$theme_url;
 		}
@@ -173,6 +199,65 @@
 				$classe->buildCache();
 			}
 
+		}
+
+		/**
+		 * Applique les différents filtres du thème courant
+		 *
+		 * return void
+		 */
+		static private function applyTheme() {
+			foreach( self::$classes as $classe ) {
+				
+				$classFunction = get_class( $classe ) . '_itemTemplate';
+				if ( function_exists( $classFunction ) ) {
+					$classe->setItemTemplate( call_user_func( $classFunction ) );
+				}
+
+				$variableFunction = get_class( $classe ) . '_'.$classe->getVariable().'_itemTemplate';
+				if ( function_exists( $variableFunction ) ) {
+					$classe->setItemTemplate( call_user_func( $variableFunction ) );
+				}
+			}
+		}
+
+		/**
+		 * Affiche les données
+		 *
+		 * return string
+		 */
+		static public function getLoop() {
+			$output = '';
+			foreach( self::$columns as $col => $classes ) {
+				$output .= '<div class="col'.$col.'">';	
+				foreach( $classes as $classe ) {
+					$output .= self::renderBox( $classe );
+				}
+				$output .= '</div>';
+			}
+			return $output;
+		}
+
+		/*
+		 * Affiche la boite d'une classe spécifique
+		 *
+		 * return string
+		 */
+		static private function renderBox( &$classe ) {
+			$output = '';
+			$output .= '<div class="boite '.strtolower(get_class($classe)).'" id="'.$classe->getVariable().'">'."\n";
+			$output .= '	<h2><a rel="me" href="'.$classe->urlTemplate.'">'.$classe->title.'</a> <span>'.$classe->description.'</span></h2>'."\n";
+			$output .= '	<ul class="clearfix">'."\n";
+			$compteur = 0;
+			foreach( $classe->getData() as $item ) {
+				$compteur++;
+				if ($classe->total && $compteur > $classe->total) { break; }  
+				$template = $classe->getItemTemplate();
+				$output .= '		'.$classe->renderItemTemplate( $template, $classe->populateItemTemplate( $item ) );
+			}
+			$output .= '	</ul>'."\n";
+			$output .= '</div>'."\n\n";
+			return $output;
 		}
 
 		/**

@@ -7,7 +7,7 @@
 	 */ 
 	class Service {
 		
-		public $data, $cache_id, $cache_options;
+		public $data, $cache_id, $cache_options, $itemTemplate, $title, $description, $urlTemplate;
 		private $url;
 
 		/**
@@ -102,8 +102,55 @@
 			return $this->data;
 		}
 
+		/**
+		 * Retourne le nom de la variable de l'instance
+		 *
+		 * return string
+		 */
 		public function getVariable() {
 			return $this->variable;
+		}
+
+		/**
+		 * Définit le template de l'URL de profil du service
+		 *
+		 * return void
+		 */
+		public function setURLTemplate( $template ) {
+			$this->urlTemplate = $template;
+		}
+
+		/**
+		 *
+		 *
+		 *
+		 */
+		public function setItemTemplate($template) {
+			$this->itemTemplate = $template;
+		}
+
+		/**
+		 *
+		 *
+		 *
+		 */
+		public function getItemTemplate() {
+			return $this->itemTemplate;
+		}
+
+		/**
+		 * Retourne un item selon un template et des données
+		 *
+		 * @param string $template
+		 * @param array $data
+		 *
+		 * return string
+		 */
+		public function renderItemTemplate( $template, $data ) {
+			foreach ($data as $key=>$value) {
+				$template = str_replace( '{%'.$key.'%}', $value, $template );
+			}
+			return $template;
 		}
 	
 	}

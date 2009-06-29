@@ -2,13 +2,39 @@
 
 	class LastFM extends Service {
 
-		private $url_template = 'http://ws.audioscrobbler.com/2.0/?method=user.getweeklyalbumchart&api_key=%s&user=%s';
+		public $username, $size;
+		private $compteur, $key, $classes;
 
 		public function __construct( $config ){
-			list($key, $username, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $key, $username ) );
-			$this->total = $total;
+			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getweeklyalbumchart&api_key=%s&user=%s', $config['key'], $config['username'] ) );
+			$this->total = $config['total'];
+			$this->username = $config['username'];
+			$this->size = $config['size'];
+			$this->key = $config['key'];
+			$this->compteur = 0;
+			$this->classes = array( 'premier', 'deuxieme', 'troisieme', 'quatrieme' );
+
+			$this->title = $config['title'];
+			$this->description = $config['description'];
+			$this->setItemTemplate('<li{%classe%}><a href="{%link%}"><img src="{%image%}" width="{%size%}" height="{%size%}" alt="{%title%}"><strong><span>{%artist%}</span> {%album%}</strong></a></li>'."\n");
+			$this->setURLTemplate('http://www.last.fm/user/'.$config['username'].'/');
+
 			parent::__construct();
+		}
+
+		public function populateItemTemplate( &$item ) {
+			$album = Smartypants( $item->name );
+			$artist = Smartypants( $item->artist );
+			$this->compteur++;
+			return array(
+						'link' => htmlspecialchars( $item->url ),
+						'title' => htmlspecialchars( $artist . ' — ' . $album ),
+						'artist' => $artist,
+						'album' => $album,
+						'image' => $this->getImage( $item ),
+						'size' => $this->size,
+						'classe' => isset($this->classes[$this->compteur-1]) ? ' class="'.$this->classes[$this->compteur-1].'"' : '',
+						);
 		}
 
 		/**
@@ -36,7 +62,7 @@
 		public function getImage( $album ) {
 			$id = $this->buildAlbumId( $album );
 			$image = $this->albumdata[$id]->album->image[1];
-			return ( $image == '' ) ? '/img/cover.png' : $image;
+			return ( $image == '' ) ? Pubwich::getThemeUrl().'/img/cover.png' : $image;
 		}
 
 		/**
@@ -89,7 +115,7 @@
 				$this->albumdata[$id] = simplexml_load_string( $data );
 			} else {
 				$Cache_Lite->get( $id );
-				$url = sprintf( "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=%s&artist=%s&album=%s", LASTFM_KEY, urlencode( $album->artist ), urlencode( $album->name ) );
+				$url = sprintf( "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=%s&artist=%s&album=%s", $this->key, urlencode( $album->artist ), urlencode( $album->name ) );
 				$data = FileFetcher::get( $url );
 				$Cache_Lite->save( $data );
 				$this->albumdata[$id] = simplexml_load_string( $data );
@@ -105,8 +131,11 @@
 		 */
 		public function buildAlbumCache( $rebuildCache ) {
 			$data = $this->getData();
+			$compteur = 0;
 			if ( $data ) {
 				foreach ( $this->getData() as $album ) {
+					$compteur++;
+					if ($compteur > $this->total) { break; }
 					$this->fetchAlbum( $album, $rebuildCache );
 				}
 			}

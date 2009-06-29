@@ -2,12 +2,15 @@
 
 	class Atom extends Service {
 	
-		private $url_template = '%s';
-
 		public function __construct( $config ){
-			list($url, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $url ) );
+			$this->setURL( $config['url'] );
 			$this->total = $total;
+
+			$this->title = $config['title'];
+			$this->description = $config['description'];
+			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a> {%date%}</li>'."\n");
+			$this->setURLTemplate( $config['link'] );
+
 			parent::__construct();
 		}
 
@@ -20,6 +23,15 @@
 			$data = parent::getData();
 			return $data->entry;
 		}
-			
-	}
 
+		public function populateItemTemplate( &$item ) {
+			$link = $item->link->attributes();
+			$link = $link->href;
+			return array(
+						'link' => htmlspecialchars( $link ),
+						'title' => SmartyPants( $item->title ),
+						'date' => Pubwich::time_since( $item->published )
+			);
+		}
+
+	}

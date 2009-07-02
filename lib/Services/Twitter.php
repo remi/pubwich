@@ -2,13 +2,17 @@
 
 	class Twitter extends Service {
 
-		private $url_template = 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d';
 		public $username;
 
 		public function __construct( $config ){
-			list($id, $username, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $id, $total ) );
-			$this->username = $username;
+			$this->setURL( sprintf( 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d', $config['id'], $config['total'] ) );
+			$this->username = $config['username'];
+
+			$this->title = $config['title'];
+			$this->description = $config['description'];
+			$this->setItemTemplate('<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n");
+			$this->setURLTemplate('http://www.twitter.com/'.$config['username'].'/');
+
 			parent::__construct();
 		}
 
@@ -20,6 +24,14 @@
 		public function getData() {
 			$data = parent::getData();
 			return $data->status;
+		}
+
+		public function populateItemTemplate( &$item ) {
+			return array(
+						'link' => sprintf( 'http://www.twitter.com/%s/statuses/%s/', $this->username, $item->id ),
+						'text' => $this->filterContent( $item->text ),
+						'date' => Pubwich::time_since( $item->created_at )
+						);
 		}
 
 		/**

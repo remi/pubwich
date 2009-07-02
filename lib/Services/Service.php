@@ -6,24 +6,33 @@
 	 * @className Service
 	 */ 
 	class Service {
-		
-		public $data, $cache_id, $cache_options, $itemTemplate, $title, $description, $urlTemplate;
-		private $url;
+
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate;
+		private $url, $itemTemplate, $tmpTemplate, $boxTemplate;
 
 		/**
 		 * @constructor
 		 */ 
 		public function __construct() {
 			PubwichLog::log( 2, "Création de la classe " . get_class( $this ) );
-			
-			//$id = strtolower( get_class($this) );
-			$id = urlencode( $this->getURL() ); 
+
+			$id = md5( $this->getURL() ); 
 			$this->cache_id = $id; 
 			$this->cache_options = array( 
 				'cacheDir' => CACHE_LOCATION, 
 				'lifeTime' => CACHE_LIMIT,
-				'errorHandlingAPIBreak' => CACHE_LITE_ERROR_RETURN
+				'errorHandlingAPIBreak' => true,
+				'automaticSerialization' => true
 			);
+
+			$this->itemTemplate = new PubwichTemplate();
+			if ( $this->tmpTemplate ) {
+				$this->setItemTemplate( $this->tmpTemplate );
+				$this->tmpTemplate = null;
+			}
+
+			$this->boxTemplate = new PubwichTemplate();
+			$this->boxTemplate->setTemplate('');
 		}
 
 		/**
@@ -44,6 +53,11 @@
 			return $this->url;
 		}
 
+		/**
+		 * Définit l'URL du service
+		 *
+		 * @return string
+		 */
 		public function setURL( $url ) {
 			$this->url = $url;
 		}
@@ -58,7 +72,7 @@
 			PubwichLog::log( 2, "Initialisation de la classe " . get_class( $this ) );
 			$url = $this->getURL();
 			$Cache_Lite = new Cache_Lite( $this->cache_options );
-			
+
 			// Si les données existent dans la cache
 			if ($data = $Cache_Lite->get( $this->cache_id) ) {
 				$this->data = simplexml_load_string( $data );
@@ -86,7 +100,10 @@
 			}
 			$content = FileFetcher::get( $url );
 			if ( $content !== false ) {
-				$Cache_Lite->save( $content );
+				$cacheWrite = $Cache_Lite->save( $content );
+				if ( PEAR::isError($cacheWrite) ) {
+					var_dump( $cacheWrite->getMessage() );
+				}
 				$this->data = simplexml_load_string( $content );
 			} else {
 				$this->data = false;
@@ -112,45 +129,65 @@
 		}
 
 		/**
+		 * Définit la variable de l'instance
+		 *
+		 * @param string $variable Le nom de la variable
+		 * @return void
+		 */
+		public function setVariable( $variable ) {
+			//$this->cache_id = $variable;
+			$this->variable = $variable;
+		}
+
+		/**
 		 * Définit le template de l'URL de profil du service
 		 *
-		 * return void
+		 * @param string $template Le template
+		 * @return void
 		 */
 		public function setURLTemplate( $template ) {
 			$this->urlTemplate = $template;
 		}
 
 		/**
+		 * Définit le template à utiliser lors de l'affichage d'un item de ce service
 		 *
-		 *
-		 *
+		 * @param string $template Le template
+		 * @return void
 		 */
-		public function setItemTemplate($template) {
-			$this->itemTemplate = $template;
+		public function setItemTemplate( $template ) {
+			if ( !$this->itemTemplate ) {
+				$this->tmpTemplate = $template;
+			} else {
+				$this->itemTemplate->setTemplate( $template );
+			}
 		}
 
 		/**
+		 * Retourne le template des items
 		 *
-		 *
-		 *
+		 * @return PubwichTemplate
 		 */
 		public function getItemTemplate() {
 			return $this->itemTemplate;
 		}
 
 		/**
-		 * Retourne un item selon un template et des données
+		 * Définit le template à utiliser lors de l'affichage de ce service
 		 *
-		 * @param string $template
-		 * @param array $data
-		 *
-		 * return string
+		 * @param string $template Le template
 		 */
-		public function renderItemTemplate( $template, $data ) {
-			foreach ($data as $key=>$value) {
-				$template = str_replace( '{%'.$key.'%}', $value, $template );
-			}
-			return $template;
+		public function setBoxTemplate( $template ) {
+			$this->boxTemplate->setTemplate( $template );		
+		}
+
+		/**
+		 * Retourne le template du service
+		 *
+		 * @return PubwichTemplate
+		 */
+		public function getBoxTemplate() {
+			return $this->boxTemplate;
 		}
 	
 	}

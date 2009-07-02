@@ -1,13 +1,8 @@
-/*
-
- @@@ Renommer ce fichier en `screen.css`
-
-*/
 @charset "UTF-8";
 
 /* ****************************************************
 
-	@file:		  screen.css
+	@file:		  style.css
 	@description: Feuille de style d'écran
 	@author:      remi (exomel.com)
 	@updated:	  20090518
@@ -37,12 +32,13 @@ body {
 	line-height: 1.5;
 	font-family: "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
 				 /* Yay for Liberation! */
+	padding: 40px 40px;
 }
 
 #wrap {
 	font-size: 110%;
-	width: 960px;
-	margin: 40px auto 0;
+	width: 100%;
+	margin: 0 auto;
 }
 
 #skip {
@@ -71,8 +67,7 @@ h1 {
 	text-align: center;
 	padding-bottom: 0.7em;
 	margin-bottom: 0.3em;
-	margin-left: 335px;
-	width: 380px;
+	width: 100%;
 	color: #666;
 }
 
@@ -122,19 +117,19 @@ h1 a {
  ******************************************************************/
  
 .col1 {
-	width: 315px;
-	margin-right: 20px;
+	width: 32%;
+	margin-right: 2%;
 	float: left;
 }
 
 .col2 {
-	width: 380px;
-	margin-right: 20px;
+	width: 32%;
+	margin-right: 2%;
 	float: left;
 }
 
 .col3 {
-	width: 225px;
+	width: 32%;
 	float: left;
 }
 
@@ -168,6 +163,16 @@ h1 a {
 	border: none;
 }
 
+.boite ul li {
+	background: rgba( 0, 0, 0, 0.04 );
+	margin-bottom: 5px;
+}
+
+
+/**
+ *	Flickr
+ ******************************************************************/
+
 .flickr h2 a {
 	color: #0063DC;
 }
@@ -177,150 +182,45 @@ h1 a {
 	font-style: normal;
 }
 
+.flickr ul li {
+	float: left;
+	padding-right: 5px;
+	background: none;
+}
+
+.flickr ul li.derniere {
+	padding-right: 0;
+}
+
+.flickr ul li a {
+	border: none;
+}
+
+.flickr ul li img {
+	display: block;
+}
+
+/**
+ *	Last.fm
+ ******************************************************************/
+
 .lastfm h2 a {
 	color: #DC413A;
 }
 
-.twitter h2 a {
-	color: #33CCFF;
-}
-
-.exomel h2 a {
-	color: #86BAAB;
-}
-
-.delicious h2 a {
-	color: #3274D0;	
-}
-
-.readernaut h2 a {
-	color: #B6C125;
-}
-
-/**
- *	WTF (aussi appelé "intro")
- ******************************************************************/
-
-.wtf {
-	margin-bottom: 0;
-}
-
-.wtf div {
-	padding: 5px;
-}
-
-.wtf p {
-	margin: 0 0 1em;
-}
-
-/**
- *	Flickr
- ******************************************************************/
-
-.flickr ul {
-	padding-top: 5px;
-}
-
-.flickr li {
-	float: left;
-	display: block;
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-
-.flickr li.derniere {
-	margin-right: 0;
-}
-
-.flickr li a, .flickr li img {
-	float: left;
-	display: block;
-	border: none;
-}
-
-/**
- *	Twitter
- ******************************************************************/
- 
-.twitter {
-	
-}
-
-.twitter li {
-	padding: 5px 10px 7px;
-	margin: 0 0 5px;
-/*	background: #1c1c1c; */
-	background: rgba(230, 230, 230, 0.2);
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-}
-
-.twitter li span.date {
-	display: block;
-	float: left;
-	width: 85px;
-	margin-right: 10px;
-}
-
-.twitter li span.date a {
-	color: #444;
-	text-decoration: none;
-	border: none;
-}
-
-.twitter li p {
-	float: left;
-	display: block;
-	width: 260px;
-}
-
-.twitter li em.from {
-	display: none;
-}
-
-/**
- *	del.icio.us
- ******************************************************************/
- 
-.delicious {
-	margin-right: 0;
-}
-
-.delicious ul {
-	margin: 0 0 0 19px;
-	padding-top: 5px;
-}
-
-.delicious li {
-	margin: 0 0 5px;
-	padding: 0 0 5px;
-	line-height: 1.4;
-	list-style: circle;
-}
-.delicious a {
-	
-}
-
-/**
- *	last.fm
- ******************************************************************/
-
-.lastfm ul {
-	padding-top: 5px;
-}
- 
 .lastfm li {
 	float: left;
-	margin: 0 0 5px 0;
-	/*background: #1c1c1c;*/
+	width: 100%;
+	background: none;
 }
 
 
 .lastfm li a {
 	text-decoration: none;
 	border: none;
+	display: block;
 	padding: 5px 0 5px 5px;
-	background: rgba(230, 230, 230, 0.2);
+	background: rgba(0, 0, 0, 0.04);
 	-moz-border-radius: 0.3em;
 	-webkit-border-radius: 0.3em;
 }
@@ -332,15 +232,14 @@ h1 a {
 	background: url("img/cover.png");
 }
 
-.lastfm li a, .lastfm li img {
+.lastfm li img {
 	display: block;
 	float: left;
 }
 
 .lastfm li a strong {
-	float: left;
 	display: block;
-	width: 231px;
+	margin-left: 70px;
 	font-weight: normal;
 	padding: 8px 5px 8px 10px;
 	color: #777;
@@ -350,7 +249,7 @@ h1 a {
 	font-size: 100%;
 	display: block;
 	font-weight: bold;
-	color: #999;
+	color: #666;
 	
 }
 
@@ -374,85 +273,82 @@ h1 a {
 	
 }
 
-/**
- *	RSS
- ******************************************************************/
-
-.rss {
-	margin-right: 0;
-}
-
-.rss ul {
-	margin: 0 0 0 19px;
-	padding-top: 5px;
-}
-
-.rss li {
-	margin: 0 0 5px;
-	padding: 0 0 5px;
-	line-height: 1.4;
-	list-style: circle;
-}
-
-.rss li small {
-	color: #666;
-}
-
 
 /**
- *	Facebook
+ *	Twitter
  ******************************************************************/
+
+.twitter h2 a {
+	color: #33CCFF;
+}
+
+/**
+ *	Exomel
+ ******************************************************************/
+
+.exomel h2 a {
+	color: #86BAAB;
+}
+
+/**
+ *	Del.icio.us
+ ******************************************************************/
+
+.delicious h2 a {
+	color: #3274D0;	
+}
+
+.delicious li {
+	display: block;
+	padding: 6px;
+}
 
 /**
  *	Readernaut
  ******************************************************************/
 
-.readernaut ul {
-	padding-top: 5px;
-}
- 
-.readernaut li {
-	float: left;
-	margin: 0 0 5px 0;
+.readernaut h2 a {
+	color: #B6C125;
 }
 
-.readernaut li a {
-	text-decoration: none;
-	border: none;
-	/*background: #1c1c1c;*/
-	background: rgba(230, 230, 230, 0.2);
-	padding: 5px 0 5px 5px;
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
+/**
+ *	Facebook
+ ******************************************************************/
+
+.facebook h2 a {
+	color: #3B5998;
 }
 
-.readernaut li a:hover {
+/**
+ *	Youtube
+ ******************************************************************/
+
+.youtube h2 a {
+	color: #D62323;
 }
 
-.readernaut li a, .readernaut li img {
-	display: block;
-	float: left;
+/**
+ *	Vimeo
+ ******************************************************************/
+
+.vimeo h2 a {
+	color: #9FC54E;
 }
 
-.readernaut li img {
-	
+/**
+ *	WTF (aussi appelé "intro")
+ ******************************************************************/
+
+.wtf {
+	margin-bottom: 0;
 }
 
-.readernaut li a strong {
-	float: left;
-	display: block;
-	width: 150px;
-	font-weight: normal;
-	padding: 8px 10px 8px 10px;
-	color: #777;
+.wtf div {
+	padding: 5px;
 }
 
-.readernaut li a span {
-	display: block;
-	font-weight: bold;
-	color: #999;
-	line-height: 1.2;
-	padding-bottom: 0.2em;
+.wtf p {
+	margin: 0 0 1em;
 }
 
 /**

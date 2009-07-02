@@ -5,10 +5,10 @@ Choses à faire avant Pubwich 1.0
 
 	[x] Atom
 	[ ] Exomel*
-	[ ] RSS
-	[ ] Twitter
-	[ ] Vimeo
-	[ ] YouTube
+	[x] RSS
+	[x] Twitter
+	[x] Vimeo
+	[x] YouTube
 
     [ ] * - Est-ce qu’on le garde ?
 	      - Est-ce qu’on crée un dossier "lib/Services/custom" ?

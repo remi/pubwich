@@ -16,7 +16,7 @@
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
-			$this->setItemTemplate('<li{%classe%}><a href="{%link%}"><img src="{%image%}" width="{%size%}" height="{%size%}" alt="{%title%}"><strong><span>{%artist%}</span> {%album%}</strong></a></li>'."\n");
+			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" height="{%size%}" alt="{%title%}"><strong><span>{%artist%}</span> {%album%}</strong></a></li>'."\n");
 			$this->setURLTemplate('http://www.last.fm/user/'.$config['username'].'/');
 
 			parent::__construct();
@@ -98,7 +98,7 @@
 		 * @return string
 		 */
 		public function buildAlbumId($album) {
-			return urlencode( $album->artist . "|" . $album->name );
+			return md5( $album->artist . "|" . $album->name );
 		}
 
 		/**
@@ -115,9 +115,13 @@
 				$this->albumdata[$id] = simplexml_load_string( $data );
 			} else {
 				$Cache_Lite->get( $id );
+				PubwichLog::log( 2, 'Reconstruction de la cache d’un album de Last.fm' );
 				$url = sprintf( "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=%s&artist=%s&album=%s", $this->key, urlencode( $album->artist ), urlencode( $album->name ) );
 				$data = FileFetcher::get( $url );
-				$Cache_Lite->save( $data );
+				$cacheWrite = $Cache_Lite->save( $data );
+				if ( PEAR::isError($cacheWrite) ) {
+					var_dump( $cacheWrite );
+				}
 				$this->albumdata[$id] = simplexml_load_string( $data );
 			}
 

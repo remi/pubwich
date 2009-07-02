@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', 0.95 );
+	define( 'PUBWICH_VERSION', 1.0 );
 
 	/**
 	 * @classname Pubwich
@@ -35,6 +35,8 @@
 			$path = dirname(__FILE__).'/';
 			set_include_path(get_include_path() . PATH_SEPARATOR . $path);
 
+			require_once('PEAR.php');
+
 			// Classe d'exception personnalisée
 			require('PubwichErreur.php');
 
@@ -52,6 +54,7 @@
 			// Assignation du thème
 			self::$theme_url = PUBWICH_URL.'themes/'.PUBWICH_THEME;
 			self::$theme_path = dirname(__FILE__).'/../themes/'.PUBWICH_THEME;
+			require('PubwichTemplate.php');
 
 			// Création des objets PHP
 			self::setClasses();
@@ -71,7 +74,7 @@
 		/**
 		 * Crée un tableau qui contient les instances des objets de Services
 		 *
-		 * return void
+		 * @return void
 		 */
 		static public function setClasses() {
 			require('Services/Service.php');
@@ -84,7 +87,7 @@
 					list($nom, $variable, $config) = $service;
 					$service_instance = strtolower( $nom . '_' . $variable );
 					${$service_instance} = Pubwich::loadService( $nom, $config );
-					${$service_instance}->variable = $variable;
+					${$service_instance}->setVariable( $variable );
 					self::$classes[] = ${$service_instance};
 					self::$columns[$columnCounter][] = &${$service_instance};
 
@@ -107,16 +110,16 @@
 				throw new PubwichErreur('Le fichier <code>/themes/'.PUBWICH_THEME.'/index.tpl.php</code> n\'a pas été trouvé. Il doit être présent.');
 			}
 
-			if ( file_exists( self::getThemePath()."/functions.php" ) ) {
-				require( self::getThemePath()."/functions.php" );
-				self::applyTheme();
-			}
-
 			// Assignation des références aux objets pour utilisation dans le template
 			foreach (self::$classes as &$classe) {
 				// on récupère les données du service
 				$classe->init();
 				$tpl->assignRef( strtolower( $classe->variable ), $classe );
+			}
+
+			if ( file_exists( self::getThemePath()."/functions.php" ) ) {
+				require( self::getThemePath()."/functions.php" );
+				self::applyTheme();
 			}
 
 			// Affichage du template
@@ -204,11 +207,25 @@
 		/**
 		 * Applique les différents filtres du thème courant
 		 *
-		 * return void
+		 * @return void
 		 */
 		static private function applyTheme() {
+
+			if ( function_exists( 'boxTemplate' ) ) {
+				$boxTemplate = call_user_func( 'boxTemplate' );
+			}
+
 			foreach( self::$classes as $classe ) {
 				
+				if ( $boxTemplate ) {
+					$classe->setBoxTemplate( $boxTemplate );
+				}
+
+				$boxFunction = get_class( $classe ) . '_boxTemplate';
+				if ( function_exists( $boxTemplate ) ) {
+					$classe->setBoxTemplate( $boxFunction );
+				}
+
 				$classFunction = get_class( $classe ) . '_itemTemplate';
 				if ( function_exists( $classFunction ) ) {
 					$classe->setItemTemplate( call_user_func( $classFunction ) );
@@ -224,7 +241,7 @@
 		/**
 		 * Affiche les données
 		 *
-		 * return string
+		 * @return string
 		 */
 		static public function getLoop() {
 			$output = '';
@@ -241,23 +258,29 @@
 		/*
 		 * Affiche la boite d'une classe spécifique
 		 *
-		 * return string
+		 * @return string
 		 */
 		static private function renderBox( &$classe ) {
-			$output = '';
-			$output .= '<div class="boite '.strtolower(get_class($classe)).'" id="'.$classe->getVariable().'">'."\n";
-			$output .= '	<h2><a rel="me" href="'.$classe->urlTemplate.'">'.$classe->title.'</a> <span>'.$classe->description.'</span></h2>'."\n";
-			$output .= '	<ul class="clearfix">'."\n";
-			$compteur = 0;
+
+			$items = '';
 			foreach( $classe->getData() as $item ) {
 				$compteur++;
 				if ($classe->total && $compteur > $classe->total) { break; }  
-				$template = $classe->getItemTemplate();
-				$output .= '		'.$classe->renderItemTemplate( $template, $classe->populateItemTemplate( $item ) );
+				$classe->getItemTemplate()->populate( $classe->populateItemTemplate( $item ) );
+				$items .= '		'.$classe->getItemTemplate()->output();
 			}
-			$output .= '	</ul>'."\n";
-			$output .= '</div>'."\n\n";
-			return $output;
+
+			$data = array(
+				'class' => strtolower(get_class($classe)),
+				'id' => $classe->getVariable(),
+				'url' => $classe->urlTemplate,
+				'title' => $classe->title,
+				'description' => $classe->description,
+				'items' => $items	
+			);
+
+			$classe->getBoxTemplate()->populate( $data );
+			return $classe->getBoxTemplate()->output();
 		}
 
 		/**

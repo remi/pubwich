@@ -1,0 +1,23 @@
+Choses à faire avant Pubwich 1.0
+------------------------------------------------------------------------------------------
+
+[ ] Services restants à convertir
+
+	[x] Atom
+	[ ] Exomel*
+	[ ] RSS
+	[ ] Twitter
+	[ ] Vimeo
+	[ ] YouTube
+
+    [ ] * - Est-ce qu’on le garde ?
+	      - Est-ce qu’on crée un dossier "lib/Services/custom" ?
+		  - Est-ce qu’on fait juste le supprimer de svn ?
+
+[ ] Thème par défaut doit être *bulletproof* et peut-être même *beau* ?
+
+[ ] S'assurer que tous les populateItemTemplate comprennent le plus de tags possibles
+    Pour ce faire, il faudrait parcourir les fichiers de cache des données
+    pour savoir quels sont les informations retournées par les APIs.
+
+[ ] Documentation

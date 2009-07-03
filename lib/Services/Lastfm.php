@@ -22,6 +22,11 @@
 			parent::__construct();
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			$album = Smartypants( $item->name );
 			$artist = Smartypants( $item->artist );

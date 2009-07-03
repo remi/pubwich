@@ -29,6 +29,11 @@
 			return $data->reader_book;
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'link' => $item->book_edition->permalink, 

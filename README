@@ -86,14 +86,14 @@ INSTALLATION
     permettre l'utilisation multiple d'un même service
     avec des configurations différentes (comme RSS générique)
 
-[ ] Décider d'un meilleur système de configuration/template. Est-ce que
+[x] Décider d'un meilleur système de configuration/template. Est-ce que
     lorsqu'on active un service, il se rajoute automatique dans le
     template? Est-ce qu'on laisse le contrôle total sur le "markup"
     à l'utilisateur?
 
 [x] Créer des répertoires `trunk`, `branches` et `tags` dans le dépot.
 
-[ ] Apprendre à utiliser les "branches"
+[x] Apprendre à utiliser les "branches"
 
 [ ] Permettre une plus grande personnalisation des services (eg. types de
     statistiques pour Last.fm, photos de groupes pour Flickr, etc.)

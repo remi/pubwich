@@ -24,6 +24,11 @@
 			return $data->channel->item;
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'link' => htmlspecialchars( $item->link ),

@@ -24,10 +24,14 @@
 			return $data->entry;
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			$link = $item->link->attributes();
 			$link = $link->href;
-			//var_dump($item->content->asXML());
 			$content = '';
 			foreach ( $item->content->children() as $content ) {
 				$content .= $content->asXML();

@@ -28,6 +28,11 @@
 			return $data->entry;
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			$media = $item->children('http://search.yahoo.com/mrss/');
 			$attrs = $media->group->thumbnail[0]->attributes();

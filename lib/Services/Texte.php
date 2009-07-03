@@ -30,6 +30,11 @@
 			return array( $this->text );
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			return array(
 				'text' => $this->text

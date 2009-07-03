@@ -29,6 +29,11 @@
 			return $data->photos->photo;
 		}
 
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
 		public function populateItemTemplate( &$item ) {
 			$this->compteur++;
 			return array(

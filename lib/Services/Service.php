@@ -8,7 +8,7 @@
 	class Service {
 
 		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate;
-		private $url, $itemTemplate, $tmpTemplate, $boxTemplate;
+		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**
 		 * @constructor
@@ -32,7 +32,10 @@
 			}
 
 			$this->boxTemplate = new PubwichTemplate();
-			$this->boxTemplate->setTemplate('');
+			if ( $this->tmpBoxTemplate ) {
+				$this->setBoxTemplate( $this->tmpBoxTemplate );
+				$this->tmpBoxTemplate = null;
+			}
 		}
 
 		/**
@@ -102,7 +105,7 @@
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
 				if ( PEAR::isError($cacheWrite) ) {
-					var_dump( $cacheWrite->getMessage() );
+					//var_dump( $cacheWrite->getMessage() );
 				}
 				$this->data = simplexml_load_string( $content );
 			} else {
@@ -178,7 +181,11 @@
 		 * @param string $template Le template
 		 */
 		public function setBoxTemplate( $template ) {
-			$this->boxTemplate->setTemplate( $template );		
+			if ( !$this->boxTemplate ) {
+				$this->tmpBoxTemplate = $template;
+			} else {	
+				$this->boxTemplate->setTemplate( $template );
+			}
 		}
 
 		/**
@@ -189,5 +196,5 @@
 		public function getBoxTemplate() {
 			return $this->boxTemplate;
 		}
-	
+
 	}

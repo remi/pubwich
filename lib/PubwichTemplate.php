@@ -6,7 +6,7 @@
 	 */
 	class PubwichTemplate {
 
-		private $template, $output;
+		private $template = null, $output;
 	
 		/**
 		 * @constructor
@@ -25,6 +25,15 @@
 		 */
 		public function setTemplate( $template ) {
 			$this->template = $template;
+		}
+
+		/**
+		 * Retourne si un template a une chaine d'assignée
+		 *
+		 * @return bool
+		 */
+		public function hasTemplate() {
+			return ( $this->template !== null );
 		}
 
 		/**

@@ -4,7 +4,7 @@
 	
 		public function __construct( $config ){
 			$this->setURL( $config['url'] );
-			$this->total = $total;
+			$this->total = $config['total'];
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
@@ -29,7 +29,7 @@
 						'link' => htmlspecialchars( $item->link ),
 						'title' => SmartyPants( $item->title ),
 						'date' => Pubwich::time_since( $item->pubDate ),
-						'text' => Markdown( $item->description )
+						'description' => Markdown( $item->description )
 			);
 		}
 

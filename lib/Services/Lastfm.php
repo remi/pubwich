@@ -120,7 +120,7 @@
 				$data = FileFetcher::get( $url );
 				$cacheWrite = $Cache_Lite->save( $data );
 				if ( PEAR::isError($cacheWrite) ) {
-					var_dump( $cacheWrite );
+					//var_dump( $cacheWrite );
 				}
 				$this->albumdata[$id] = simplexml_load_string( $data );
 			}

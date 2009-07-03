@@ -3,7 +3,7 @@
 /* ****************************************************
 
 	@file:		  style.css
-	@description: Feuille de style d'écran
+	@cescription: Feuille de style d'écran
 	@author:      remi (exomel.com)
 	@updated:	  20090518
 
@@ -25,19 +25,25 @@
 hr { display: none; } 
 a * { cursor: pointer; }
 
-body {
-	background: #fff;
-	color: #222;
+html {
 	font-size: 62.5%;
-	line-height: 1.5;
-	font-family: "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
+}
+
+body {
+	background: #024f35;
+	background: #0c6849;
+	/* color: #699787; */
+	color: rgba( 255, 255, 255, 0.6 );
+	font-size: 110%;
+	line-height: 1.4;
+	font-family: Helvetica, Arial, "Lucida Grande", "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
 				 /* Yay for Liberation! */
-	padding: 40px 40px;
+	padding: 40px 0 10px;
 }
 
 #wrap {
 	font-size: 110%;
-	width: 100%;
+	width: 960px;
 	margin: 0 auto;
 }
 
@@ -47,13 +53,13 @@ body {
 }
 
 a {
-	color: #327e61;
+	color: #fff;
 	text-decoration: none;
 	border-bottom: 1px dotted #327e61;
 }
 
 a:hover {
-	color: #196145;
+	color: #cbe9df;
 	border-color: #196145;
 }
 
@@ -63,24 +69,21 @@ acronym, abbr {
 
 h1 {
 	font-size: 250%;
-	font-weight: normal;
+	font-weight: bold;
 	text-align: center;
-	padding-bottom: 0.7em;
-	margin-bottom: 0.3em;
+	padding-top: 0.1em;
+	padding-bottom: 1.4em;
 	width: 100%;
 	color: #666;
 }
 
-h1 strong {
-	color: #fafafa;
-	font-weight: normal;
-	font-style: normal;
-	font-size: 140%;
+h1 a {
+	color: #acdecd;
+	border: none;
 }
 
-h1 a {
-	color: #666;
-	border: none;
+h1 a:hover {
+	color: #fff;
 }
 
 .erreur {
@@ -96,20 +99,12 @@ h1 a {
 #footer {
 	text-align: center;
 	padding: 1.3em 0 1.9em;
-	color: #777;
 }
 
-#footer .footer-inner {
-	width: 380px;
-	margin: 0 0 0 335px;
-}
-
-#footer a {
-	color: #aaa;
-}
-
-#footer a:hover {
-	color: #fff;
+#footer a.pubwich {
+	background: url("img/pubwich.png") no-repeat;
+	padding: 2px 1px 2px 17px;
+	border: none;
 }
 
 /**
@@ -117,19 +112,19 @@ h1 a {
  ******************************************************************/
  
 .col1 {
-	width: 32%;
-	margin-right: 2%;
+	width: 337px;
+	margin-right: 20px;
 	float: left;
 }
 
 .col2 {
-	width: 32%;
-	margin-right: 2%;
+	width: 358px;
+	margin-right: 20px;
 	float: left;
 }
 
 .col3 {
-	width: 32%;
+	width: 225px;
 	float: left;
 }
 
@@ -143,18 +138,16 @@ h1 a {
 
 .boite h2 {
 	font-size: 130%;
-	padding: 8px 10px 9px;
-	background: #eee;
-	margin-bottom: 0.3em;
-	color: #333;
-	-moz-border-radius: 0.2em;
-	-webkit-border-radius: 0.2em;
+	padding: 11px 10px 9px;
+	color: #fff;
+	background: rgba( 0, 0, 0, 0.6 );
+	-moz-border-radius: 0.5em 0.5em 0 0;
 	line-height: 1.1;
 }
 
 .boite h2 span {
 	font-size: 80%;
-	color: #444;
+	color: rgba( 255, 255, 255, 0.3 );
 	font-weight: normal;
 }
 
@@ -164,10 +157,28 @@ h1 a {
 }
 
 .boite ul li {
-	background: rgba( 0, 0, 0, 0.04 );
+	background: rgba( 0, 0, 0, 0.06 );
 	margin-bottom: 5px;
 }
 
+.boite .boite-inner {
+	border: 1px solid rgba( 0, 0, 0, 0.7 );
+	border-top: none;
+	padding: 10px;
+}
+
+.boite.no-title .boite-inner {
+	border-top: 1px solid rgba( 0, 0, 0, 0.7 );
+}
+
+
+/**
+ *	RSS & Atom
+ ******************************************************************/
+
+.rss li, .atom li {
+	padding: 5px;
+}
 
 /**
  *	Flickr
@@ -219,10 +230,7 @@ h1 a {
 	text-decoration: none;
 	border: none;
 	display: block;
-	padding: 5px 0 5px 5px;
-	background: rgba(0, 0, 0, 0.04);
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
+	padding: 5px;
 }
 
 .lastfm li a:hover {
@@ -242,15 +250,14 @@ h1 a {
 	margin-left: 70px;
 	font-weight: normal;
 	padding: 8px 5px 8px 10px;
-	color: #777;
+	color: rgba( 255, 255, 255, 0.5 );
 }
 
 .lastfm li a span {
 	font-size: 100%;
 	display: block;
 	font-weight: bold;
-	color: #666;
-	
+	color: #fff;	
 }
 
 .lastfm li.premier span {
@@ -282,6 +289,33 @@ h1 a {
 	color: #33CCFF;
 }
 
+.twitter li {
+	padding: 5px 10px 7px;
+	margin: 0 0 5px;
+}
+
+.twitter li span.date {
+	display: block;
+	float: left;
+	width: 85px;
+	margin-right: 10px;
+}
+
+.twitter li span.date a {
+	text-decoration: none;
+	border: none;
+}
+
+.twitter li p {
+	display: block;
+	margin-left: 95px;
+}
+
+.twitter li em.from {
+	display: none;
+}
+
+
 /**
  *	Exomel
  ******************************************************************/
@@ -303,6 +337,12 @@ h1 a {
 	padding: 6px;
 }
 
+.delicious li .desc {
+	display: block;
+	line-height: 1.2;
+	padding-top: 4px;
+}
+
 /**
  *	Readernaut
  ******************************************************************/
@@ -311,12 +351,60 @@ h1 a {
 	color: #B6C125;
 }
 
+.readernaut ul {
+	padding-top: 5px;
+}
+ 
+.readernaut li {
+	float: left;
+	width: 100%;
+}
+
+.readernaut li a {
+	text-decoration: none;
+	border: none;
+	display: block;
+	padding: 5px 0 5px 5px;
+}
+
+.readernaut li a:hover {
+}
+
+.readernaut li img {
+	display: block;
+	float: left;
+}
+
+.readernaut li img {
+        
+}
+
+.readernaut li a strong {
+	display: block;
+	margin-left: 55px;
+	font-weight: normal;
+	padding: 8px 10px 8px 10px;
+	color: rgba( 255, 255, 255, 0.5 );
+}
+
+.readernaut li a span {
+	display: block;
+	font-weight: bold;
+	color: #fff;
+	line-height: 1.2;
+}
+
+
 /**
  *	Facebook
  ******************************************************************/
 
 .facebook h2 a {
 	color: #3B5998;
+}
+
+.facebook ul li {
+	padding: 5px;
 }
 
 /**
@@ -327,12 +415,57 @@ h1 a {
 	color: #D62323;
 }
 
+.youtube li a {
+	display: block;
+	padding: 5px;
+	border: none;
+}
+
+.youtube li a img {
+	float: left;
+	display: block;
+}
+
+.youtube li a strong {
+	display: block;
+	margin-left: 130px;
+}
+
+.youtube li a span {
+	display: block;
+	margin-left: 130px;
+	color: rgba( 255, 255, 255, 0.5 );
+}
+
 /**
  *	Vimeo
  ******************************************************************/
 
 .vimeo h2 a {
 	color: #9FC54E;
+}
+
+.vimeo li a {
+	display: block;
+	padding: 5px;
+	border: none;
+}
+
+.vimeo li a img {
+	float: left;
+	display: block;
+}
+
+.vimeo li a strong {
+	display: block;
+	margin-left: 90px;
+	color: #fff;
+}
+
+.vimeo li a span {
+	display: block;
+	margin-left: 90px;
+	color: rgba( 255, 255, 255, 0.5 );
 }
 
 /**

@@ -172,10 +172,15 @@
 		static public function loadService( $service, $config ) {
 			PubwichLog::log( 1, "Chargement du service " . $service );
 
-			if (!file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
-				throw new PubwichErreur('Vous avez dit à Pubwich d\'utiliser le service '.$service.' mais le fichier <code>/lib/Services/'.$service.'.php</code> n\'a pu être trouvé.');
+			if ( file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
+				$fichier = 'Services/' . $service . '.php';
+			} elseif ( file_exists( dirname(__FILE__).'/Services/Custom/' . $service . '.php' ) ) {
+				$fichier = 'Services/Custom/' . $service . '.php';
+			} else {
+				throw new PubwichErreur('Vous avez dit à Pubwich d\'utiliser le service '.$service.' mais le fichier <code>/lib/Services/'.$service.'.php</code> ou <code>/lib/Services/Custom/'.$service.'.php</code> n\'a pu être trouvé.');
 			}
-			require_once( 'Services/' . $service . '.php' );
+
+			require_once( $fichier );
 			return new $service( $config );
 		}
 
@@ -216,14 +221,14 @@
 			}
 
 			foreach( self::$classes as $classe ) {
-				
-				if ( $boxTemplate ) {
+
+				if ( !$classe->getBoxTemplate()->hasTemplate() && $boxTemplate ) {
 					$classe->setBoxTemplate( $boxTemplate );
 				}
 
 				$boxFunction = get_class( $classe ) . '_boxTemplate';
-				if ( function_exists( $boxTemplate ) ) {
-					$classe->setBoxTemplate( $boxFunction );
+				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxFunction ) ) {
+					$classe->setBoxTemplate( call_user_func( $boxFunction ) );
 				}
 
 				$classFunction = get_class( $classe ) . '_itemTemplate';

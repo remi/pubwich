@@ -30,7 +30,8 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'link' => htmlspecialchars( $item->link ),
-						'title' => SmartyPants( $item->title )
+						'title' => SmartyPants( $item->title ),
+						'description' => Smartypants( $item->description )
 			);
 		}
 			

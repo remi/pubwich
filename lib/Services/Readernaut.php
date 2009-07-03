@@ -13,7 +13,7 @@
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
-			$this->setItemTemplate('<li><a href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
+			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
 			$this->setURLTemplate('http://www.readernaut.com/'.$config['username'].'/');
 
 			parent::__construct();

@@ -19,7 +19,7 @@
 			<div id="footer">
 				<div class="footer-inner">
 					<hr>
-					Toutes ces données sont &copy; copyright <?=date('Y')?>. 
+					Toutes ces données sont &copy; copyright <?=date('Y')?>. Propulsé fièrement par <a class="pubwich" href="http://www.pubwich.com/">Pubwich</a>.
 				</div>
 			</div>
 		</div>

@@ -21,9 +21,28 @@
 	 * Syntaxe à utiliser pour setServices
 	 *
 	 * Pubwich::setServices(
-	 *		array(), // colonne 1
-	 *		array(), // colonne 2
-	 *		array()  // colonne 3
+	 *		array(
+	 *
+	 *			// colonne 1
+	 *			array(
+	 *				array('Flickr', 'photos', array(
+	 *					'title' => 'Flickr',
+	 *					'description' => 'Mes photos',
+	 *					'key' => '',
+	 *					...
+	 *				)
+	 *			),
+	 *
+	 *			// colonne 2 
+	 *			array(
+	 *				...
+	 *			),
+	 *
+	 *			// colonne 3
+	 *			array(
+	 *				...
+	 *			)
+	 *		)
 	 * );
 	 *
 	 */	

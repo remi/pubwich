@@ -10,12 +10,6 @@
  
 -------------------------------------------------------------
 
-
-NOTE
--------------------------------------------------------------
-Ce fichier est en cours d'écriture.
-
-
 COMPOSANTS REQUIS
 -------------------------------------------------------------
 Les composants suivants doivent être installés pour que
@@ -24,7 +18,7 @@ Pubwich fonctionne :
 - Apache
 - PHP 5 (avec les extensions suivantes : SimpleXML et cURL)
 - PEAR (requis pour la librairie Cache_Lite)
-- crontab 
+- crontab (installés sur les systèmes UNIX [Linux et Mac OS X])
 
 
 INSTALLATION

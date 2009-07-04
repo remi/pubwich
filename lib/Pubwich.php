@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', 1.0 );
+	define( 'PUBWICH_VERSION', '1.0pre' );
 
 	/**
 	 * @classname Pubwich
@@ -21,9 +21,25 @@
 		 */
 		static private $classes;
 
+		/**
+		 * Contient les colonnes avec les instances de classe
+		 *
+		 * @var $columns
+		 */
 		static private $columns;
 
+		/**
+		 * Contient l’URL vers les fichiers du thème
+		 *
+		 * @var $theme_url
+		 */
 		static private $theme_url;
+
+		/**
+		 * Contient le chemin absolu vers les fichiers du thème
+		 *
+		 * @var $theme_path
+		 */
 		static private $theme_path;
 
 		/**
@@ -167,6 +183,7 @@
 		 * Charge la classe d'un service
 		 *
 		 * @param string $service Le nom du service (et de la classe)
+		 * @param array $config Le tableau de configuration
 		 * @return Service
 		 */
 		static public function loadService( $service, $config ) {
@@ -231,6 +248,11 @@
 					$classe->setBoxTemplate( call_user_func( $boxFunction ) );
 				}
 
+				$boxVariableFunction = get_class( $classe ) . '_' . $classe->getVariable() . '_boxTemplate';
+				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxVariableFunction ) ) {
+					$classe->setBoxTemplate( call_user_func( $boxVariableFunction ) );
+				}
+
 				$classFunction = get_class( $classe ) . '_itemTemplate';
 				if ( function_exists( $classFunction ) ) {
 					$classe->setItemTemplate( call_user_func( $classFunction ) );
@@ -263,6 +285,7 @@
 		/*
 		 * Affiche la boite d'une classe spécifique
 		 *
+		 * @param Service &$classe La référence de l’instancedu service à afficher
 		 * @return string
 		 */
 		static private function renderBox( &$classe ) {

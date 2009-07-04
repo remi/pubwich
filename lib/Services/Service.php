@@ -59,7 +59,8 @@
 		/**
 		 * Définit l'URL du service
 		 *
-		 * @return string
+		 * @param string $url
+		 * @return void
 		 */
 		public function setURL( $url ) {
 			$this->url = $url;

@@ -6,6 +6,7 @@
 	 * ------------------------------------------------------------------------
 	 * - Gabarit par défaut d’une boite : boxTemplate
 	 * - Gabarit d’une boite d’un service : <Service>_boxTemplate (eg. Facebook_boxTemplate)
+	 * - Gabarit d’une boite d’une instance d’un service : <Service>_<variable>_boxTemplate (eg. Facebook_etats_boxTemplate)
 	 * - Gabarit d’un item d’un service : <Service>_itemTemplate (eg. Delicious_itemTemplate)
 	 * - Gabarit d’un item d’une instance de service : <Service>_<variable>_itemTemplate (eg. RSS_monblogue_itemTemplate) 
 	 *

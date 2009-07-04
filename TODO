@@ -1,3 +1,37 @@
+
+[x] Meilleure gestion de la récupération des données
+    externes (dépendante de cURL présentement) via une
+    classe dédiée qui offre plusieurs alternatives. 
+
+[x] Meilleur système de  configuration (ne pas avoir à
+    saisir les URLS complètes, seulement les paramètres uniques).
+    Les passer lorsqu'on créé l'objet de service, via init().
+
+[x] Utilisation d'une classe statique <code>Pubwich</code> pour éviter
+    de polluer le namespace global avec des fonctions
+    utilitaires.
+
+[x] Support de thèmes
+
+[x] Plus de services (Facebook, RSS générique, etc.)
+
+[x] Meilleur système de configuration de service pour
+    permettre l'utilisation multiple d'un même service
+    avec des configurations différentes (comme RSS générique)
+
+[ ] Décider d'un meilleur système de configuration/template. Est-ce que
+    lorsqu'on active un service, il se rajoute automatique dans le
+    template? Est-ce qu'on laisse le contrôle total sur le "markup"
+    à l'utilisateur?
+
+	[x] Créer des répertoires <code>trunk</code>, <code>branches</code> et <code>tags</code> dans le dépot.
+
+[ ] Apprendre à utiliser les "branches"
+
+[ ] Permettre une plus grande personnalisation des services (eg. types de
+    statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
+
+
 Choses à faire avant Pubwich 1.0
 ------------------------------------------------------------------------------------------
 

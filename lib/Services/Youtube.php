@@ -2,7 +2,7 @@
 
 	class Youtube extends Service {
 	
-		public $username, $size;
+		private $size;
 
 		public function __construct( $config ){
 			$this->setURL( sprintf( 'http://gdata.youtube.com/feeds/api/users/%s/uploads?v=2', $config['username'] ) );
@@ -51,6 +51,4 @@
 			);
 		}
 
-
 	}
-

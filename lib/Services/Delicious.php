@@ -2,8 +2,6 @@
 
 	class Delicious extends Service {
 	
-		public $username;
-
 		public function __construct( $config ){
 			$this->setURL( sprintf( 'http://feeds.delicious.com/v2/rss/%s?count=%s', $config['username'], $config['total'] ) );
 			$this->username = $config['username'];
@@ -36,7 +34,8 @@
 			return array(
 						'link' => htmlspecialchars( $item->link ),
 						'title' => SmartyPants( $item->title ),
-						'description' => Smartypants( $item->description )
+						'description' => Smartypants( $item->description ),
+						'date' => Pubwich::time_since( $item->pubDate ),
 			);
 		}
 			

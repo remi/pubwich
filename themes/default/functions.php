@@ -56,3 +56,7 @@
 	function Youtube_itemTemplate() {
 		return '<li class="clearfix"><a href="{%link%}"><img width="{%size%}" src="{%image%}" alt="{%title%}" /><strong>{%title%}</strong> <span>{%description%}</span></a></li>'."\n";
 	}
+
+	function Twitter_itemTemplate() {
+		return '<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n";
+	}

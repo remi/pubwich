@@ -2,7 +2,6 @@
 
 	class Flickr extends Service {
 
-		public $username;
 		private $compteur, $row;
 
 		public function __construct( $config ){

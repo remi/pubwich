@@ -2,7 +2,6 @@
 
 	class Readernaut extends Service {
 		
-		public $username;
 		private $size;
 
 		public function __construct( $config ){
@@ -36,11 +35,18 @@
 		 */
 		public function populateItemTemplate( &$item ) {
 			return array(
+						'id' => $item->reader_book_id,
 						'link' => $item->book_edition->permalink, 
 						'title' => SmartyPants( $item->book_edition->title ),
+						'subtitle' => SmartyPants( $item->book_edition->subtitle ),
 						'author' => SmartyPants( $item->book_edition->authors->author ), 
 						'image' => $item->book_edition->covers->cover_small,
-						'size' => $this->size
+						'image_medium' => $item->book_edition->covers->cover_medium,
+						'image_large' => $item->book_edition->covers->cover_large,
+						'size' => $this->size,
+						'created' => Pubwich::time_since( $this->book_edition->created ),
+						'modified' => Pubwich::time_since( $this->book_edition->modified ),
+						'isbn' => $this->book_edition->isbn,
 						);
 		}
 			

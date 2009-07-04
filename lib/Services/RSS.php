@@ -30,10 +30,13 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
+			$comments_count = $item->children('http://purl.org/rss/1.0/modules/slash/')->comments;
 			return array(
 						'link' => htmlspecialchars( $item->link ),
 						'title' => SmartyPants( $item->title ),
 						'date' => Pubwich::time_since( $item->pubDate ),
+						'comments_link' => $item->comments,
+						'comments_count' => $comments_count,
 						'description' => Markdown( $item->description )
 			);
 		}

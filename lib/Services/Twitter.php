@@ -2,9 +2,7 @@
 
 	class Twitter extends Service {
 
-		public $username;
-
-		public function __construct( $config ){
+		public function __construct( $config ) {
 			$this->setURL( sprintf( 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d', $config['id'], $config['total'] ) );
 			$this->username = $config['username'];
 
@@ -35,7 +33,9 @@
 			return array(
 						'link' => sprintf( 'http://www.twitter.com/%s/statuses/%s/', $this->username, $item->id ),
 						'text' => $this->filterContent( $item->text ),
-						'date' => Pubwich::time_since( $item->created_at )
+						'date' => Pubwich::time_since( $item->created_at ),
+						'location' => $item->user->location,
+						'source' => $item->source,
 						);
 		}
 

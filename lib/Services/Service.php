@@ -7,7 +7,7 @@
 	 */ 
 	class Service {
 
-		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate;
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total;
 		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**

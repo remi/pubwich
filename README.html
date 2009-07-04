@@ -14,10 +14,38 @@
 				font-family: Helvetica, Arial, sans-serif;
 				font-size: 140%;
 				line-height: 1.3;
+				background: #111;
+				color: #ccc;
+			}
+
+			hr {
+				color: #111;
+				border: none;
+				border-bottom: 1px solid #333;
+				height: 1px;
+				margin: 2em 0;
+			}
+
+			a {
+				color: #35ADAB;
+			}
+
+			a:hover {
+				color: #7CCCCB;
+			}
+
+			h1, h2, h3, h4 {
+				color: #fff;
+			}
+
+			h3 {
+				margin-top: 2em;
 			}
 
 			code {
 				font-size: 120%;
+				background: #000;
+				color: #FFFFCF;
 			}
 
 			table {
@@ -26,18 +54,27 @@
 			}
 
 			table td {
-				border: 1px solid #ddd;
+				border: 2px solid #111;
 				padding: 5px 7px;
+				background: #0a0a0a;
+			}
+
+			h1 small {
+				font-size: 50%;
+				color: #777;
+				font-weight: normal;
 			}
 		</style>
 	</head>
 	<body>
 
-		<h1>Pubwich 1.0</h1>
-		<p>Aggrégation du contenu publié sur différents services Web<br />
-		Par Rémi Prévost (<a href="http://remiprevost.com">http://remiprevost.com</a>)</p>
+		<h1>Pubwich 1.0 <small>Aggrégation du contenu publié sur différents services Web</small></h1>
+		<ul>
+			<li><a href="http://pubwich.com">http://pubwich.com</a></li>
+			<li>Par <a href="http://remiprevost.com">Rémi Prévost</a></li>
+		</ul>
  
-		<hr />
+		<hr>
 
 		<h2>Composants requis</h2>
 		<p>Les composants suivants doivent être installés pour que Pubwich fonctionne :</p>
@@ -49,6 +86,7 @@
 			<li><code>crontab</code> (installé sur tous les systèmes UNIX)</li>
 		</ul>
 
+		<hr>
 
 		<h2 id="installation">Installation</h2>
 
@@ -69,7 +107,7 @@
 
 				<table>
 					<tr><td><code>&lt;N&gt;</code></td><td>L’interval (en minutes) de rafraichissement du cache</td></tr>
-					<tr><td><code>&lt;PHP&gt;</code></td><td>Le chemin vers PHP 5 (habituellement <code>/usr/bin/php</code>)</td></tr>
+					<tr><td><code>&lt;PHP&gt;</code></td><td>Le chemin vers l’exécutable de PHP (habituellement <code>/usr/bin/php</code> ou <code>/usr/local/bin/php</code>)</td></tr>
 					<tr><td><code>&lt;CHEMIN_ABSOLU&gt;</code></td><td>Le chemin absolu vers l’installation de Pubwich</td></tr>
 				</table>
 
@@ -78,13 +116,15 @@
 				<p><code>*/10 * * * * /usr/bin/php -f /home/utilisateur/public_html/pubwich/trunk/cron/cron.php</code></p>
 
 			</li>
-			<li>Changer les permissions du dossier <code>cache/</code> pour qu’il soit "writeable" par tous (<code>$ chmod 0777 cache</code>).</li>
+			<li>Changer les permissions du dossier <code>cache</code> pour qu’il soit "writeable" par tous (<code>$ chmod 0777 cache</code>).</li>
 			<li>Tout devrait fonctionner (en navigant vers le fichier <code>index.php</code> placé sur un serveur!).</li>
 		</ol>
 
+		<hr>
+
 		<h2 id="configuration">Configuration des services</h2>
 
-		<p>La méthode <code>setServices</code> de l’objet <code>Pubwich</code> recoit comme seul argument un tableau. Chaque élément de ce tableau constitue une colonne. Chaque élément d’une colonne est une boite d’un service (voir le fichier <code>cfg/config.sample.php</code> pour des exemples). Pour configurer une boite, on utilise la syntaxe suivante :</p>
+		<p>La méthode <code>setServices</code> de l’objet <code>Pubwich</code> recoit comme seul argument un tableau. Chaque élément de ce tableau constitue une colonne. Chaque élément d’une colonne est une boite d’un service (voir le fichier <code>cfg/config.sample.php</code> pour des exemples). L’ordre d’apparition de la boite dans le tableau de la colonne sera le même ordre qu’à l’affichage. Pour configurer une boite, on utilise la syntaxe suivante :</p>
 
 		<p><code>array( &lt;service&gt;, &lt;variable&gt;, &lt;config&gt; )</code></p>
 
@@ -104,33 +144,11 @@
 			<tr><td><code>total</code></td><td>Le nombre total d’élément à afficher provenant du service</td></tr>
 		</table>
 
-		<h3>Éléments de configuration du service Flickr</h3>
+		<h3>Éléments de configuration du service Atom</h3>
 
 		<table>
-			<tr><td><code>key</code></td><td>Votre clé d’API</td></tr>
-			<tr><td><code>userid</code></td><td>Votre identifiant numérique (utiliser <a href="http://idgettr.com/">http://idgettr.com</a> pour le trouver facilement)</td></tr>
-			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
-			<tr><td><code>row</code></td><td>Le nombre de photos par rangée. Pubwich ajoutera la classe <code>derniere</code> à chaque photo de fin de rangée</td></tr>
-		</table>
-
-		<h3>Éléments de configuration du service Vimeo</h3>
-
-		<table>
-			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
-		</table>
-
-		<h3>Éléments de configuration du service Youtube</h3>
-
-		<table>
-			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
-			<tr><td><code>size</code></td><td>La largeur des vignettes</td></tr>
-		</table>
-
-		<h3>Éléments de configuration du service Twitter</h3>
-
-		<table>
-			<tr><td><code>id</code></td><td>Votre identifiant numérique</td></tr>
-			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>url</code></td><td>L’URL du fil Atom</td></tr>
+			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil Atom</td></tr>
 		</table>
 
 		<h3>Éléments de configuration du service Delicious</h3>
@@ -147,25 +165,13 @@
 			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
 		</table>
 
-		<h3>Éléments de configuration du service RSS</h3>
+		<h3>Éléments de configuration du service Flickr</h3>
 
 		<table>
-			<tr><td><code>url</code></td><td>L’URL du fil RSS</td></tr>
-			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil RSS</td></tr>
-		</table>
-
-		<h3>Éléments de configuration du service Atom</h3>
-
-		<table>
-			<tr><td><code>url</code></td><td>L’URL du fil Atom</td></tr>
-			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil Atom</td></tr>
-		</table>
-
-		<h3>Éléments de configuration du service Readernaut</h3>
-
-		<table>
+			<tr><td><code>key</code></td><td>Votre clé d’API</td></tr>
+			<tr><td><code>userid</code></td><td>Votre identifiant numérique (utiliser <a href="http://idgettr.com/">http://idgettr.com</a> pour le trouver facilement)</td></tr>
 			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
-			<tr><td><code>size</code></td><td>La largeur des couvertures de livre</td></tr>
+			<tr><td><code>row</code></td><td>Le nombre de photos par rangée. Pubwich ajoutera la classe <code>derniere</code> à chaque photo de fin de rangée</td></tr>
 		</table>
 
 		<h3>Éléments de configuration du service Lastfm</h3>
@@ -176,11 +182,49 @@
 			<tr><td><code>size</code></td><td>La largeur des couvertures d’album</td></tr>
 		</table>		
 
+		<h3>Éléments de configuration du service Readernaut</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>size</code></td><td>La largeur des couvertures de livre</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service RSS</h3>
+
+		<table>
+			<tr><td><code>url</code></td><td>L’URL du fil RSS</td></tr>
+			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil RSS</td></tr>
+		</table>
+
 		<h3>Éléments de configuration du service Texte</h3>
 
 		<table>
 			<tr><td><code>text</code></td><td>Le texte à afficher dans la boite</td></tr>
 		</table>		
 
-		</body>
-	</html>
+		<h3>Éléments de configuration du service Twitter</h3>
+
+		<table>
+			<tr><td><code>id</code></td><td>Votre identifiant numérique</td></tr>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Vimeo</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Youtube</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>size</code></td><td>La largeur des vignettes</td></tr>
+		</table>
+
+		<hr>
+
+		<p>© Copyright Rémi Prévost 2008-2009 ($Date$)</p>
+
+	</body>
+</html>

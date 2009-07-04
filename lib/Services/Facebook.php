@@ -2,9 +2,6 @@
 
 	class Facebook extends Service {
 	
-		private $url_template = 'http://www.facebook.com/feeds/status.php?id=%d&viewer=%d&key=%s&format=rss20';
-		public $total = 0;
-
 		public function __construct( $config ){
 			$this->setURL( sprintf( 'http://www.facebook.com/feeds/status.php?id=%d&viewer=%d&key=%s&format=rss20', $config['id'], $config['id'], $config['key'] ) );
 			$this->total = $config['total'];
@@ -37,7 +34,8 @@
 			return array(
 						'link' => htmlspecialchars( $item->link ),
 						'title' => $item->title,
-						'date' => Pubwich::time_since( $item->pubDate )
+						'date' => Pubwich::time_since( $item->pubDate ),
+						'author' => $item->author,
 						);
 		}
 			

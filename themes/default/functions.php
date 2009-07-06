@@ -1,34 +1,5 @@
 <?php
 	
-	/**
-	 *
-	 * Fonctions personnalisées du thème
-	 * ------------------------------------------------------------------------
-	 * - Gabarit par défaut d’une boite : boxTemplate
-	 * - Gabarit d’une boite d’un service : <Service>_boxTemplate (eg. Facebook_boxTemplate)
-	 * - Gabarit d’une boite d’une instance d’un service : <Service>_<variable>_boxTemplate (eg. Facebook_etats_boxTemplate)
-	 * - Gabarit d’un item d’un service : <Service>_itemTemplate (eg. Delicious_itemTemplate)
-	 * - Gabarit d’un item d’une instance de service : <Service>_<variable>_itemTemplate (eg. RSS_monblogue_itemTemplate) 
-	 *
-	 * 
-	 * Tags à utiliser dans les gabarits
-	 * ------------------------------------------------------------------------
-	 *
-	 * Gabarits de boites :
-	 *
-	 *   - {%class%}
-	 *   - {%id%}
-	 *   - {%url%}
-	 *   - {%title%}
-	 *   - {%description%}
-	 *   - {%items%}
-	 *
-	 * Gabarits d’items
-	 *
-	 *   - Différents selon le service
-	 *
-	 */
-
 	function boxTemplate() {
 		return '
 			<div class="boite {%class%}" id="{%id%}">
@@ -42,6 +13,12 @@
 
 	}
 
+	/****************************************************
+	 *
+	 * Peut-être que ces fonctions vous seront utiles...
+	 *
+	 ****************************************************/
+	/*
 	function RSS_ixmedia_itemTemplate() {
 		return '<li><a href="{%link%}">{%title%}</a> {%date%} <div class="text">{%description%}</div></li>'."\n";
 	}
@@ -61,3 +38,4 @@
 	function Twitter_itemTemplate() {
 		return '<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n";
 	}
+	 */

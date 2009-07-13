@@ -43,7 +43,7 @@
 	
 			return array(
 						'link' => htmlspecialchars( $url ),
-						'title' => htmlspecialchars( SmartyPants( $title ) ),
+						'title' => SmartyPants( $title ),
 						'description' => SmartyPants( $description ),
 						'date' => Pubwich::time_since( $item->published ),
 						'image' => $attrs['url'],

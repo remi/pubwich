@@ -2,11 +2,15 @@
 
 	class Twitter extends Service {
 
-		private $url_template = 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d';
+		public function __construct( $config ) {
+			$this->setURL( sprintf( 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d', $config['id'], $config['total'] ) );
+			$this->username = $config['username'];
 
-		public function __construct( $config ){
-			list($id, $total) = $config;
-			$this->setURL( sprintf( $this->url_template, $id, $total ) );
+			$this->title = $config['title'];
+			$this->description = $config['description'];
+			$this->setItemTemplate('<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n");
+			$this->setURLTemplate('http://www.twitter.com/'.$config['username'].'/');
+
 			parent::__construct();
 		}
 
@@ -18,6 +22,21 @@
 		public function getData() {
 			$data = parent::getData();
 			return $data->status;
+		}
+
+		/**
+		 * Retourne un item formatté selon le gabarit
+		 *
+		 * @return array
+		 */
+		public function populateItemTemplate( &$item ) {
+			return array(
+						'link' => sprintf( 'http://www.twitter.com/%s/statuses/%s/', $this->username, $item->id ),
+						'text' => $this->filterContent( $item->text ),
+						'date' => Pubwich::time_since( $item->created_at ),
+						'location' => $item->user->location,
+						'source' => $item->source,
+						);
 		}
 
 		/**
@@ -37,8 +56,7 @@
 			$text = preg_replace( '/(https?:\/\/[^\s\)]+)/', '<a href="\\1">\\1</a>', $text );
 			$text = preg_replace( '/\@([^\s\ \:\.\;\-\!\)\(\"]+)/', '@<a href="http://twitter.com/\\1">\\1</a>', $text );
 			$text = '<p>' . ( Smartypants( $text ) ) . '</p>';
-			
 			return $text;
 		}
-		
+
 	}

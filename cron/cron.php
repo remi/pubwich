@@ -1,6 +1,6 @@
 <?php
 
-	define( 'CRON', true );
+	define( 'PUBWICH_CRON', true );
 
 	require( dirname(__FILE__) . '/../lib/Pubwich.php');
 	Pubwich::init();

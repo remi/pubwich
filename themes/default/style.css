@@ -1,16 +1,11 @@
-/*
-
- @@@ Renommer ce fichier en `screen.css`
-
-*/
 @charset "UTF-8";
 
 /* ****************************************************
 
-	@file:		  screen.css
-	@description: Feuille de style d'écran
+	@file:		  style.css
+	@cescription: Feuille de style d'écran
 	@author:      remi (exomel.com)
-	@updated:	  20090518
+	@updated:	  20090704
 
 	@notes:       Vous pouvez vous servir de ce fichier
 	              pour créer un nouveau thème pour
@@ -30,19 +25,26 @@
 hr { display: none; } 
 a * { cursor: pointer; }
 
-body {
-	background: #fff;
-	color: #222;
+html {
 	font-size: 62.5%;
-	line-height: 1.5;
-	font-family: "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
+}
+
+body {
+	background: #024f35;
+	background: #111;
+	/* color: #699787; */
+	color: rgba( 255, 255, 255, 0.6 );
+	font-size: 110%;
+	line-height: 1.4;
+	font-family: Helvetica, Arial, "Lucida Grande", "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
 				 /* Yay for Liberation! */
+	padding: 40px 0 10px;
 }
 
 #wrap {
 	font-size: 110%;
 	width: 960px;
-	margin: 40px auto 0;
+	margin: 0 auto;
 }
 
 #skip {
@@ -51,13 +53,13 @@ body {
 }
 
 a {
-	color: #327e61;
+	color: #fff;
 	text-decoration: none;
-	border-bottom: 1px dotted #327e61;
+	border-bottom: 1px dotted;
 }
 
 a:hover {
-	color: #196145;
+	color: #cbe9df;
 	border-color: #196145;
 }
 
@@ -67,25 +69,22 @@ acronym, abbr {
 
 h1 {
 	font-size: 250%;
-	font-weight: normal;
+	font-weight: bold;
 	text-align: center;
-	padding-bottom: 0.7em;
-	margin-bottom: 0.3em;
-	margin-left: 335px;
-	width: 380px;
+	padding-top: 0.1em;
+	padding-bottom: 1.4em;
+	width: 100%;
 	color: #666;
-}
-
-h1 strong {
-	color: #fafafa;
-	font-weight: normal;
-	font-style: normal;
-	font-size: 140%;
+	text-shadow: 2px 2px rgba( 0, 0, 0, 0.5);
 }
 
 h1 a {
-	color: #666;
 	border: none;
+	color: #fff;
+}
+
+h1 a:hover {
+	color: #acdecd;
 }
 
 .erreur {
@@ -101,20 +100,12 @@ h1 a {
 #footer {
 	text-align: center;
 	padding: 1.3em 0 1.9em;
-	color: #777;
 }
 
-#footer .footer-inner {
-	width: 380px;
-	margin: 0 0 0 335px;
-}
-
-#footer a {
-	color: #aaa;
-}
-
-#footer a:hover {
-	color: #fff;
+#footer a.pubwich {
+	background: url("img/pubwich.png") no-repeat;
+	padding: 2px 1px 2px 17px;
+	border: none;
 }
 
 /**
@@ -122,13 +113,13 @@ h1 a {
  ******************************************************************/
  
 .col1 {
-	width: 315px;
+	width: 337px;
 	margin-right: 20px;
 	float: left;
 }
 
 .col2 {
-	width: 380px;
+	width: 358px;
 	margin-right: 20px;
 	float: left;
 }
@@ -146,20 +137,23 @@ h1 a {
 	margin: 0 0 18px;	
 }
 
+.boite.nodata {
+	opacity: 0.5;
+	background: rgba( 0, 0, 0, 0.2);
+}
+
 .boite h2 {
 	font-size: 130%;
-	padding: 8px 10px 9px;
-	background: #eee;
-	margin-bottom: 0.3em;
-	color: #333;
-	-moz-border-radius: 0.2em;
-	-webkit-border-radius: 0.2em;
-	line-height: 1.1;
+	padding: 12px 10px 8px;
+	color: #fff;
+	background: rgba( 0, 0, 0, 0.6 );
+	-moz-border-radius: 0.5em 0.5em 0 0;
+	line-height: 1;
 }
 
 .boite h2 span {
 	font-size: 80%;
-	color: #444;
+	color: rgba( 255, 255, 255, 0.3 );
 	font-weight: normal;
 }
 
@@ -167,6 +161,38 @@ h1 a {
 	text-decoration: none;
 	border: none;
 }
+
+.boite ul li {
+	background: rgba( 0, 0, 0, 0.06 );
+	margin-bottom: 5px;
+}
+
+.boite ul li.nodata {
+	opacity: 0.5;
+}
+
+.boite .boite-inner {
+	border: 1px solid rgba( 0, 0, 0, 0.7 );
+	border-top: none;
+	padding: 10px;
+}
+
+.boite.no-title .boite-inner {
+	border-top: 1px solid rgba( 0, 0, 0, 0.7 );
+}
+
+
+/**
+ *	RSS & Atom
+ ******************************************************************/
+
+.rss li, .atom li {
+	padding: 5px;
+}
+
+/**
+ *	Flickr
+ ******************************************************************/
 
 .flickr h2 a {
 	color: #0063DC;
@@ -177,152 +203,44 @@ h1 a {
 	font-style: normal;
 }
 
+.flickr ul li {
+	float: left;
+	padding-right: 5px;
+	background: none;
+}
+
+.flickr ul li.derniere {
+	padding-right: 0;
+}
+
+.flickr ul li a {
+	border: none;
+}
+
+.flickr ul li img {
+	display: block;
+}
+
+/**
+ *	Last.fm
+ ******************************************************************/
+
 .lastfm h2 a {
 	color: #DC413A;
 }
 
-.twitter h2 a {
-	color: #33CCFF;
-}
-
-.exomel h2 a {
-	color: #86BAAB;
-}
-
-.delicious h2 a {
-	color: #3274D0;	
-}
-
-.readernaut h2 a {
-	color: #B6C125;
-}
-
-/**
- *	WTF (aussi appelé "intro")
- ******************************************************************/
-
-.wtf {
-	margin-bottom: 0;
-}
-
-.wtf div {
-	padding: 5px;
-}
-
-.wtf p {
-	margin: 0 0 1em;
-}
-
-/**
- *	Flickr
- ******************************************************************/
-
-.flickr ul {
-	padding-top: 5px;
-}
-
-.flickr li {
-	float: left;
-	display: block;
-	margin-right: 5px;
-	margin-bottom: 5px;
-}
-
-.flickr li.derniere {
-	margin-right: 0;
-}
-
-.flickr li a, .flickr li img {
-	float: left;
-	display: block;
-	border: none;
-}
-
-/**
- *	Twitter
- ******************************************************************/
- 
-.twitter {
-	
-}
-
-.twitter li {
-	padding: 5px 10px 7px;
-	margin: 0 0 5px;
-/*	background: #1c1c1c; */
-	background: rgba(230, 230, 230, 0.2);
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-}
-
-.twitter li span.date {
-	display: block;
-	float: left;
-	width: 85px;
-	margin-right: 10px;
-}
-
-.twitter li span.date a {
-	color: #444;
-	text-decoration: none;
-	border: none;
-}
-
-.twitter li p {
-	float: left;
-	display: block;
-	width: 260px;
-}
-
-.twitter li em.from {
-	display: none;
-}
-
-/**
- *	del.icio.us
- ******************************************************************/
- 
-.delicious {
-	margin-right: 0;
-}
-
-.delicious ul {
-	margin: 0 0 0 19px;
-	padding-top: 5px;
-}
-
-.delicious li {
-	margin: 0 0 5px;
-	padding: 0 0 5px;
-	line-height: 1.4;
-	list-style: circle;
-}
-.delicious a {
-	
-}
-
-/**
- *	last.fm
- ******************************************************************/
-
-.lastfm ul {
-	padding-top: 5px;
-}
- 
 .lastfm li {
 	float: left;
-	margin: 0 0 5px 0;
-	/*background: #1c1c1c;*/
+	width: 100%;
+	background: none;
 }
 
 
 .lastfm li a {
 	text-decoration: none;
 	border: none;
-	padding: 5px 0 5px 5px;
-	background: rgba(230, 230, 230, 0.2);
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
+	display: block;
+	padding: 5px;
 }
 
 .lastfm li a:hover {
@@ -332,26 +250,24 @@ h1 a {
 	background: url("img/cover.png");
 }
 
-.lastfm li a, .lastfm li img {
+.lastfm li img {
 	display: block;
 	float: left;
 }
 
 .lastfm li a strong {
-	float: left;
 	display: block;
-	width: 231px;
+	margin-left: 70px;
 	font-weight: normal;
 	padding: 8px 5px 8px 10px;
-	color: #777;
+	color: rgba( 255, 255, 255, 0.5 );
 }
 
 .lastfm li a span {
 	font-size: 100%;
 	display: block;
 	font-weight: bold;
-	color: #999;
-	
+	color: #fff;	
 }
 
 .lastfm li.premier span {
@@ -374,38 +290,67 @@ h1 a {
 	
 }
 
+
 /**
- *	RSS
+ *	Twitter
  ******************************************************************/
 
-.rss {
-	margin-right: 0;
+.twitter h2 a {
+	color: #33CCFF;
 }
 
-.rss ul {
-	margin: 0 0 0 19px;
-	padding-top: 5px;
-}
-
-.rss li {
+.twitter li {
+	padding: 5px 10px 7px;
 	margin: 0 0 5px;
-	padding: 0 0 5px;
-	line-height: 1.4;
-	list-style: circle;
 }
 
-.rss li small {
-	color: #666;
+.twitter li span.date {
+	display: block;
+	float: left;
+	width: 85px;
+	margin-right: 10px;
 }
 
+.twitter li span.date a {
+	text-decoration: none;
+	border: none;
+}
+
+.twitter li p {
+	display: block;
+	margin-left: 95px;
+}
+
+.twitter li em.from {
+	display: none;
+}
 
 /**
- *	Facebook
+ *	Del.icio.us
  ******************************************************************/
+
+.delicious h2 a {
+	color: #3274D0;	
+}
+
+.delicious li {
+	display: block;
+	padding: 6px;
+}
+
+.delicious li .desc {
+	display: block;
+	line-height: 1.2;
+	padding-top: 4px;
+}
 
 /**
  *	Readernaut
  ******************************************************************/
+
+.readernaut h2 a {
+	color: #B6C125;
+}
 
 .readernaut ul {
 	padding-top: 5px;
@@ -413,46 +358,131 @@ h1 a {
  
 .readernaut li {
 	float: left;
-	margin: 0 0 5px 0;
+	width: 100%;
 }
 
 .readernaut li a {
 	text-decoration: none;
 	border: none;
-	/*background: #1c1c1c;*/
-	background: rgba(230, 230, 230, 0.2);
+	display: block;
 	padding: 5px 0 5px 5px;
-	-moz-border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
 }
 
 .readernaut li a:hover {
 }
 
-.readernaut li a, .readernaut li img {
+.readernaut li img {
 	display: block;
 	float: left;
 }
 
 .readernaut li img {
-	
+        
 }
 
 .readernaut li a strong {
-	float: left;
 	display: block;
-	width: 150px;
+	margin-left: 55px;
 	font-weight: normal;
 	padding: 8px 10px 8px 10px;
-	color: #777;
+	color: rgba( 255, 255, 255, 0.5 );
 }
 
 .readernaut li a span {
 	display: block;
 	font-weight: bold;
-	color: #999;
+	color: #fff;
 	line-height: 1.2;
-	padding-bottom: 0.2em;
+}
+
+
+/**
+ *	Facebook
+ ******************************************************************/
+
+.facebook h2 a {
+	color: #3B5998;
+}
+
+.facebook ul li {
+	padding: 5px;
+}
+
+/**
+ *	Youtube
+ ******************************************************************/
+
+.youtube h2 a {
+	color: #D62323;
+}
+
+.youtube li a {
+	display: block;
+	padding: 5px;
+	border: none;
+}
+
+.youtube li a img {
+	float: left;
+	display: block;
+}
+
+.youtube li a strong {
+	display: block;
+	margin-left: 130px;
+}
+
+.youtube li a span {
+	display: block;
+	margin-left: 130px;
+	color: rgba( 255, 255, 255, 0.5 );
+}
+
+/**
+ *	Vimeo
+ ******************************************************************/
+
+.vimeo h2 a {
+	color: #9FC54E;
+}
+
+.vimeo li a {
+	display: block;
+	padding: 5px;
+	border: none;
+}
+
+.vimeo li a img {
+	float: left;
+	display: block;
+}
+
+.vimeo li a strong {
+	display: block;
+	margin-left: 90px;
+	color: #fff;
+}
+
+.vimeo li a span {
+	display: block;
+	margin-left: 90px;
+	color: rgba( 255, 255, 255, 0.5 );
+}
+
+/**
+ *	WTF (aussi appelé "intro")
+ ******************************************************************/
+
+.wtf {
+	margin-bottom: 0;
+}
+
+.wtf div {
+	padding: 5px;
+}
+
+.wtf p {
+	margin: 0 0 1em;
 }
 
 /**

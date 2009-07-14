@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Pubwich — lisez-moi</title>
+		<style type="text/css">
+			html { font-size: 62.5% }
+			body { margin: 0; padding: 50px 70px 40px; font-family: Helvetica, Arial, sans-serif; font-size: 140%; line-height: 1.3; background: #111; color: #ccc; }
+			ul, ol { padding-left: 18px; }
+			hr { color: #111; border: none; border-bottom: 1px solid #333; height: 1px; margin: 2em 0; display: none; }
+			a { color: #35ADAB; }
+			a:hover { color: #7CCCCB; }
+			h1, h2, h3 { color: #fff; margin-left: -30px; }
+			h4 { color: #666; margin: 2em 0 1em; }
+			h2 { margin-top: 2.5em; margin-bottom: 0.7em; }
+			h3 { margin-top: 2em; color: #aaa; border-bottom: 1px solid #333; padding-bottom: 0.6em; }
+			code { font-size: 120%; background: #000; color: #FFFFCF; }
+			pre { background: #000; color: #FFFFCF; padding: 5px; }
+			table { border-collapse: collapse; }
+			table td { border: 2px solid #111; padding: 5px 7px; background: #0a0a0a; }
+			h1 small { font-size: 50%; color: #777; font-weight: normal; }
+			#footer { margin-top: 4em; padding-top: 2em; border-top: 1px solid #333; }
+			#footer small { color: #555; font-size: 100%; margin-left: 1em; }
+		</style>
+	</head>
+	<body>
+
+		<h1><a href="http://pubwich.com/">Pubwich</a> 1.0 <small>Aggrégation du contenu publié sur différents services Web</small></h1>
+
+		<ol>
+			<li><a href="#composants">Composants requis</a></li>
+			<li><a href="#installation">Installation</a></li>
+			<li><a href="#configuration">Configuration des services</a></li>
+			<li><a href="#theme">Configuration du thème</a></li>
+		</ol>
+
+		<hr>
+
+		<h2 id="composants">1. Composants requis</h2>
+		<p>Les composants suivants doivent être installés pour que Pubwich fonctionne :</p>
+
+		<ul>
+			<li><a href="http://apache.org">Apache</a></li>
+			<li><a href="http://php.net">PHP 5</a> (avec les extensions suivantes : <code>SimpleXML</code> et <code>cURL</code>)</li>
+			<li><a href="http://pear.php.net">PEAR</a> (requis pour la librairie <code>Cache_Lite</code>)</li>
+			<li><code>crontab</code> (installé sur tous les systèmes UNIX)</li>
+		</ul>
+
+		<hr>
+
+		<h2 id="installation">2. Installation</h2>
+
+		<ol>
+			<li>
+				<p>Dupliquer <code>cfg/config.sample.php</code> vers <code>cfg/config.php</code></p>
+				<p>(optionnel : Si vous voulez utiliser un thème personnalisé, dupliquer le dossier <code>themes/default</code> vers <code>themes/nom_du_theme</code> et modifier la constante <code>PUBWICH_THEME</code> dans le fichier <code>cfg/config.php</code> pour "nom_du_theme".</p>
+			</li> 
+			<li>
+				<p>Modifier le nouveau fichier <code>config.php</code> en remplaçant les espaces vides par vos informations (clés d’API, nom d’utilisateur, URL du site, etc.) et en modifiant le tableau passé en argument à <code>Pubwich::setServices()</code>. Voir la section « <a href="#configuration">Configuration des services</a> » de ce fichier pour plus de détails.</p>
+			</li>
+
+			<li>
+				<p>Modifier votre fichier <code>crontab</code> (en exécutant <code>crontab -e</code>) et ajouter la ligne suivante :</p>
+				<p><code>*/&lt;N&gt; * * * * &lt;PHP&gt; -f &lt;CHEMIN_ABSOLU&gt;/cron/cron.php</code></p>
+
+				<p>En remplacant les éléments suivants :</p>
+
+				<table>
+					<tr><td><code>&lt;N&gt;</code></td><td>L’interval (en minutes) de rafraichissement du cache</td></tr>
+					<tr><td><code>&lt;PHP&gt;</code></td><td>Le chemin vers l’exécutable de PHP (habituellement <code>/usr/bin/php</code> ou <code>/usr/local/bin/php</code>)</td></tr>
+					<tr><td><code>&lt;CHEMIN_ABSOLU&gt;</code></td><td>Le chemin absolu vers l’installation de Pubwich</td></tr>
+				</table>
+
+				<p>Exemple:</p>
+
+				<p><code>*/10 * * * * /usr/bin/php -f /home/utilisateur/public_html/pubwich/trunk/cron/cron.php</code></p>
+
+			</li>
+			<li><p>Changer les permissions du dossier <code>cache</code> pour qu’il soit "writeable" par tous (<code>$ chmod 0777 cache</code>).</p></li>
+			<li><p>Tout devrait fonctionner (en navigant vers le fichier <code>index.php</code> placé sur un serveur!).</p></li>
+		</ol>
+
+		<hr>
+
+		<h2 id="configuration">3. Configuration des services</h2>
+
+		<p>La méthode <code>setServices</code> de l’objet <code>Pubwich</code> recoit comme seul argument un tableau. Chaque élément de ce tableau constitue une colonne. Chaque élément d’une colonne est une boite d’un service (voir le fichier <code>cfg/config.sample.php</code> pour des exemples). L’ordre d’apparition de la boite dans le tableau de la colonne sera le même ordre qu’à l’affichage. Pour configurer une boite, on utilise la syntaxe suivante :</p>
+
+		<p><code>array( &lt;service&gt;, &lt;variable&gt;, &lt;config&gt; )</code></p>
+
+		<p>Où :</p>
+
+		<table>
+			<tr><td><code>&lt;service&gt;</code></td><td>le nom du service à utiliser (<code>'Flickr'</code>, <code>'Twitter'</code>, etc.)</td></tr>
+			<tr><td><code>&lt;variable&gt;</code></td><td>le nom unique de la boite (<code>'photos'</code>, <code>'etats'</code>, etc.)</td> </tr>
+			<tr><td><code>&lt;config&gt;</code></td><td>un tableau contenant des <a href="#configuration-elements">éléments de configuration</a></td></tr>
+		</table>
+
+		<h3 id="configuration-elements">Éléments communs de configuration</h3>
+
+		<table>
+			<tr><td><code>title</code></td><td>Le titre principal de la boite</td></tr>
+			<tr><td><code>description</code></td><td>Le texte à côté du titre de la boite</td></tr>
+			<tr><td><code>total</code></td><td>Le nombre total d’élément à afficher provenant du service</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Atom</h3>
+
+		<table>
+			<tr><td><code>url</code></td><td>L’URL du fil Atom</td></tr>
+			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil Atom</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Delicious</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Facebook</h3>
+
+		<p>Pour trouver certaines informations, on doit se rendre sur la <a href="http://www.facebook.com/notifications.php">page suivante</a> puis extraire les variables <code>&amp;id</code> et <code>&amp;key</code> dans l’URL du lien « Vos alertes ».</p>
+
+		<table>
+			<tr><td><code>id</code></td><td>Votre identifiant numérique</td></tr>
+			<tr><td><code>key</code></td><td>Votre clé personnelle</td></tr>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Flickr</h3>
+
+		<table>
+			<tr><td><code>key</code></td><td>Votre clé d’API</td></tr>
+			<tr><td><code>userid</code></td><td>Votre identifiant numérique (utiliser <a href="http://idgettr.com/">http://idgettr.com</a> pour le trouver facilement)</td></tr>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>row</code></td><td>Le nombre de photos par rangée. Pubwich ajoutera la classe <code>derniere</code> à chaque photo de fin de rangée</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Lastfm</h3>
+
+		<table>
+			<tr><td><code>key</code></td><td>Votre clé d’API (<a href="http://www.last.fm/api/account">obtenir une clé d’API</a>)</td></tr>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>size</code></td><td>La largeur des couvertures d’album</td></tr>
+		</table>		
+
+		<h3>Éléments de configuration du service Readernaut</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>size</code></td><td>La largeur des couvertures de livre</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service RSS</h3>
+
+		<table>
+			<tr><td><code>url</code></td><td>L’URL du fil RSS</td></tr>
+			<tr><td><code>link</code></td><td>L’URL du site qui produit le fil RSS</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Texte</h3>
+
+		<table>
+			<tr><td><code>text</code></td><td>Le texte à afficher dans la boite</td></tr>
+		</table>		
+
+		<h3>Éléments de configuration du service Twitter</h3>
+
+		<table>
+			<tr><td><code>id</code></td><td>Votre identifiant numérique</td></tr>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Vimeo</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+		</table>
+
+		<h3>Éléments de configuration du service Youtube</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Votre identifiant d’utilisateur</td></tr>
+			<tr><td><code>size</code></td><td>La largeur des vignettes</td></tr>
+		</table>
+
+		<hr>
+
+		<h2 id="theme">4. Configuration du thème</h2>
+
+		<p>Le thème peut être configuré à l’aide du fichier <code>functions.php</code> de son dossier.</p>
+
+		<h3>Gabarits d’item</h3>
+
+		<p>Chaque service possède un gabarit d’affichage d’item par défaut. Par exemple, celui de Twitter est celui-ci :</p>
+
+		<pre><code>&lt;li class=&quot;clearfix&quot;&gt;&lt;span class=&quot;date&quot;&gt;&lt;a href=&quot;{%link%}&quot;&gt;{%date%}&lt;/a&gt;&lt;/span&gt;{%text%}&lt;/li&gt;</code></pre>
+
+		<p>Cependant, il est possible de modifier le gabarit d’item de chaque service, et même de seulement une instance particulière d’un service. Pour ce faire, il suffit de modifier le fichier <code>functions.php</code> et d’y ajouter la fonction suivante (en remplacant <code>Service</code> par le nom du service) :</p>
+
+		<pre><code>function Service_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
+		<p>Pour uniquement modifier le gabarit d’item d’une instance de service (en remplacant <code>Service</code> par le nom du service et <code>variable</code> par le nom de la variable du service, définie dans le fichier de configuration) :</p>
+
+		<pre><code>function Service_variable_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
+		<p>Les tags (<code>{%link%}</code>, <code>{%title%}</code>, etc.) sont différents pour chaque service. Pour connaitre les tags disponibles pour un service, il faut se référer à la méthode <code>populateItemTemplate</code> dans le fichier du service situé dans le dossier <code>lib/Services/</code></p>
+
+
+		<h3>Gabarits de boite</h3>
+
+		<p>Chaque thème doit définir un gabarit de boite par défaut. Celui du thème par défaut est celui-ci :</p>
+
+		<pre><code>&lt;div class=&quot;boite {%class%}&quot; id=&quot;{%id%}&quot;&gt;
+	&lt;h2&gt;&lt;a rel=&quot;me&quot; href=&quot;{%url%}&quot;&gt;{%title%}&lt;/a&gt; &lt;span&gt;{%description%}&lt;/span&gt;&lt;/h2&gt;
+	&lt;div class=&quot;boite-inner&quot;&gt;
+		&lt;ul class=&quot;clearfix&quot;&gt;
+			{%items%}
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+		<p>On peut modifier cette fonction dans le fichier <code>functions.php</code> du thème.</p>
+
+		<p>Il est également possible de modifier le gabarit de boite d’un service en particulier (en remplacant <code>Service</code> par le nom du service) :</p>
+
+		<pre><code>function Service_boxTemplate() {
+	return '&lt;div class=&quot;boite {%class%}&quot; id=&quot;{%id%}&quot;&gt;
+			&lt;h2&gt;&lt;a rel=&quot;me&quot; href=&quot;{%url%}&quot;&gt;{%title%}&lt;/a&gt; &lt;span&gt;{%description%}&lt;/span&gt;&lt;/h2&gt;
+			&lt;div class=&quot;boite-inner&quot;&gt;
+				&lt;ul class=&quot;clearfix&quot;&gt;
+					{%items%}
+				&lt;/ul&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;';
+}</code></pre>
+
+		<p>Pour modifier le gabarit de boite d’une instance d’un service, il suffit de procéder la même manière que pour les gabarits d’item, c’est-à-dire en ajoutant <code>_variable</code> dans le nom de la fonction.</p>
+
+		<h4>Tags disponibles pour les gabarits de boite</h4>
+
+		<table>
+			<tr><td><code>class</code></td><td>L’attribut <code>class</code> de la boite</td></tr>
+			<tr><td><code>id</code></td><td>L’attribut <code>id</code> unique de la boite</td></tr>
+			<tr><td><code>url</code></td><td>L’URL vers le profil du service (eg. <code>http://www.twitter.com/remi/</code>)</td></tr>
+			<tr><td><code>title</code></td><td>Le titre de la boite, défini dans la configuration</td></tr>
+			<tr><td><code>description</code></td><td>La description de la boite, définie dans la configuration</td></tr>
+			<tr><td><code>items</code></td><td>Le code HTML des items généré par Pubwich</td></tr>
+		</table>
+
+		<p>Les tags doivent être utilisés de la manière suivante : <code>{%tag%}</code>.</p>
+
+
+		<hr>
+
+		<p id="footer">© Copyright Rémi Prévost 2008-2009 <small>($Date$)</small></p>
+
+	</body>
+</html>

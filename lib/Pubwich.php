@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', '1.0pre' );
+	define( 'PUBWICH_VERSION', '1.0-beta' );
 
 	/**
 	 * @classname Pubwich

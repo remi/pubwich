@@ -1,15 +1,8 @@
 License du code source
 ============================================================================================
-Pubwich est distribué sous licence Creative Commons BY-SA[1] ce qui signifie que vous
-pouvez l'utiliser (même à des fins commerciales) en indiquant clairement que Pubwich
-a été utilisé. Vous êtes également libre de modifier le code source de l'application.
-Cependant, si vous désirez distribuer vos modifications, vous devrez partager le code
-source modifié sous la même license.
-
-En résumé : vous pouvez utiliser Pubwich n'importe quand, en autant qu'un crédit à
-Pubwich soit indiqué, question de faire connaître l'application à d'autres! Vous pouvez
-modifier le code, mais vous ne pouvez pas faire d'argent avec vos modifications --
-vous devez les redistribuer à tous, en préservant cette license.
+Avant la version 1.0 Pubwich était distribué sous licence Creative Commons BY-SA[1].
+Cependant, à la sortie de la version 1.0, Pubwich sera distribué sous une vraie license
+de type "open-source". Cette license reste à être déterminée.
 
 Apparence visuelle
 ============================================================================================
@@ -26,4 +19,3 @@ avec leurs notices de copyright respectives.
 Liens
 ============================================================================================
 [1]: http://creativecommons.org/licenses/by-sa/2.0/ca/deed.fr_CA
-

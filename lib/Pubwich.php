@@ -81,8 +81,8 @@
 
 			if ( !defined( 'PUBWICH_CRON' ) ) {
 				require_once( 'Savant/Savant3.php' );
-				require( 'Markup/Markdown.php' );
-				require( 'Markup/Smartypants.php' );
+				require( 'Markup/Markdown/Markdown.php' );
+				require( 'Markup/Smartypants/Smartypants.php' );
 			}
 
 		}

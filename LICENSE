@@ -8,7 +8,10 @@ License du code source
 ============================================================================================
 Avant la version 1.0 Pubwich était distribué sous licence Creative Commons BY-SA[1].
 Cependant, depuis la sortie de la version 1.0, le code source de Pubwich est distribué
-sous la license open-source GPL 2.0[2].
+sous la license open-source GPL 2.0[2]. Cela signifie que vous pouvez utiliser et modifier
+le code source de Pubwich gratuitement et librement (de façon personnelle ou commerciale).
+Cependant, si vous souhaitez partager les modifications au code source, vous devez les
+distribuer sous la même license.
 
 Demande spéciale de l’auteur
 ============================================================================================
@@ -36,4 +39,4 @@ avec leurs notices de copyright respectives.
 Liens
 ============================================================================================
 [1]: http://creativecommons.org/licenses/by-sa/2.0/ca/deed.fr_CA
-[2]: voir le fichier GPL distribué avec cette application
+[2]: voir le fichier `GPL` distribué avec cette application

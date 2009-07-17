@@ -1,21 +1,43 @@
-License du code source
+
+CONTENU DE CE FICHIER
+
+ 1. License du code source
+ 2. Demande spéciale de l’auteur
+ 3. Apparence visuelle
+ 4. Librairies externes
+ 5. Liens
+
+
+1. License du code source
 ============================================================================================
 Avant la version 1.0 Pubwich était distribué sous licence Creative Commons BY-SA[1].
-Cependant, à la sortie de la version 1.0, Pubwich sera distribué sous une vraie license
-de type "open-source". Cette license reste à être déterminée.
+Cependant, depuis la sortie de la version 1.0, le code source de Pubwich est distribué
+sous la license open-source GPL 2.0[2].
 
-Apparence visuelle
+2. Demande spéciale de l’auteur
 ============================================================================================
-L'apparence visuelle de http://remiprevost.com est © Copyright 2008-2009 Rémi Prévost.
-Vous pouvez cependant utiliser les fichiers `index.tpl.php` et `screen.css` du dossier
-`themes/default/` pour vous créer un nouveau thème. Il est d'ailleurs fortement conseillé
-de le faire si vous tenez à ce que votre implémentation soit unique :)
+Comme Pubwich est une application encore peu connue, et même si la licence ci-dessus ne
+l’exige aucunement, l’auteur serait très heureux si un lien "Propulsé par Pubwich" ou
+quelque chose de similaire était affiché sur votre page. Bien sûr, ce n’est qu’une demande
+spéciale et selon la licence vous n’y êtes pas tenu.
 
-Librairies externes
+
+3. Apparence visuelle
+============================================================================================
+L'apparence visuelle de <http://remiprevost.com/> ne fait pas partie du code source de
+Pubwich et est © Copyright 2008-2009 Rémi Prévost. Vous pouvez cependant utiliser les
+fichiers `index.tpl.php` et `screen.css` du dossier `themes/default/` pour vous créer un
+nouveau thème. Il est d'ailleurs fortement conseillé de le faire si vous tenez à ce que
+votre implémentation soit unique :)
+
+
+4. Librairies externes
 ============================================================================================
 Les librairies Cache_Lite, Savant3, PHP Markdown et PHP Smartypants sont incluses
 avec leurs notices de copyright respectives.
 
-Liens
+
+5. Liens
 ============================================================================================
 [1]: http://creativecommons.org/licenses/by-sa/2.0/ca/deed.fr_CA
+[2]: voir le fichier GPL distribué avec cette application

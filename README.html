@@ -77,7 +77,7 @@
 				<p><code>*/10 * * * * /usr/bin/php -f /home/utilisateur/public_html/pubwich/trunk/cron/cron.php</code></p>
 
 			</li>
-			<li><p>Changer les permissions du dossier <code>cache</code> pour qu’il soit "writeable" par tous (<code>$ chmod 0777 cache</code>).</p></li>
+			<li><p>Changer les permissions des dossiers <code>cache</code> et <code>logs/</code> pour qu’ils soient "writeable" par tous (<code>$ chmod -R 0766 cache; chmod -R 0766 logs</code>).</p></li>
 			<li><p>Tout devrait fonctionner (en navigant vers le fichier <code>index.php</code> placé sur un serveur!).</p></li>
 		</ol>
 

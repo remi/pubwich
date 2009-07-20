@@ -275,48 +275,11 @@
 			foreach( self::$columns as $col => $classes ) {
 				$output .= '<div class="col'.$col.'">';	
 				foreach( $classes as $classe ) {
-					$output .= self::renderBox( $classe );
+					$output .= $classe->renderBox();
 				}
 				$output .= '</div>';
 			}
 			return $output;
-		}
-
-		/*
-		 * Affiche la boite d'une classe spécifique
-		 *
-		 * @param Service &$classe La référence de l’instancedu service à afficher
-		 * @return string
-		 */
-		static private function renderBox( &$classe ) {
-
-			$items = '';
-			$classData = $classe->getData();
-
-			$htmlClass = strtolower( get_class( $classe ) );
-			if ( !$classData ) {
-				$items = '<li class="nodata">Une erreur avec l’API de ' . get_class( $classe ) . ' est survenue. Ces données ne sont donc pas disponibles.</li>';
-				$htmlClass .= ' nodata';
-			} else {
-				foreach( $classData as $item ) {
-					$compteur++;
-					if ($classe->total && $compteur > $classe->total) { break; }  
-					$classe->getItemTemplate()->populate( $classe->populateItemTemplate( $item ) );
-					$items .= '		'.$classe->getItemTemplate()->output();
-				}
-			}
-
-			$data = array(
-				'class' => $htmlClass,
-				'id' => $classe->getVariable(),
-				'url' => $classe->urlTemplate,
-				'title' => $classe->title,
-				'description' => $classe->description,
-				'items' => $items	
-			);
-
-			$classe->getBoxTemplate()->populate( $data );
-			return $classe->getBoxTemplate()->output();
 		}
 
 		/**

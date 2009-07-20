@@ -198,4 +198,41 @@
 			return $this->boxTemplate;
 		}
 
+		/*
+		 * Affiche la boite d'une classe spécifique
+		 *
+		 * @param Service &$classe La référence de l’instancedu service à afficher
+		 * @return string
+		 */
+		public function renderBox( ) {
+
+			$items = '';
+			$classData = $this->getData();
+
+			$htmlClass = strtolower( get_class( $this ) );
+			if ( !$classData ) {
+				$items = '<li class="nodata">Une erreur avec l’API de ' . get_class( $this ) . ' est survenue. Ces données ne sont donc pas disponibles.</li>';
+				$htmlClass .= ' nodata';
+			} else {
+				foreach( $classData as $item ) {
+					$compteur++;
+					if ($this->total && $compteur > $this->total) { break; }  
+					$this->getItemTemplate()->populate( $this->populateItemTemplate( $item ) );
+					$items .= '		'.$this->getItemTemplate()->output();
+				}
+			}
+
+			$data = array(
+				'class' => $htmlClass,
+				'id' => $this->getVariable(),
+				'url' => $this->urlTemplate,
+				'title' => $this->title,
+				'description' => $this->description,
+				'items' => $items	
+			);
+
+			$this->getBoxTemplate()->populate( $data );
+			return $this->getBoxTemplate()->output();
+		}
+
 	}

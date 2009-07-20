@@ -7,6 +7,7 @@
 	// error_reporting(0);
 
 	define('PUBWICH_LOGLEVEL', 0);
+	define('PUBWICH_LOGTOFILE', false);
 
 	define('PUBWICH_URL', 'http://localhost/pubwich/');
 	define('PUBWICH_THEME', 'default');

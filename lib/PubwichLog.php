@@ -15,12 +15,14 @@
 				if ( !PUBWICH_LOGTOFILE ) {
 					echo $msg . "<br />\n";
 				} else {
+					/*
 					$log_file = dirname(__FILE__).'/../logs/pubwich-'.date('Y-m-d').'.log';
 					$fh = fopen($log_file, 'a');
 					if ( !$fh ) { return false; }
 					$stringData = Date('Y m d h:i:s').' '. $msg ."\n";
 					fwrite($fh, $stringData);
 					fclose($fh);
+					 */
 				}
 			}
 

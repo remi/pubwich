@@ -32,15 +32,11 @@
 		public function populateItemTemplate( &$item ) {
 			$link = $item->link->attributes();
 			$link = $link->href;
-			$content = '';
-			foreach ( $item->content->children() as $content ) {
-				$content .= $content->asXML();
-			}
 			return array(
 						'link' => htmlspecialchars( $link ),
 						'title' => SmartyPants( $item->title ),
 						'date' => Pubwich::time_since( $item->published ),
-						'content' => strip_tags( $content ),
+						'content' => SmartyPants( Markdown( $item->content ) ),
 			);
 		}
 

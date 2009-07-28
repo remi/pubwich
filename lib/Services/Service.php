@@ -106,7 +106,7 @@
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
 				if ( PEAR::isError($cacheWrite) ) {
-					var_dump( $cacheWrite->getMessage() );
+					//var_dump( $cacheWrite->getMessage() );
 				}
 				$this->data = simplexml_load_string( $content );
 			} else {

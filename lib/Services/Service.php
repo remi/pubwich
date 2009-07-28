@@ -21,8 +21,10 @@
 			$this->cache_options = array( 
 				'cacheDir' => CACHE_LOCATION, 
 				'lifeTime' => CACHE_LIMIT,
+				'readControl' => true,
+				'readControlType' => 'strlen',
 				'errorHandlingAPIBreak' => true,
-				'automaticSerialization' => true
+				'automaticSerialization' => false
 			);
 
 			$this->itemTemplate = new PubwichTemplate();
@@ -83,7 +85,7 @@
 			}
 			// Sinon
 			else {
-				$this->buildCache( $Cache_Lite );
+				$this->buildCache( &$Cache_Lite );
 			}
 			return $this;
 		}
@@ -106,7 +108,7 @@
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
 				if ( PEAR::isError($cacheWrite) ) {
-					//var_dump( $cacheWrite->getMessage() );
+					/*var_dump( $cacheWrite->getMessage() );*/
 				}
 				$this->data = simplexml_load_string( $content );
 			} else {

@@ -91,6 +91,7 @@
 						'id' => 'TWITTER_USERID_HERE',
 						'username' => 'TWITTER_USERNAME_HERE',
 						'password' => 'TWITTER_PASSWORD_HERE',
+						'authenticate' => true, // set to true if you are on a shared hosting
 						'total' => 10,
 						'title' => 'Twitter',
 						'description' => 'derniers états'

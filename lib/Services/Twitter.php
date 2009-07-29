@@ -3,7 +3,7 @@
 	class Twitter extends Service {
 
 		public function __construct( $config ) {
-			$this->setURL( sprintf( 'http://twitter.com/statuses/user_timeline/%s.xml?count=%d', $config['id'], $config['total'] ) );
+			$this->setURL( sprintf( 'https://'.$config['username'].':'.$config['password'].'@twitter.com/statuses/user_timeline/%s.xml?count=%d', $config['id'], $config['total'] ) );
 			$this->username = $config['username'];
 
 			$this->title = $config['title'];

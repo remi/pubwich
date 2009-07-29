@@ -90,6 +90,7 @@
 				array( 'Twitter', 'etats', array(
 						'id' => 'TWITTER_USERID_HERE',
 						'username' => 'TWITTER_USERNAME_HERE',
+						'password' => 'TWITTER_PASSWORD_HERE',
 						'total' => 10,
 						'title' => 'Twitter',
 						'description' => 'derniers états'

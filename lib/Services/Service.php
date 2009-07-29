@@ -85,7 +85,7 @@
 			}
 			// Sinon
 			else {
-				$this->buildCache( &$Cache_Lite );
+				$this->buildCache( $Cache_Lite );
 			}
 			return $this;
 		}

@@ -90,8 +90,8 @@
 				array( 'Twitter', 'etats', array(
 						'id' => 'TWITTER_USERID_HERE',
 						'username' => 'TWITTER_USERNAME_HERE',
-						'password' => 'TWITTER_PASSWORD_HERE',
-						'authenticate' => true, // set to true if you are on a shared hosting
+						'authenticate' => false, // set to true if you are on a shared hosting
+						'password' => 'TWITTER_PASSWORD_HERE', // enter your password only if `authenticate` is true
 						'total' => 10,
 						'title' => 'Twitter',
 						'description' => 'derniers états'

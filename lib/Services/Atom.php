@@ -34,7 +34,7 @@
 			$link = $link->href;
 			return array(
 						'link' => htmlspecialchars( $link ),
-						'title' => SmartyPants( $item->title ),
+						'title' => trim( SmartyPants( $item->title ) ),
 						'date' => Pubwich::time_since( $item->published ),
 						'content' => SmartyPants( Markdown( $item->content ) ),
 			);

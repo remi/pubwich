@@ -33,12 +33,12 @@
 			$this->compteur++;
 			return array(
 						'link' => htmlspecialchars( $item->url ),
-						'title' => htmlspecialchars( $artist . ' — ' . $album ),
-						'artist' => htmlspecialchars( $artist ),
+						'title' => ( $artist . ' — ' . $album ),
+						'artist' => $artist,
 						'release_date' => $item->release_date,
 						'listeners' => $item->listeners,
 						'playcount' => $item->playcount,
-						'album' => htmlspecialchars( $album ),
+						'album' => $album,
 						'image' => $this->getImage( $item ),
 						'size' => $this->size,
 						'classe' => isset($this->classes[$this->compteur-1]) ? ' class="'.$this->classes[$this->compteur-1].'"' : '',

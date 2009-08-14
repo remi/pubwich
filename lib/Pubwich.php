@@ -71,7 +71,7 @@
 			}
 
 			// Internationalization class
-			if ( PUBWICH_LANG != '' ) {
+			if ( defined('PUBWICH_LANG') && PUBWICH_LANG != '' ) {
 				require( 'Gettext/streams.php' );
 				require( 'Gettext/gettext.php' );
 				self::$gettext = new gettext_reader( new FileReader( dirname(__FILE__).'/../lang/pubwich-'.PUBWICH_LANG.'.mo' ) );

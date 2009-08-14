@@ -10,7 +10,7 @@
 		 * @constructor
 		 */
 		public function __construct($msg) {
-			die('<strong>Erreur!</strong> '.$msg);
+			die('<strong>'.Pubwich::_('Erreur').'!</strong> '.$msg);
 		}
 
 

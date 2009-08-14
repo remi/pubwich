@@ -1,45 +1,47 @@
 <?php
 
-	// Renommer ce fichier en config.php
+	// Rename to config.php
 
-	// À commenter en production
+	// Change this setting in a production environment (pretty important!)
 	error_reporting(E_ALL ^ E_NOTICE);
 	// error_reporting(0);
 
 	define('PUBWICH_LOGLEVEL', 0);
 	define('PUBWICH_LOGTOFILE', false);
-
-	define('PUBWICH_URL', 'http://localhost/pubwich/');
-	define('PUBWICH_THEME', 'default');
-	define('PUBWICH_TITLE', 'Mon site propulsé par Pubwich');
-
+	
 	// Localisation
 	date_default_timezone_set( 'America/Montreal' );
-	setlocale( LC_ALL, 'fr_CA.UTF8', 'fr_FR.UTF8', 'fr.UTF8', 'fr_FR.UTF-8', 'fr.UTF-8' );
+	define('PUBWICH_LANG', ''); // leave to '' to keep Pubwich in english
+	setlocale( LC_ALL, 'en_CA.UTF8' );
 
-	// Configuration de Pubwich et des services utilisés
+	// General informations
+	define('PUBWICH_URL', 'http://localhost/pubwich/');
+	define('PUBWICH_THEME', 'default');
+	define('PUBWICH_TITLE', 'My Pubwich-powered site');
+
+	// Pubwich services configuration
 	/*
-	 * Syntaxe à utiliser pour setServices
+	 * setServices syntax to use
 	 *
 	 * Pubwich::setServices(
 	 *		array(
 	 *
-	 *			// colonne 1
+	 *			// column 1
 	 *			array(
 	 *				array('Flickr', 'photos', array(
 	 *					'title' => 'Flickr',
-	 *					'description' => 'Mes photos',
+	 *					'description' => 'My pictures',
 	 *					'key' => '',
 	 *					...
 	 *				)
 	 *			),
 	 *
-	 *			// colonne 2 
+	 *			// column 2 
 	 *			array(
 	 *				...
 	 *			),
 	 *
-	 *			// colonne 3
+	 *			// column 3
 	 *			array(
 	 *				...
 	 *			)
@@ -159,6 +161,6 @@
 		)
 	);
 
-	// Système de cache
+	// Caching system
 	define( 'CACHE_LOCATION', dirname(__FILE__) . '/../cache/' );
 	define( 'CACHE_LIMIT', 20 * 60 );

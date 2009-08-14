@@ -14,7 +14,7 @@
 		 * @constructor
 		 */ 
 		public function __construct() {
-			PubwichLog::log( 2, "Création de la classe " . get_class( $this ) );
+			PubwichLog::log( 2, sprintf( Pubwich::_("Creating an instance of %s"), get_class( $this ) ) );
 
 			$id = md5( $this->getURL() ); 
 			$this->cache_id = $id; 
@@ -75,13 +75,15 @@
 		 * @return Service
 		 */ 	
 		public function init() {
-			PubwichLog::log( 2, "Initialisation de la classe " . get_class( $this ) );
+			PubwichLog::log( 2, sprintf( Pubwich::_("Initializing instance of %s"), get_class( $this ) ) );
 			$url = $this->getURL();
 			$Cache_Lite = new Cache_Lite( $this->cache_options );
 
 			// Si les données existent dans la cache
 			if ($data = $Cache_Lite->get( $this->cache_id) ) {
+				libxml_use_internal_errors(true);
 				$this->data = simplexml_load_string( $data );
+				libxml_clear_errors();
 			}
 			// Sinon
 			else {
@@ -213,7 +215,7 @@
 
 			$htmlClass = strtolower( get_class( $this ) );
 			if ( !$classData ) {
-				$items = '<li class="nodata">Une erreur avec l’API de ' . get_class( $this ) . ' est survenue. Ces données ne sont donc pas disponibles.</li>';
+				$items = '<li class="nodata">'.sprintf( Pubwich::_('An error occured with the %s API. The data is therefore unavailable.'), get_class( $this ) ).'</li>';
 				$htmlClass .= ' nodata';
 			} else {
 				foreach( $classData as $item ) {

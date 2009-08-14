@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Pubwich — Read me</title>
+		<style type="text/css">
+			html { font-size: 62.5% }
+			body { margin: 0; padding: 50px 70px 40px; font-family: Helvetica, Arial, sans-serif; font-size: 140%; line-height: 1.3; background: #111; color: #ccc; }
+			ul, ol { padding-left: 18px; }
+			hr { color: #111; border: none; border-bottom: 1px solid #333; height: 1px; margin: 2em 0; display: none; }
+			a { color: #35ADAB; }
+			a:hover { color: #7CCCCB; }
+			h1, h2, h3 { color: #fff; margin-left: -30px; }
+			h4 { color: #666; margin: 2em 0 1em; }
+			h2 { margin-top: 2.5em; margin-bottom: 0.7em; }
+			h3 { margin-top: 2em; color: #ddd; border-bottom: 1px solid #333; padding-bottom: 0.6em; }
+			code { font-size: 120%; background: #000; color: #FFFFCF; }
+			pre { background: #000; color: #FFFFCF; padding: 5px; }
+			table { border-collapse: collapse; }
+			table td { border: 2px solid #111; padding: 5px 7px; background: #0a0a0a; }
+			h1 small { font-size: 50%; color: #777; font-weight: normal; }
+			#footer { margin-top: 4em; padding-top: 2em; border-top: 1px solid #333; }
+			#footer small { color: #555; font-size: 100%; margin-left: 1em; }
+		</style>
+	</head>
+	<body>
+
+		<h1>Pubwich 1.0</h1>
+
+		<ol>
+			<li><a href="#components">Required components</a></li>
+			<li><a href="#installation">Installation</a></li>
+			<li><a href="#configuration">Services configuration</a></li>
+			<li><a href="#theme">Theme configuration</a></li>
+		</ol>
+
+		<hr>
+
+		<h2 id="components">1. Required components</h2>
+		<p>The following components must be installed so Pubwich can work:</p>
+
+		<ul>
+			<li><a href="http://apache.org">Apache</a></li>
+			<li><a href="http://php.net">PHP 5</a> (with <code>SimpleXML</code> &amp; <code>cURL</code> extensions)</li>
+			<li><a href="http://pear.php.net">PEAR</a> (required for <code>Cache_Lite</code> library)</li>
+			<li><code>crontab</code> (installed on all UNIX systems)</li>
+		</ul>
+
+		<hr>
+
+		<h2 id="installation">2. Installation</h2>
+
+		<ol>
+			<li>
+				<p>Duplicate <code>cfg/config.sample.php</code> to <code>cfg/config.php</code></p>
+				<p>(optional: if you want to use a custom theme, duplicate <code>themes/default</code> to <code>themes/your_theme_name</code> and edit the <code>PUBWICH_THEME</code> constant in <code>cfg/config.php</code> to "<code>your_theme_name</code>".</p>
+			</li> 
+			<li>
+				<p>Edit the newly created <code>config.php</code> to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to <code>Pubwich::setServices()</code>. See the <a href="#configuration">Services configuration</a> section of this file.</p>
+			</li>
+
+			<li>
+				<p>Modify your <code>crontab</code> file (by running <code>crontab -e</code>) and add the following line:</p>
+				<p><code>*/&lt;N&gt; * * * * &lt;PHP&gt; -f &lt;ABSOLUTE_PATH&gt;/cron/cron.php</code></p>
+
+				<p>Then replace the following elements:</p>
+
+				<table>
+					<tr><td><code>&lt;N&gt;</code></td><td>Cache expiration (in minutes)</td></tr>
+					<tr><td><code>&lt;PHP&gt;</code></td><td>The path to PHP executable binary (usually <code>/usr/bin/php</code> or <code>/usr/local/bin/php</code>, use <code>which php</code> to find it)</td></tr>
+					<tr><td><code>&lt;ABSOLUTE_PATH&gt;</code></td><td>Absolute path to Pubwich directory</td></tr>
+				</table>
+
+				<p>Example:</p>
+
+				<p><code>*/10 * * * * /usr/bin/php -f /home/myusername/public_html/pubwich/trunk/cron/cron.php</code></p>
+
+			</li>
+			<li><p>Change the permissions on the <code>cache</code> directory to make it writeable for all (<code>$ chmod -R 0777 cache</code>).</p></li>
+			<li><p>Everything should be working now (when browsing to the <code>index.php</code>!).</p></li>
+		</ol>
+
+		<hr>
+
+		<h2 id="configuration">3. Services configuration</h2>
+
+		<p>The <code>Pubwich</code> object has a <code>setServices</code> method which take an array as its only parameter. Each element of this array is a column (defined by an array). Each column element is a service box (see the <code>cfg/config.sample.php</code> file for more examples). The order of the boxes within the column array will be the same order used for the template. To configure a box, you must use the following syntax:</p>
+
+		<p><code>array( &lt;service&gt;, &lt;variable&gt;, &lt;config&gt; )</code></p>
+
+		<p>Where:</p>
+
+		<table>
+			<tr><td><code>&lt;service&gt;</code></td><td>the service name (<code>'Flickr'</code>, <code>'Twitter'</code>, etc.)</td></tr>
+			<tr><td><code>&lt;variable&gt;</code></td><td>the box’s unique name (<code>'photos'</code>, <code>'statues'</code>, etc.)</td> </tr>
+			<tr><td><code>&lt;config&gt;</code></td><td>an array of <a href="#configuration-elements">configuration elements</a></td></tr>
+		</table>
+
+		<h3 id="configuration-elements">Common configuration elements</h3>
+
+		<p>These elements can be used in any box configuration:</p>
+		<table>
+			<tr><td><code>title</code></td><td>The box’s main title</td></tr>
+			<tr><td><code>description</code></td><td>The box’s short description (usually dsplayed near the title)</td></tr>
+			<tr><td><code>total</code></td><td>Total of elements to show for this box</td></tr>
+		</table>
+
+		<h3>Atom service configuration elements</h3>
+
+		<table>
+			<tr><td><code>url</code></td><td>Atom feed URL</td></tr>
+			<tr><td><code>link</code></td><td>Main website URL</td></tr>
+		</table>
+
+		<h3>Delicious service configuration elements</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+		</table>
+
+		<h3>Facebook service configuration elements</h3>
+
+		<p>To find some informations, you will have to go to the <a href="http://www.facebook.com/notifications.php">following page</a>, and extract the <code>&amp;id</code> and <code>&amp;key</code> query variables from the "Your alerts" link.</p>
+
+		<table>
+			<tr><td><code>id</code></td><td>Your user id</td></tr>
+			<tr><td><code>key</code></td><td>Your personal API key</td></tr>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+		</table>
+
+		<h3>Flickr service configuration elements</h3>
+
+		<table>
+			<tr><td><code>key</code></td><td>Your API key</td></tr>
+			<tr><td><code>userid</code></td><td>Your user id (you will have to use <a href="http://idgettr.com/">http://idgettr.com</a> to find it easily)</td></tr>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>row</code></td><td>The number of photos by row. Pubwich will add the class <code>derniere</code> to each end-of-row photo.</td></tr>
+		</table>
+
+		<h3>Lastfm service configuration elements</h3>
+
+		<table>
+			<tr><td><code>key</code></td><td>Your API key (<a href="http://www.last.fm/api/account">get an API key</a>)</td></tr>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>size</code></td><td>The width of the album covers</td></tr>
+		</table>		
+
+		<h3>Readernaut service configuration elements</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>size</code></td><td>The width of the book covers</td></tr>
+		</table>
+
+		<h3>RSS service configuration elements</h3>
+
+		<table>
+			<tr><td><code>url</code></td><td>The feed URL</td></tr>
+			<tr><td><code>link</code></td><td>The website URL</td></tr>
+		</table>
+
+		<h3>Text service configuration elements</h3>
+
+		<table>
+			<tr><td><code>text</code></td><td>The text to put in the box</td></tr>
+		</table>		
+
+		<h3>Twitter service configuration elements</h3>
+
+		<table>
+			<tr><td><code>id</code></td><td>Your user id</td></tr>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+		</table>
+
+		<h3>Vimeo service configuration elements</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+		</table>
+
+		<h3>Youtube service configuration elements</h3>
+
+		<table>
+			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>size</code></td><td>The width of the video thumbnails</td></tr>
+		</table>
+
+		<hr>
+
+		<h2 id="theme">4. Theme configuration</h2>
+
+		<p>A theme can be customized by using the <code>functions.php</code> file in the theme folder.</p>
+
+		<h3>Item template</h3>
+
+		<p>Each service has a default item template. For example, the default item template for Twitter is this:</p>
+
+		<pre><code>&lt;li class=&quot;clearfix&quot;&gt;&lt;span class=&quot;date&quot;&gt;&lt;a href=&quot;{%link%}&quot;&gt;{%date%}&lt;/a&gt;&lt;/span&gt;{%text%}&lt;/li&gt;</code></pre>
+
+		<p>However, it is possible to modify each service's item template, or even for a single instance of a service. To do so, you must edit the <code>functions.php</code> file and add the following function (and replacing <code>Service</code> by the actual service name):</p>
+
+		<pre><code>function Service_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
+		<p>To only modify the item template of a particular service instance, you must add the following line (and replacing <code>Service</code> by the service name, and <code>variable</code> by the variable name defined in your configuration file)</p>
+
+		<pre><code>function Service_variable_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
+		<p>The tags (<code>{%link%}</code>, <code>{%title%}</code>, etc.) are different for each service. To get a list of available tags for a service, you must open the service file (in <code>lib/Services/</code>) and look for the <code>populateItemTemplate</code> method</p>
+
+		<h3>Box template</h3>
+
+		<p>Each theme must specify a default box template. The default theme's one is this:</p>
+
+		<pre><code>&lt;div class=&quot;boite {%class%}&quot; id=&quot;{%id%}&quot;&gt;
+	&lt;h2&gt;&lt;a rel=&quot;me&quot; href=&quot;{%url%}&quot;&gt;{%title%}&lt;/a&gt; &lt;span&gt;{%description%}&lt;/span&gt;&lt;/h2&gt;
+	&lt;div class=&quot;boite-inner&quot;&gt;
+		&lt;ul class=&quot;clearfix&quot;&gt;
+			{%items%}
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+		<p>You can modify this function in the theme’s <code>functions.php</code> file.</p>
+
+		<p>It is also possible to modify a service box template with a function like this: (by replacing <code>Service</code> with the service name)</p>
+
+		<pre><code>function Service_boxTemplate() {
+	return '&lt;div class=&quot;boite {%class%}&quot; id=&quot;{%id%}&quot;&gt;
+			&lt;h2&gt;&lt;a rel=&quot;me&quot; href=&quot;{%url%}&quot;&gt;{%title%}&lt;/a&gt; &lt;span&gt;{%description%}&lt;/span&gt;&lt;/h2&gt;
+			&lt;div class=&quot;boite-inner&quot;&gt;
+				&lt;ul class=&quot;clearfix&quot;&gt;
+					{%items%}
+				&lt;/ul&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;';
+}</code></pre>
+
+		<p>To modify the box template of a particular service instance, you can use the same method as the item templates.</p>
+
+		<h4>Available box template tags</h4>
+
+		<table>
+			<tr><td><code>class</code></td><td>The box <code>class</code> HTML attribute</td></tr>
+			<tr><td><code>id</code></td><td>The box <code>title</code> HTML attribute</td></tr>
+			<tr><td><code>url</code></td><td>The service profile URL (eg. <code>http://www.twitter.com/remi/</code>)</td></tr>
+			<tr><td><code>title</code></td><td>The box title, as defined in the configuration file</td></tr>
+			<tr><td><code>description</code></td><td>The box description, defined in the configuration file</td></tr>
+			<tr><td><code>items</code></td><td>The items HTML code generated by Pubwich</td></tr>
+		</table>
+
+		<p>The tags must be used with this syntax: <code>{%tag%}</code></p>
+
+		<hr>
+
+		<p id="footer">© Copyright Rémi Prévost 2008-2009 <small>($Date: 2009-07-20 21:19:34 -0400 (Lun, 20 jul 2009) $)</small></p>
+
+	</body>
+</html>

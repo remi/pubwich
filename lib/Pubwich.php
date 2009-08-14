@@ -43,39 +43,53 @@
 		static private $theme_path;
 
 		/**
-		 * Initialise l'application
+		 * Instance of gettext_reader class to reads localized strings
+		 *
+		 * @var $gettext
+		 */
+		static private $gettext = null;
+
+		/**
+		 * Application initialisation
 		 */
 		static public function init() {
 
-			// Modification du `include_path`
+			// Let’s modify the `include_path`
 			$path = dirname(__FILE__).'/';
 			set_include_path( get_include_path() . PATH_SEPARATOR . $path );
 
 			require_once( 'PEAR.php' );
 
-			// Classe d'exception personnalisée
+			// Exception class
 			require( 'PubwichErreur.php' );
 
-			// Fichier de configuration
+			// Configuration files
 			if ( !file_exists( dirname(__FILE__)."/../cfg/config.php" ) ) {
-				throw new PubwichErreur( 'Vous devez renommer le fichier <code>/cfg/config.sample.php</code> en <code>/cfg/config.php</code> et y adapter les URLs des services Web.' );
+				throw new PubwichErreur( 'You must rename <code>/cfg/config.sample.php</code> to <code>/cfg/config.php</code> and edit the Web service configuration details.' );
 			} else {
 				require( dirname(__FILE__) . '/../cfg/config.php' );
 			}
 
-			// Logger d'évènements (et premier message)
-			require('PubwichLog.php');
-			PubwichLog::log( 1, "Initialisation de l'objet Pubwich" );
+			// Internationalization class
+			if ( PUBWICH_LANG != '' ) {
+				require( 'Gettext/streams.php' );
+				require( 'Gettext/gettext.php' );
+				self::$gettext = new gettext_reader( new FileReader( dirname(__FILE__).'/../lang/pubwich-'.PUBWICH_LANG.'.mo' ) );
+			}
 
-			// Assignation du thème
+			// Events logger (and first message)
+			require('PubwichLog.php');
+			PubwichLog::log( 1, Pubwich::_("Pubwich object initialization") );
+
+			// Theme
 			self::$theme_url = PUBWICH_URL . 'themes/' . PUBWICH_THEME;
 			self::$theme_path = dirname(__FILE__) . '/../themes/' . PUBWICH_THEME;
 			require( 'PubwichTemplate.php' );
 
-			// Création des objets PHP
+			// PHP objects creation
 			self::setClasses();
 
-			// Inclusion des autres classes externes
+			// Other classes
 			require( 'FileFetcher.php' );
 			require( 'CacheLite/Lite.php' );
 
@@ -85,6 +99,16 @@
 				require( 'Markup/Smartypants/Smartypants.php' );
 			}
 
+		}
+
+		/**
+		 * Translate a string according to the defined locale/
+		 *
+		 * @param string $string 
+		 * @return string
+		 */
+		public function _( $string ) {
+			return (self::$gettext ) ? self::$gettext->translate( $string ) : $string;
 		}
 
 		/**
@@ -100,9 +124,9 @@
 				self::$columns[$columnCounter] = array();
 				foreach( $column as $service ) {
 
-					list( $nom, $variable, $config ) = $service;
-					$service_instance = strtolower( $nom . '_' . $variable );
-					${$service_instance} = Pubwich::loadService( $nom, $config );
+					list( $name, $variable, $config ) = $service;
+					$service_instance = strtolower( $name . '_' . $variable );
+					${$service_instance} = Pubwich::loadService( $name, $config );
 					${$service_instance}->setVariable( $variable );
 					self::$classes[] = ${$service_instance};
 					self::$columns[$columnCounter][] = &${$service_instance};
@@ -112,7 +136,7 @@
 		}
 
 		/**
-		 * Création et affichage du document HTML
+		 * Creation and display of the HTML document
 		 *
 		 * @return void
 		 */
@@ -123,7 +147,7 @@
 			$tpl->addPath( 'template', self::getThemePath() );
 
 			if ( !file_exists(self::getThemePath()."/index.tpl.php") ) {
-				throw new PubwichErreur( 'Le fichier <code>/themes/'.PUBWICH_THEME.'/index.tpl.php</code> n\'a pas été trouvé. Il doit être présent.' );
+				throw new PubwichErreur( sprintf( Pubwich::_( 'The file <code>%s</code> was not found. It has to be there.' ), '/themes/'.PUBWICH_THEME.'/index.tpl.php' ) );
 			}
 
 			// Assignation des références aux objets pour utilisation dans le template
@@ -194,7 +218,7 @@
 			} elseif ( file_exists( dirname(__FILE__).'/Services/Custom/' . $service . '.php' ) ) {
 				$fichier = 'Services/Custom/' . $service . '.php';
 			} else {
-				throw new PubwichErreur('Vous avez dit à Pubwich d\'utiliser le service '.$service.' mais le fichier <code>/lib/Services/'.$service.'.php</code> ou <code>/lib/Services/Custom/'.$service.'.php</code> n\'a pu être trouvé.');
+				throw new PubwichErreur( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but either the file <code>%s</code> or <code>%s</code> cannot be found.' ), $service, '/lib/Services/'.$service.'.php', '/lib/Services/Custom/'.$service.'.php' ) );
 			}
 
 			require_once( $fichier );
@@ -208,7 +232,7 @@
 		 */
 		static public function rebuildCache() {
 
-			PubwichLog::log( 1, "Reconstruction de la cache de l'application" );
+			PubwichLog::log( 1, "Building application cache" );
 
 			// On vide le contenu du dossier de cache
 			$fichiers = scandir(CACHE_LOCATION);
@@ -297,23 +321,23 @@
 			$original = strtotime( $original );
 
 			$chunks = array(
-				array( 60 * 60 * 24 * 365 , 'année' ),
-				array( 60 * 60 * 24 * 30 , 'mois' ),
-				array( 60 * 60 * 24 * 7, 'semaine' ),
-				array( 60 * 60 * 24 , 'jour' ),
-				array( 60 * 60 , 'heure' ),
-				array( 60 , 'minute' ),
+				array( 60 * 60 * 24 * 365 , Pubwich::_('year') ),
+				array( 60 * 60 * 24 * 30 , Pubwich::_('month' ) ),
+				array( 60 * 60 * 24 * 7, Pubwich::_('week') ),
+				array( 60 * 60 * 24 , Pubwich::_('day') ),
+				array( 60 * 60 , Pubwich::_('hour') ),
+				array( 60 , Pubwich::_('minute') ),
 			);
 			
 			$today = time();
 			$since = $today - $original;
 		
 			if ( $since < 60 ) {
-				return 'il y a '.$since.' secondes';
+				return sprintf( Pubwich::_('%d seconds ago'), $since );
 			}
 			
 			if ( $since > ( 7 * 24 * 60 * 60 ) ) {
-				$print =  strftime( '%e %B à %H:%M', $original ); 
+				$print =  strftime( Pubwich::_('%e %B at %H:%M'), $original ); 
 				return $print;
 			}
 			
@@ -325,12 +349,10 @@
 				}
 			}
 
-			$suffixe = "";
-			if ( $name != "mois" ) { $suffixe = "s"; }
-
+			$suffixe = "s";
 			$print = ( $count == 1 ) ? '1&nbsp;'.$name : $count.'&nbsp;'.$name.$suffixe;
 
-			return 'il y a '.$print;
+			return sprintf( Pubwich::_('%s ago'), $print );
 
 		}
 

@@ -37,7 +37,7 @@
 			$this->compteur++;
 			return array(
 						'link' => $this->urlTemplate . $item['id'].'/',
-						'title' => htmlspecialchars( $item['title'] ),
+						'title' => Smartypants( $item['title'] ),
 						'photo' => $this->getAbsoluteUrl( $item ),
 						'classe' => ($this->compteur % $this->row == 0 ) ? ' class="derniere"' : ''
 						);

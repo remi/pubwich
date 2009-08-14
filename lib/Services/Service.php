@@ -81,7 +81,7 @@
 
 			// Si les données existent dans la cache
 			if ($data = $Cache_Lite->get( $this->cache_id) ) {
-				libxml_use_internal_errors(true);
+				libxml_use_internal_errors( true );
 				$this->data = simplexml_load_string( $data );
 				libxml_clear_errors();
 			}
@@ -112,6 +112,7 @@
 				if ( PEAR::isError($cacheWrite) ) {
 					/*var_dump( $cacheWrite->getMessage() );*/
 				}
+				libxml_use_internal_errors( true );
 				$this->data = simplexml_load_string( $content );
 			} else {
 				$this->data = false;

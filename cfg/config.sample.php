@@ -1,23 +1,23 @@
 <?php
 
-	// Rename to config.php
+	// Rename this file to config.php
 
-	// Change this setting in a production environment (pretty important!)
-	error_reporting(E_ALL ^ E_NOTICE);
-	// error_reporting(0);
+	error_reporting(E_ALL ^ E_NOTICE); // comment this line in production environment
+	// error_reporting(0); // comment this line in development environment
 
-	define('PUBWICH_LOGLEVEL', 0);
-	define('PUBWICH_LOGTOFILE', false);
-	
 	// Localisation
 	date_default_timezone_set( 'America/Montreal' );
 	define('PUBWICH_LANG', ''); // leave to '' to keep Pubwich in english
-	setlocale( LC_ALL, 'en_CA.UTF8' );
+	setlocale( LC_ALL, 'en_CA.UTF8' ); // for date methods
 
-	// General informations
+	// General site informations
 	define('PUBWICH_URL', 'http://localhost/pubwich/');
 	define('PUBWICH_THEME', 'default');
 	define('PUBWICH_TITLE', 'My Pubwich-powered site');
+
+	// Logging configuration (you should not have to edit this)
+	define('PUBWICH_LOGLEVEL', 0);
+	define('PUBWICH_LOGTOFILE', false);
 
 	// Pubwich services configuration
 	/*
@@ -56,6 +56,7 @@
 				array( 'Texte', 'intro', array(
 						'title' => 'Introduction',
 						'text' => 'Ceci est un petit texte d’introduction. Pour ne pas voir le titre "Introduction", il suffit de ne pas configurer l’item `title` de l’élément <strong>Texte</strong>.',
+						'text' => 'This is a short introduction text. To hide the "Introduction" title, all you have to is not specify a "title" item for the <strong>Texte</strong> box.',
 					)
 				),
 
@@ -65,7 +66,7 @@
 						'username' => 'FLICKR_USERNAME_HERE',
 						'total' => 12,
 						'title' => 'Flick<em>r</em>',
-						'description' => 'dernières photos ajoutées',
+						'description' => 'latest photos',
 						'row' => 4,
 					)
 				),
@@ -74,7 +75,7 @@
 						'username' => 'VIMEO_USERNAME_HERE',
 						'total' => 4,
 						'title' => 'Vimeo',
-						'description' => 'derniers vidéos ajoutés'
+						'description' => 'latest videos'
 					)
 				),
 
@@ -83,7 +84,7 @@
 						'total' => 4,
 						'size' => 120,
 						'title' => 'Youtube',
-						'description' => 'derniers vidéos ajoutés'
+						'description' => 'latest videos'
 					)
 				),
 				
@@ -96,7 +97,7 @@
 						'password' => 'TWITTER_PASSWORD_HERE', // enter your password only if `authenticate` is true
 						'total' => 10,
 						'title' => 'Twitter',
-						'description' => 'derniers états'
+						'description' => 'latest statuses'
 					)
 				),
 
@@ -104,7 +105,7 @@
 						'username' => 'DELICIOUS_USERNAME_HERE',
 						'total' => 5,
 						'title' => 'del.icio.us',
-						'description' => 'derniers liens publiés',
+						'description' => 'latest bookmarks',
 					)
 				),
 
@@ -114,7 +115,7 @@
 						'username' => 'FACEBOOK_USERNAME_HERE',
 						'total' => 5,
 						'title' => 'Facebook',
-						'description' => 'derniers états postés',
+						'description' => 'latest statues',
 					)
 				),
 
@@ -123,7 +124,7 @@
 						'link' => 'http://blogue.ixmedia.com/',
 						'total' => 5,
 						'title' => 'Blogue iXmédia',
-						'description' => 'derniers billets'
+						'description' => 'latest atom blog entries'
 					)
 				),
 			),
@@ -134,7 +135,7 @@
 						'link' => 'http://remiprevost.com/',
 						'total' => 5,
 						'title' => 'Effair',
-						'description' => 'derniers billets'
+						'description' => 'latest rss blog entries'
 					)
 				),
 
@@ -143,7 +144,7 @@
 						'total' => 9,
 						'size' => 50,
 						'title' => 'Readernaut',
-						'description' => 'derniers livres'
+						'description' => 'latest books'
 					)
 				),
 
@@ -153,7 +154,7 @@
 						'total' => 5,
 						'size' => 64,
 						'title' => 'Last.fm',
-						'description' => 'top albums de la dernière semaine',
+						'description' => 'weekly top albums',
 					) 
 				),
 			),

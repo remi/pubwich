@@ -55,7 +55,6 @@
 
 				array( 'Texte', 'intro', array(
 						'title' => 'Introduction',
-						'text' => 'Ceci est un petit texte d’introduction. Pour ne pas voir le titre "Introduction", il suffit de ne pas configurer l’item `title` de l’élément <strong>Texte</strong>.',
 						'text' => 'This is a short introduction text. To hide the "Introduction" title, all you have to is not specify a "title" item for the <strong>Texte</strong> box.',
 					)
 				),

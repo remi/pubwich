@@ -31,6 +31,6 @@
 [ ] Permettre une plus grande personnalisation des services (eg. types de
     statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
 
-[ ] I18n des textes utilisés dans Pubwich
+[x] I18n des textes utilisés dans Pubwich
 
 [ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)

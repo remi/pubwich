@@ -32,8 +32,9 @@ html {
 body {
 	background: #024f35;
 	background: #111;
+	background: #fff8e1;
 	/* color: #699787; */
-	color: rgba( 255, 255, 255, 0.6 );
+	color: #000;
 	font-size: 110%;
 	line-height: 1.4;
 	font-family: Helvetica, Arial, "Lucida Grande", "Liberation Sans", Tahoma, Verdana, Arial, sans-serif;
@@ -53,14 +54,14 @@ body {
 }
 
 a {
-	color: #fff;
+	color: #9e9473;
 	text-decoration: none;
 	border-bottom: 1px dotted;
 }
 
 a:hover {
-	color: #cbe9df;
-	border-color: #196145;
+	color: #62593d;
+	border-color: #62593d;
 }
 
 acronym, abbr {
@@ -68,23 +69,24 @@ acronym, abbr {
 }
 
 h1 {
-	font-size: 250%;
+	font-size: 320%;
 	font-weight: bold;
 	text-align: center;
 	padding-top: 0.1em;
-	padding-bottom: 1.4em;
+	padding-bottom: 1.2em;
 	width: 100%;
-	color: #666;
-	text-shadow: 2px 2px rgba( 0, 0, 0, 0.5);
+	color: #9e9473;
+	text-shadow: 1px 1px 0 #fff;
+	letter-spacing: -0.02em;
 }
 
 h1 a {
 	border: none;
-	color: #fff;
+	color: #9e9473;
 }
 
 h1 a:hover {
-	color: #acdecd;
+	color: #62593d;
 }
 
 .erreur {
@@ -135,25 +137,25 @@ h1 a:hover {
  
 .boite {
 	margin: 0 0 18px;	
+	border: 1px solid #dfd3ac;
+	background: #fffcf1;
 }
 
 .boite.nodata {
 	opacity: 0.5;
-	background: rgba( 0, 0, 0, 0.2);
 }
 
 .boite h2 {
 	font-size: 130%;
 	padding: 12px 10px 8px;
-	color: #fff;
-	background: rgba( 0, 0, 0, 0.6 );
-	-moz-border-radius: 0.5em 0.5em 0 0;
+	color: #c5b78a;
+	background: #fff;
 	line-height: 1;
+	border-bottom: 1px solid #dfd3ac;
 }
 
 .boite h2 span {
 	font-size: 80%;
-	color: rgba( 255, 255, 255, 0.3 );
 	font-weight: normal;
 }
 
@@ -163,7 +165,6 @@ h1 a:hover {
 }
 
 .boite ul li {
-	background: rgba( 0, 0, 0, 0.06 );
 	margin-bottom: 5px;
 }
 
@@ -172,13 +173,10 @@ h1 a:hover {
 }
 
 .boite .boite-inner {
-	border: 1px solid rgba( 0, 0, 0, 0.7 );
-	border-top: none;
 	padding: 10px;
 }
 
 .boite.no-title .boite-inner {
-	border-top: 1px solid rgba( 0, 0, 0, 0.7 );
 }
 
 
@@ -260,14 +258,12 @@ h1 a:hover {
 	margin-left: 70px;
 	font-weight: normal;
 	padding: 8px 5px 8px 10px;
-	color: rgba( 255, 255, 255, 0.5 );
 }
 
 .lastfm li a span {
 	font-size: 100%;
 	display: block;
 	font-weight: bold;
-	color: #fff;	
 }
 
 .lastfm li.premier span {
@@ -385,13 +381,11 @@ h1 a:hover {
 	margin-left: 55px;
 	font-weight: normal;
 	padding: 8px 10px 8px 10px;
-	color: rgba( 255, 255, 255, 0.5 );
 }
 
 .readernaut li a span {
 	display: block;
 	font-weight: bold;
-	color: #fff;
 	line-height: 1.2;
 }
 
@@ -435,7 +429,6 @@ h1 a:hover {
 .youtube li a span {
 	display: block;
 	margin-left: 130px;
-	color: rgba( 255, 255, 255, 0.5 );
 }
 
 /**
@@ -460,13 +453,11 @@ h1 a:hover {
 .vimeo li a strong {
 	display: block;
 	margin-left: 90px;
-	color: #fff;
 }
 
 .vimeo li a span {
 	display: block;
 	margin-left: 110px;
-	color: rgba( 255, 255, 255, 0.5 );
 }
 
 /**

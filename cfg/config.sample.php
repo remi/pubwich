@@ -114,7 +114,7 @@
 						'username' => 'FACEBOOK_USERNAME_HERE',
 						'total' => 5,
 						'title' => 'Facebook',
-						'description' => 'latest statues',
+						'description' => 'latest statuses',
 					)
 				),
 

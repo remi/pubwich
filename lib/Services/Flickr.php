@@ -1,4 +1,13 @@
 <?php
+	/**
+	 *
+	 * @classname Flickr
+	 * @description Retreives photos from Flickr
+	 * @version 1.1 (20090927)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods user* group
+	 *
+	 */
 
 	class Flickr extends Service {
 
@@ -6,7 +15,14 @@
 
 		public function __construct( $config ){
 			$this->compteur = 0;
-			$this->setURL( sprintf( 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%s&user_id=%s&per_page=%d', $config['key'], $config['userid'], $config['total'] ) );
+			$this->method = isset( $config['method'] ) ? $config['method'] : 'user';
+
+			if ( $this->method == 'user' ) {
+				$this->setURL( sprintf( 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=%s&user_id=%s&per_page=%d', $config['key'], $config['userid'], $config['total'] ) );
+			} elseif ( $this->method == 'group' ) {
+				$this->setURL( sprintf( 'http://api.flickr.com/services/rest/?method=flickr.groups.pools.getPhotos&api_key=%s&group_id=%s&per_page=%d', $config['key'], $config['groupid'], $config['total'] ) );
+			}
+
 			$this->username = $config['username'];
 			$this->row = $config['row'];
 
@@ -19,7 +35,7 @@
 		}
 
 		/**
-		 * Surcharge de parent::getData()
+		 * Overcharge parent::getData()
 		 *
 		 * @return SimpleXMLElement
 		 */
@@ -29,14 +45,19 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
-		 *
+		 * Return an array of key->value using the item data
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
 			$this->compteur++;
+			if ( $this->method == 'group' ) {
+				$link = $this->urlTemplate . $item['id'].'/';
+			}
+			if ( $this->method == 'group' ) {
+				$link = 'http://www.flickr.com/photos/'.$item['owner'].'/'.$item['id'];
+			}
 			return array(
-						'link' => $this->urlTemplate . $item['id'].'/',
+						'link' => $link,
 						'title' => Smartypants( $item['title'] ),
 						'photo' => $this->getAbsoluteUrl( $item ),
 						'classe' => ($this->compteur % $this->row == 0 ) ? ' class="derniere"' : ''
@@ -44,9 +65,8 @@
 		}
 
 		/**
-		 * Retourne l'URL absolu d'une photo sur le site de Flickr
-		 * 
-		 * @param array $photo La photo
+		 * Return a Flickr photo URL
+		 * @param array $photo Photo item
 		 * @return string
 		 */	
 		public function getAbsoluteUrl( $photo, $taille = 's' ) {

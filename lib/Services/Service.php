@@ -7,7 +7,7 @@
 	 */ 
 	class Service {
 
-		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total;
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method;
 		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**
@@ -54,7 +54,7 @@
 		 *
 		 * @return string
 		 */
-		private function getURL() {
+		public function getURL() {
 			return $this->url;
 		}
 

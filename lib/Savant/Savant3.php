@@ -222,22 +222,14 @@ class Savant3 {
 	* fetch() to get an error object when errors occur.
 	* 
 	* @access public
-	* 
-	* @param string $tpl The template source to use.
-	* 
+	*  
 	* @return string The template output.
 	* 
 	*/
 	
-	public function __toString($tpl = null)
+	public function __toString()
 	{
-		$output = $this->fetch($tpl);
-		if ($this->isError($output)) {
-			$text = $this->__config['error_text'];
-			return $this->escape($text);
-		} else {
-			return $output;
-		}
+		return $this->getOutput();
 	}
 	
 	
@@ -998,7 +990,26 @@ class Savant3 {
 	
 	public function display($tpl = null)
 	{
-		echo $this->__toString($tpl);
+		echo $this->getOutput($tpl);
+	}
+	
+	/**
+	 * Returns output, including error_text if an error occurs.
+	 * 
+	 * @param $tpl The template to process; if null, uses the
+	 * default template set with setTemplate().
+	 * 
+	 * @return string The template output.
+	 */
+	public function getOutput($tpl = null)
+	{
+	    $output = $this->fetch($tpl);
+        if ($this->isError($output)) {
+            $text = $this->__config['error_text'];
+            return $this->escape($text);
+        } else {
+            return $output;
+        }
 	}
 	
 	

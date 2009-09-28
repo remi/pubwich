@@ -36,7 +36,7 @@ abstract class Savant3_Plugin {
 	* 
 	* @access protected
 	* 
-	* @var object
+	* @var Savant3
 	* 
 	*/
 	

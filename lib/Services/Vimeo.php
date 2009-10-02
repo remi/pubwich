@@ -1,4 +1,11 @@
 <?php
+	/**
+	 * @classname Vimeo
+	 * @description Fetch Vimeo videos
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 
 	class Vimeo extends Service {
 	
@@ -7,17 +14,14 @@
 			$this->total = $config['total'];
 			$this->username = $config['username'];
 
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image_small%}" alt="{%title%}" /><span>{%title%}</span></a></li>'."\n");
 			$this->setURLTemplate('http://www.vimeo.com/'.$config['username'].'/');
 
-			parent::__construct();
+			parent::__construct( $config );
 		}
 
 		/**
 		 * Surcharge de parent::getData()
-		 *
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -27,7 +31,6 @@
 
 		/**
 		 * Retourne un item formatté selon le gabarit
-		 *
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
@@ -44,7 +47,6 @@
 						'image_large' => $item->thumbnail_large,
 			);
 		}
-
 			
 	}
 

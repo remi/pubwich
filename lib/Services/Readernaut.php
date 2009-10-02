@@ -1,4 +1,11 @@
 <?php
+	/**
+	 * @classname Readernaut
+	 * @description Fetch Readernaut books
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 
 	class Readernaut extends Service {
 		
@@ -10,17 +17,14 @@
 			$this->username = $config['username'];
 			$this->size = $config['size'];
 
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
 			$this->setURLTemplate('http://www.readernaut.com/'.$config['username'].'/');
 
-			parent::__construct();
+			parent::__construct( $config );
 		}
 
 		/**
 		 * Surcharge de parent::getData()
-		 *
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -30,7 +34,6 @@
 
 		/**
 		 * Retourne un item formatté selon le gabarit
-		 *
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

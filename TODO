@@ -31,6 +31,19 @@
 [ ] Permettre une plus grande personnalisation des services (eg. types de
     statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
 
+[ ] PrÃ©voire des "hooks" dans le thÃ¨me pour appliquer seulement Ã  une mÃ©thode d'un service.
+    Et s'assurer que les hooks de services fonctionnent encore, mais ont une moins grande
+	prioritÃ© que ceux sur les mÃ©thodes. Exemple, on a un service "Flickr" avec la mÃ©thode "FlickrUser"
+	et l'identifiant "photos", les hooks s'exÃ©cutent dans cet ordre (le plus bas a la prioritÃ©) :
+
+	1 Flickr_itemTemplate
+	2 Flickr_FlickrUser_itemTemplate
+	3 Flickr_FlickrUser_photos_itemTemplate
+
+	1 Flickr_boxTemplate
+	2 Flickr_FlickrUser_boxTemplate
+	3 Flickr_FlickrUser_photos_boxTemplate
+
 [x] I18n des textes utilisés dans Pubwich
 
 [ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)

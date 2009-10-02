@@ -1,4 +1,11 @@
 <?php
+	/**
+	 * @classname Youtube
+	 * @description Fetch Youtube videos
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 
 	class Youtube extends Service {
 	
@@ -10,12 +17,10 @@
 			$this->username = $config['username'];
 			$this->size = $config['size'];
 
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 			$this->setItemTemplate('<li class="clearfix"><a href="{%link%}"><img src="{%image%}" alt="{%title%}" /><strong>{%title%}</strong></a></li>'."\n");
 			$this->setURLTemplate('http://www.youtube.com/user/'.$config['username'].'/');
 
-			parent::__construct();
+			parent::__construct( $config );
 		}
 
 		/**

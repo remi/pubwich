@@ -1,23 +1,29 @@
 <?php
 
 	/**
-	 * Classe de service générale
-	 *
-	 * @className Service
+	 * @classname Service
 	 */ 
 	class Service {
 
-		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method;
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function;
 		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**
 		 * @constructor
 		 */ 
-		public function __construct() {
+		public function __construct( $config=null ) {
 			PubwichLog::log( 2, sprintf( Pubwich::_("Creating an instance of %s"), get_class( $this ) ) );
+
+			$this->title = $config['title'];
+			$this->description = $config['description'];
 
 			$id = md5( $this->getURL() ); 
 			$this->cache_id = $id; 
+
+			if ( !$this->callback_function ) {
+				$this->callback_function = 'simplexml_load_string';
+			}
+
 			$this->cache_options = array( 
 				'cacheDir' => CACHE_LOCATION, 
 				'lifeTime' => CACHE_LIMIT,
@@ -65,6 +71,7 @@
 		 * @return void
 		 */
 		public function setURL( $url ) {
+			PubwichLog::log( 3, sprintf( Pubwich::_("Setting the URL for %s: %s"), get_class( $this ), $url ) );
 			$this->url = $url;
 		}
 
@@ -79,13 +86,11 @@
 			$url = $this->getURL();
 			$Cache_Lite = new Cache_Lite( $this->cache_options );
 
-			// Si les données existent dans la cache
 			if ($data = $Cache_Lite->get( $this->cache_id) ) {
 				libxml_use_internal_errors( true );
-				$this->data = simplexml_load_string( $data );
+				$this->data = call_user_func( $this->callback_function, $data );
 				libxml_clear_errors();
 			}
-			// Sinon
 			else {
 				$this->buildCache( $Cache_Lite );
 			}
@@ -113,7 +118,7 @@
 					/*var_dump( $cacheWrite->getMessage() );*/
 				}
 				libxml_use_internal_errors( true );
-				$this->data = simplexml_load_string( $content );
+				$this->data = call_user_func( $this->callback_function, $content );
 			} else {
 				$this->data = false;
 			}
@@ -214,7 +219,7 @@
 			$items = '';
 			$classData = $this->getData();
 
-			$htmlClass = strtolower( get_class( $this ) );
+			$htmlClass = strtolower( get_class( $this ) ).' '.strtolower( get_parent_class( $this ) );
 			if ( !$classData ) {
 				$items = '<li class="nodata">'.sprintf( Pubwich::_('An error occured with the %s API. The data is therefore unavailable.'), get_class( $this ) ).'</li>';
 				$htmlClass .= ' nodata';

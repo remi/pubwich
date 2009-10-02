@@ -1,4 +1,11 @@
 <?php
+	/**
+	 * @classname Facebook
+	 * @description Fetch Facebook statuses
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 
 	class Facebook extends Service {
 	
@@ -7,12 +14,10 @@
 			$this->total = $config['total'];
 			$this->username = $config['username'];
 
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a> {%date%}</li>'."\n");
 			$this->setURLTemplate('http://www.facebook.com/'.$config['username'].'/');
 
-			parent::__construct();
+			parent::__construct( $config );
 		}
 
 		/**

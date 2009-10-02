@@ -1,4 +1,11 @@
 <?php
+	/**
+	 * @classname Delicious
+	 * @description Fetch Del.icio.us bookmarks
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 
 	class Delicious extends Service {
 	
@@ -6,12 +13,10 @@
 			$this->setURL( sprintf( 'http://feeds.delicious.com/v2/rss/%s?count=%s', $config['username'], $config['total'] ) );
 			$this->username = $config['username'];
 
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a></li>'."\n");
 			$this->setURLTemplate('http://del.icio.us/'.$config['username'].'/');
 			
-			parent::__construct();
+			parent::__construct( $config );
 
 		}
 

@@ -1,13 +1,9 @@
 <?php
 
-	class Texte extends Service {
+	class Text extends Service {
 	
-		public $username, $size;
-
 		public function __construct( $config ){
 			$this->text = $config['text'];
-			$this->title = $config['title'];
-			$this->description = $config['description'];
 
 			$this->setItemTemplate('{%text%}'."\n");
 			$this->setBoxTemplate('
@@ -18,12 +14,11 @@
 				</div>
 			</div>');
 
-			parent::__construct();
+			parent::__construct( $config );
 		}
 
 		/**
 		 * Surcharge de parent::getData()
-		 *
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -32,7 +27,6 @@
 
 		/**
 		 * Retourne un item formatté selon le gabarit
-		 *
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
@@ -40,7 +34,6 @@
 				'text' => $this->text
 			);
 		}
-
 
 	}
 

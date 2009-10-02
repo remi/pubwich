@@ -8,43 +8,31 @@
 	class Pubwich {
 
 		/**
-		 * Contient le tableau des services utilisés sur Pubwich
-		 *
 		 * @var $services
 		 */
 		static private $services;
 
 		/**
-		 * Contient un tableau d'objets PHP représentant chaque service utilisé
-		 *
 		 * @var $classes
 		 */
 		static private $classes;
 
 		/**
-		 * Contient les colonnes avec les instances de classe
-		 *
 		 * @var $columns
 		 */
 		static private $columns;
 
 		/**
-		 * Contient l’URL vers les fichiers du thème
-		 *
 		 * @var $theme_url
 		 */
 		static private $theme_url;
 
 		/**
-		 * Contient le chemin absolu vers les fichiers du thème
-		 *
 		 * @var $theme_path
 		 */
 		static private $theme_path;
 
 		/**
-		 * Instance of gettext_reader class to reads localized strings
-		 *
 		 * @var $gettext
 		 */
 		static private $gettext = null;
@@ -112,8 +100,6 @@
 		}
 
 		/**
-		 * Crée un tableau qui contient les instances des objets de Services
-		 *
 		 * @return void
 		 */
 		static public function setClasses() {
@@ -136,8 +122,6 @@
 		}
 
 		/**
-		 * Creation and display of the HTML document
-		 *
 		 * @return void
 		 */
 		static public function renderTemplate() {
@@ -167,8 +151,6 @@
 		}
 
 		/**
-		 * Définit le chemin vers les fichiers du thème
-		 *
 		 * @return string
 		 */
 		static public function getThemePath() {
@@ -176,8 +158,6 @@
 		}
 
 		/**
-		 * Définit l'URL  vers les fichiers du thème
-		 *
 		 * @return string
 		 */
 		static public function getThemeUrl() {
@@ -185,9 +165,7 @@
 		}
 
 		/**
-		 * Définit les services utilisés sur Pubwich
-		 *
-		 * @param array $services Le tableau de services
+		 * @param array $services
 		 * @return void
 		 */
 		static public function setServices( $services = array() ) {
@@ -195,8 +173,6 @@
 		}
 
 		/**
-		 * Récupère les services utilisés sur Pubwich
-		 *
 		 * @return array
 		 */
 		static public function getServices( ) {
@@ -204,8 +180,6 @@
 		}
 
 		/**
-		 * Charge la classe d'un service
-		 *
 		 * @param string $service Le nom du service (et de la classe)
 		 * @param array $config Le tableau de configuration
 		 * @return Service
@@ -222,12 +196,16 @@
 			}
 
 			require_once( $fichier );
-			return new $service( $config );
+			
+			$classname = ( $config['method'] ) ? $config['method'] : $service;
+			if ( !class_exists( $classname ) ) {
+				throw new PubwichErreur( sprintf( Pubwich::_( 'The class %s doesn\'t exist. Check your configuration file for inexistent services or methods.' ), $classname ) );
+			}
+
+			return new $classname( $config );
 		}
 
 		/**
-		 * Reconstruit toute la cache de l'application
-		 *
 		 * @return void
 		 */
 		static public function rebuildCache() {
@@ -267,22 +245,22 @@
 					$classe->setBoxTemplate( $boxTemplate );
 				}
 
-				$boxFunction = get_class( $classe ) . '_boxTemplate';
+				$boxFunction = get_parent_class( $classe ) . '_boxTemplate';
 				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxFunction ) ) {
 					$classe->setBoxTemplate( call_user_func( $boxFunction ) );
 				}
 
-				$boxVariableFunction = get_class( $classe ) . '_' . $classe->getVariable() . '_boxTemplate';
+				$boxVariableFunction = get_parent_class( $classe ) . '_' . $classe->getVariable() . '_boxTemplate';
 				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxVariableFunction ) ) {
 					$classe->setBoxTemplate( call_user_func( $boxVariableFunction ) );
 				}
 
-				$classFunction = get_class( $classe ) . '_itemTemplate';
+				$classFunction = get_parent_class( $classe ) . '_itemTemplate';
 				if ( function_exists( $classFunction ) ) {
 					$classe->setItemTemplate( call_user_func( $classFunction ) );
 				}
 
-				$variableFunction = get_class( $classe ) . '_'.$classe->getVariable().'_itemTemplate';
+				$variableFunction = get_parent_class( $classe ) . '_'.$classe->getVariable().'_itemTemplate';
 				if ( function_exists( $variableFunction ) ) {
 					$classe->setItemTemplate( call_user_func( $variableFunction ) );
 				}

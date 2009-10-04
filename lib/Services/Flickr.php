@@ -39,7 +39,7 @@
 			$path = $item['pathalias']!='' ? $item['pathalias'] : $item['owner'];
 			return array(
 						'link' => 'http://www.flickr.com/photos/'.$path.'/'.$item['id'].'/',
-						'title' => Smartypants( $item['title'] ),
+						'title' => $item['title'],
 						'photo' => $this->getAbsoluteUrl( $item ),
 						'classe' => ($this->compteur % $this->row == 0 ) ? ' class="derniere"' : ''
 			);

@@ -36,11 +36,11 @@
 			$comments_count = $item->children('http://purl.org/rss/1.0/modules/slash/')->comments;
 			return array(
 						'link' => htmlspecialchars( $item->link ),
-						'title' => trim( SmartyPants( $item->title ) ),
+						'title' => trim( $item->title ),
 						'date' => Pubwich::time_since( $item->pubDate ),
 						'comments_link' => $item->comments,
 						'comments_count' => $comments_count,
-						'description' => SmartyPants( Markdown( $item->description ) )
+						'description' => $item->description
 			);
 		}
 

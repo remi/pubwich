@@ -33,7 +33,6 @@
 		 * 1. Enlève tous les tags HTML que Twitter pourrait inclure (?)
 		 * 2. Rends les liens hypertextes cliquables
 		 * 3. Remplace "@username" par un lien cliquable vers le profil de "username"
-		 * 4. Passe le contenu dans Smartypants puis Markdown
 		 *
 		 * @param string $text Le contenu du tweet
 		 *
@@ -43,7 +42,7 @@
 			$text = strip_tags( $text );
 			$text = preg_replace( '/(https?:\/\/[^\s\)]+)/', '<a href="\\1">\\1</a>', $text );
 			$text = preg_replace( '/\@([^\s\ \:\.\;\-\,\!\)\(\"]+)/', '@<a href="http://twitter.com/\\1">\\1</a>', $text );
-			$text = '<p>' . ( Smartypants( $text ) ) . '</p>';
+			$text = '<p>' . $text . '</p>';
 			return $text;
 		}
 
@@ -78,6 +77,10 @@
 		public function populateItemTemplate( &$item ) {
 			return parent::populateItemTemplate( $item ) + array(
 					'link' => sprintf( 'http://www.twitter.com/%s/statuses/%s/', $this->username, $item->id ),
+					'user_image' => $item->user->profile_image_url,
+					'user_name' => $item->user->name,
+					'user_nickname' => $item->user->screen_name,
+					'user_link' => sprintf( 'http://www.twitter.com/%s/', $item->user->screen_name ),
 			);
 		}
 
@@ -106,6 +109,9 @@
 		public function populateItemTemplate( &$item ) {
 			return parent::populateItemTemplate( $item ) + array(
 						'link' => sprintf( 'http://www.twitter.com/%s/statuses/%s/', $item->from_user, $item->id ),
+						'user_image' => $item->profile_image_url,
+						'user_nickname' => $item->from_user,
+						'user_link' => sprintf( 'http://www.twitter.com/%s/', $item->from_user ),
 			);
 		}
 

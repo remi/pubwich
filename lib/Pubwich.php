@@ -237,32 +237,45 @@
 
 			if ( function_exists( 'boxTemplate' ) ) {
 				$boxTemplate = call_user_func( 'boxTemplate' );
+			} else {
+				throw new PubwichErreur( Pubwich::__('You must define a boxTemplate function in your theme\'s functions.php file.') );
 			}
 
 			foreach( self::$classes as $classe ) {
+
+				$functions = array();
+				$parent = get_parent_class( $classe );
+				$classname = get_class( $classe );
+				$variable = $classe->getVariable();
 
 				if ( !$classe->getBoxTemplate()->hasTemplate() && $boxTemplate ) {
 					$classe->setBoxTemplate( $boxTemplate );
 				}
 
-				$boxFunction = get_parent_class( $classe ) . '_boxTemplate';
-				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxFunction ) ) {
-					$classe->setBoxTemplate( call_user_func( $boxFunction ) );
+				if ( $parent != 'Service' ) {
+					$functions = array(
+						$parent,
+						$parent . '_' . $classname,
+						$parent . '_' . $classname . '_' . $variable,
+					);
+				} else {
+					$functions = array(
+						$classname,
+						$classname . '_' . $variable,
+					);
 				}
 
-				$boxVariableFunction = get_parent_class( $classe ) . '_' . $classe->getVariable() . '_boxTemplate';
-				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxVariableFunction ) ) {
-					$classe->setBoxTemplate( call_user_func( $boxVariableFunction ) );
-				}
+				foreach ( $functions as $f ) {
+					$box_f = $f . '_boxTemplate';
+					$item_f = $f . '_itemTemplate';
 
-				$classFunction = get_parent_class( $classe ) . '_itemTemplate';
-				if ( function_exists( $classFunction ) ) {
-					$classe->setItemTemplate( call_user_func( $classFunction ) );
-				}
+					if ( function_exists( $box_f ) ) {
+						$classe->setBoxTemplate( call_user_func( $box_f ) );
+					}
 
-				$variableFunction = get_parent_class( $classe ) . '_'.$classe->getVariable().'_itemTemplate';
-				if ( function_exists( $variableFunction ) ) {
-					$classe->setItemTemplate( call_user_func( $variableFunction ) );
+					if ( function_exists( $item_f ) ) {
+						$classe->setItemTemplate( call_user_func( $item_f ) );
+					}
 				}
 			}
 		}

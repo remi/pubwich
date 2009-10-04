@@ -40,9 +40,9 @@
 			return array(
 						'id' => $item->reader_book_id,
 						'link' => $item->book_edition->permalink, 
-						'title' => SmartyPants( $item->book_edition->title ),
-						'subtitle' => SmartyPants( $item->book_edition->subtitle ),
-						'author' => SmartyPants( $item->book_edition->authors->author ), 
+						'title' => $item->book_edition->title,
+						'subtitle' => $item->book_edition->subtitle,
+						'author' => $item->book_edition->authors->author, 
 						'image' => $item->book_edition->covers->cover_small,
 						'image_medium' => $item->book_edition->covers->cover_medium,
 						'image_large' => $item->book_edition->covers->cover_large,

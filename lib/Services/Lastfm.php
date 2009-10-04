@@ -17,6 +17,7 @@
 			$this->username = $config['username'];
 			$this->key = $config['key'];
 			$this->total = $config['total'];
+			$this->setURLTemplate('http://www.last.fm/user/'.$config['username'].'/');
 		}
 
 
@@ -40,10 +41,8 @@
 		public function __construct( $config ) {
 			parent::setVariables( $config );	
 
-			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&api_key=%s&user=%s', $this->key, $this->username ) );
-
+			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&api_key=%s&user=%s&limit=%d', $this->key, $this->username, $this->total ) );
 			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}">{%artist%} — {%track%}</a></li>'."\n");
-			$this->setURLTemplate('http://www.last.fm/user/'.$config['username'].'/');
 
 			parent::__construct( $config );
 		}
@@ -60,17 +59,16 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
-			$album = Smartypants( $item->album );
-			$artist = Smartypants( $item->artist );
-			$title= Smartypants( $item->name );
+			$album = $item->album;
+			$artist = $item->artist;
+			$title= $item->name;
 			$this->compteur++;
 			return array(
 						'link' => htmlspecialchars( $item->url ),
 						'artist' => $artist,
 						'album' => $album,
 						'track' => $title,
-						'release_date' => $item->release_date,
-						'listeners' => $item->listeners,
+						'date' => $item->date,
 						'classe' => isset($this->classes[$this->compteur-1]) ? ' class="'.$this->classes[$this->compteur-1].'"' : '',
 						);
 		}
@@ -84,9 +82,7 @@
 
 			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getweeklyalbumchart&api_key=%s&user=%s', $this->key, $this->username ) );
 			$this->classes = array( 'premier', 'deuxieme', 'troisieme', 'quatrieme' );
-
 			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" height="{%size%}" alt="{%title%}"><strong><span>{%artist%}</span> {%album%}</strong></a></li>'."\n");
-			$this->setURLTemplate('http://www.last.fm/user/'.$config['username'].'/');
 
 			parent::__construct( $config );
 		}
@@ -162,8 +158,8 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
-			$album = Smartypants( $item->name );
-			$artist = Smartypants( $item->artist );
+			$album = $item->name;
+			$artist = $item->artist;
 			$this->compteur++;
 			return array(
 						'link' => htmlspecialchars( $item->url ),

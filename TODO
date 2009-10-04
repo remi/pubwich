@@ -1,40 +1,10 @@
-
-[x] Meilleure gestion de la récupération des données
-    externes (dépendante de cURL présentement) via une
-    classe dédiée qui offre plusieurs alternatives. 
-
-[x] Meilleur système de  configuration (ne pas avoir à
-    saisir les URLS complètes, seulement les paramètres uniques).
-    Les passer lorsqu'on créé l'objet de service, via init().
-
-[x] Utilisation d'une classe statique <code>Pubwich</code> pour éviter
-    de polluer le namespace global avec des fonctions
-    utilitaires.
-
-[x] Support de thèmes
-
-[x] Plus de services (Facebook, RSS générique, etc.)
-
-[x] Meilleur système de configuration de service pour
-    permettre l'utilisation multiple d'un même service
-    avec des configurations différentes (comme RSS générique)
-
-[x] Décider d'un meilleur système de configuration/template. Est-ce que
-    lorsqu'on active un service, il se rajoute automatique dans le
-    template? Est-ce qu'on laisse le contrôle total sur le "markup"
-    à l'utilisateur?
-
-[x] Créer des répertoires <code>trunk</code>, <code>branches</code> et <code>tags</code> dans le dépot.
-
-[x] Apprendre à utiliser les "branches"
-
 [ ] Permettre une plus grande personnalisation des services (eg. types de
     statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
 
-[ ] PrÃ©voire des "hooks" dans le thÃ¨me pour appliquer seulement Ã  une mÃ©thode d'un service.
+[ ] Prévoire des "hooks" dans le thème pour appliquer seulement à une méthode d'un service.
     Et s'assurer que les hooks de services fonctionnent encore, mais ont une moins grande
-	prioritÃ© que ceux sur les mÃ©thodes. Exemple, on a un service "Flickr" avec la mÃ©thode "FlickrUser"
-	et l'identifiant "photos", les hooks s'exÃ©cutent dans cet ordre (le plus bas a la prioritÃ©) :
+	priorité que ceux sur les méthodes. Exemple, on a un service "Flickr" avec la mÃ©thode "FlickrUser"
+	et l'identifiant "photos", les hooks s'exÃ©cutent dans cet ordre (le plus bas a la priorité) :
 
 	1 Flickr_itemTemplate
 	2 Flickr_FlickrUser_itemTemplate
@@ -44,6 +14,11 @@
 	2 Flickr_FlickrUser_boxTemplate
 	3 Flickr_FlickrUser_photos_boxTemplate
 
-[x] I18n des textes utilisés dans Pubwich
+	1 Vimeo_boxTemplate
+	2 Vimeo_videos_boxTemplate
+
+[ ] Prévoir un fallback pour l'absence de fonction json_encode native.
+
+[ ] Meilleurs (et fonctionnelle!) configuration d'exemple
 
 [ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)

@@ -36,9 +36,9 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'link' => htmlspecialchars( $item->url ),
-						'title' => SmartyPants( $item->title ),
+						'title' => $item->title,
 						'date' => Pubwich::time_since( $item->uploaded_date ),
-						'caption' => SmartyPants( $item->caption ),
+						'caption' => $item->caption,
 						'duration' => $item->duration,
 						'width' => $item->width,
 						'height' => $item->height,

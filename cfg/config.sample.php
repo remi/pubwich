@@ -29,6 +29,7 @@
 	 *			// column 1
 	 *			array(
 	 *				array('Flickr', 'photos', array(
+	 *					'method' => 'FlickrUser',
 	 *					'title' => 'Flickr',
 	 *					'description' => 'My pictures',
 	 *					'key' => '',
@@ -60,6 +61,7 @@
 				),
 
 				array( 'Flickr', 'photos', array( 
+						'method' => 'FlickrUser',
 						'key' => 'FLICKR_KEY_HERE',
 						'userid' => 'FLICKER_USERID_HERE', // http://www.idgettr.com/
 						'username' => 'FLICKR_USERNAME_HERE',
@@ -90,6 +92,7 @@
 			),
 			array(
 				array( 'Twitter', 'etats', array(
+						'method' => 'TwitterUser',
 						'id' => 'TWITTER_USERID_HERE',
 						'username' => 'TWITTER_USERNAME_HERE',
 						'authenticate' => false, // set to true if you are on a shared hosting
@@ -148,6 +151,7 @@
 				),
 
 				array( 'Lastfm', 'albums', array(
+						'method' => 'LastFMWeeklyAlbums',
 						'key' => 'LASTFM_KEY_HERE',
 						'username' => 'LASTFM_USERNAME_HERE',
 						'total' => 5,

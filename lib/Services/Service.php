@@ -219,7 +219,7 @@
 			$items = '';
 			$classData = $this->getData();
 
-			$htmlClass = strtolower( get_class( $this ) ).' '.strtolower( get_parent_class( $this ) );
+			$htmlClass = strtolower( get_class( $this ) ).' '.( get_parent_class( $this ) != 'Service' ? strtolower( get_parent_class( $this ) ) : '' );
 			if ( !$classData ) {
 				$items = '<li class="nodata">'.sprintf( Pubwich::_('An error occured with the %s API. The data is therefore unavailable.'), get_class( $this ) ).'</li>';
 				$htmlClass .= ' nodata';

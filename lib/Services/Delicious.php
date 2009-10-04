@@ -38,8 +38,8 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'link' => htmlspecialchars( $item->link ),
-						'title' => SmartyPants( $item->title ),
-						'description' => Smartypants( $item->description ),
+						'title' => $item->title,
+						'description' => $item->description,
 						'date' => Pubwich::time_since( $item->pubDate ),
 			);
 		}

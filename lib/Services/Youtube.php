@@ -48,8 +48,8 @@
 	
 			return array(
 						'link' => htmlspecialchars( $url ),
-						'title' => SmartyPants( $title ),
-						'description' => SmartyPants( $description ),
+						'title' => $title,
+						'description' => $description,
 						'date' => Pubwich::time_since( $item->published ),
 						'image' => $attrs['url'],
 						'size' => $this->size,

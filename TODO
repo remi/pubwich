@@ -19,6 +19,8 @@
 
 [ ] Prévoir un fallback pour l'absence de fonction json_encode native.
 
-[ ] Meilleurs (et fonctionnelle!) configuration d'exemple
+[ ] Meilleure (et fonctionnelle!) configuration d'exemple.
 
 [ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)
+
+[ ] Créer un hook pour modifier, dans le thème, les populateItemTemplate.

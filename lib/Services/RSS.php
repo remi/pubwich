@@ -40,7 +40,8 @@
 						'date' => Pubwich::time_since( $item->pubDate ),
 						'comments_link' => $item->comments,
 						'comments_count' => $comments_count,
-						'description' => $item->description
+						'description' => $item->description,
+						'author' => $item->author,
 			);
 		}
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pubwich\n"
 "Report-Msgid-Bugs-To: http://pubwich.com/\n"
-"POT-Creation-Date: 2009-10-03 20:49-0400\n"
+"POT-Creation-Date: 2009-10-03 21:07-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rémi Prévost <remi@exomel.com>\n"
 "Language-Team: \n"
@@ -57,14 +57,19 @@ msgstr "minute"
 
 #: lib/Pubwich.php:327
 #, php-format
+msgid "just moments ago"
+msgstr "il y a quelques secondes"
+
+#: lib/Pubwich.php:332
+#, php-format
 msgid "%d seconds ago"
 msgstr "Il y a %d secondes"
 
-#: lib/Pubwich.php:331
+#: lib/Pubwich.php:336
 msgid "%e %B at %H:%M"
 msgstr "%e %B à %H:%M"
 
-#: lib/Pubwich.php:346
+#: lib/Pubwich.php:351
 #, php-format
 msgid "%s ago"
 msgstr "Il y a %s"
@@ -97,4 +102,7 @@ msgstr "Une erreur est survenue avec l’API de %s. Les données ne sont donc pa
 #, php-format
 msgid "All data is &copy; copyright %s. Proudly powered by <a class=\"pubwich\" href=\"http://www.pubwich.com/\">Pubwich %s</a>"
 msgstr "Toutes les données sont &copy; copyright %s. Propulsé fièrement par <a class=\"pubwich\" href=\"http://www.pubwich.com/\">Pubwich %s</a>"
+
+#~ msgid "il y a quelques secondes"
+#~ msgstr "just moments ago"
 

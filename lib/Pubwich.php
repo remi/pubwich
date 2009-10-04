@@ -322,6 +322,10 @@
 			
 			$today = time();
 			$since = $today - $original;
+
+			if ( $since < 0 ) {
+				return sprintf( Pubwich::_('just moments ago'), $since );
+			}
 		
 			if ( $since < 60 ) {
 				return sprintf( Pubwich::_('%d seconds ago'), $since );

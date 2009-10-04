@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://pubwich.com/\n"
-"POT-Creation-Date: 2009-10-03 20:49-0400\n"
+"POT-Creation-Date: 2009-10-03 21:07-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,14 +61,19 @@ msgstr ""
 
 #: lib/Pubwich.php:327
 #, php-format
+msgid "just moments ago"
+msgstr ""
+
+#: lib/Pubwich.php:332
+#, php-format
 msgid "%d seconds ago"
 msgstr ""
 
-#: lib/Pubwich.php:331
+#: lib/Pubwich.php:336
 msgid "%e %B at %H:%M"
 msgstr ""
 
-#: lib/Pubwich.php:346
+#: lib/Pubwich.php:351
 #, php-format
 msgid "%s ago"
 msgstr ""

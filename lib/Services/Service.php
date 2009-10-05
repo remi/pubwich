@@ -227,7 +227,13 @@
 				foreach( $classData as $item ) {
 					$compteur++;
 					if ($this->total && $compteur > $this->total) { break; }  
-					$this->getItemTemplate()->populate( $this->populateItemTemplate( $item ) );
+					$populate = $this->populateItemTemplate( $item );
+
+					if ( function_exists( get_class( $this ) . '_populateItemTemplate' ) ) {
+						$populate = call_user_func( get_class( $this ) . '_populateItemTemplate', $item ) + $populate;
+					}
+
+					$this->getItemTemplate()->populate( $populate );
 					$items .= '		'.$this->getItemTemplate()->output();
 				}
 			}
@@ -240,6 +246,10 @@
 				'description' => $this->description,
 				'items' => $items	
 			);
+
+			if ( function_exists( 'populateBoxTemplate' ) ) {
+				$data = call_user_func( 'populateBoxTemplate', $this ) + $data;
+			}
 
 			$this->getBoxTemplate()->populate( $data );
 			return $this->getBoxTemplate()->output();

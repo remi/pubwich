@@ -12,13 +12,24 @@
 			</div>';
 
 	}
-	
+
 	/****************************************************
 	 *
 	 * Peut-être que ces fonctions vous seront utiles...
 	 *
 	 ****************************************************/
 	/*
+
+	function populateBoxTemplate( $item ) {
+		return array(
+		);
+	}
+
+	function TwitterUser_populateItemTemplate( $item ) {
+		return array(
+		);	
+	}
+	
 	function RSS_ixmedia_itemTemplate() {
 		return '<li><a href="{%link%}">{%title%}</a> {%date%} <div class="text">{%description%}</div></li>'."\n";
 	}

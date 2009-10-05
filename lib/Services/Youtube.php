@@ -7,30 +7,17 @@
 	 * @methods None
 	 */
 
-	class Youtube extends Service {
+	require_once( dirname(__FILE__) . '/Atom.php' );
+	class Youtube extends Atom {
 	
 		private $size;
 
 		public function __construct( $config ){
-			$this->setURL( sprintf( 'http://gdata.youtube.com/feeds/api/users/%s/uploads?v=2', $config['username'] ) );
-			$this->total = $config['total'];
-			$this->username = $config['username'];
-			$this->size = $config['size'];
-
-			$this->setItemTemplate('<li class="clearfix"><a href="{%link%}"><img src="{%image%}" alt="{%title%}" /><strong>{%title%}</strong></a></li>'."\n");
-			$this->setURLTemplate('http://www.youtube.com/user/'.$config['username'].'/');
-
+			$config['url'] = sprintf( 'http://gdata.youtube.com/feeds/api/users/%s/uploads?v=2', $config['username'] );
+			$config['link'] = 'http://www.youtube.com/user/'.$config['username'].'/';
 			parent::__construct( $config );
-		}
-
-		/**
-		 * Surcharge de parent::getData()
-		 *
-		 * @return SimpleXMLElement
-		 */
-		public function getData() {
-			$data = parent::getData();
-			return $data->entry;
+			$this->size = $config['size'];
+			$this->setItemTemplate('<li class="clearfix"><a href="{%link%}"><img src="{%image%}" alt="{%title%}" /><strong>{%title%}</strong></a></li>'."\n");
 		}
 
 		/**
@@ -46,13 +33,11 @@
 			$url_attrs = $media->group->player->attributes();
 			$url = $url_attrs['url'];
 	
-			return array(
-						'link' => htmlspecialchars( $url ),
+			return parent::populateItemTemplate( $item ) + array(
 						'title' => $title,
 						'description' => $description,
-						'date' => Pubwich::time_since( $item->published ),
 						'image' => $attrs['url'],
-						'size' => $this->size,
+						'size' => $item->size,
 			);
 		}
 

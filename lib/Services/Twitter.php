@@ -28,14 +28,6 @@
 
 
 		/**
-		 * Filtre le contenu d'un tweet. Effectue le traitement suivant:
-		 *
-		 * 1. Enlève tous les tags HTML que Twitter pourrait inclure (?)
-		 * 2. Rends les liens hypertextes cliquables
-		 * 3. Remplace "@username" par un lien cliquable vers le profil de "username"
-		 *
-		 * @param string $text Le contenu du tweet
-		 *
 		 * @return string
 		 */
 		public function filterContent( $text ) {
@@ -101,7 +93,12 @@
 			$this->setItemTemplate('<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n");
 			$this->setURLTemplate('http://search.twitter.com/?q='.$config['terms'].'/');
 
-			$this->callback_function = 'json_decode';
+			if ( !function_exists( 'json_decode' ) ) {
+				// only include the zend_json library if php json support is not enabled (php < 5.2)
+				require_once( dirname(__FILE__) . '/../Zend/Json.php' );
+			}
+
+			$this->callback_function = array(Pubwich, 'json_decode');
 
 			parent::__construct( $config );
 		}

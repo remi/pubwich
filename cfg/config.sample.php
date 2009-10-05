@@ -142,6 +142,7 @@
 				),
 
 				array( 'Readernaut', 'livres', array(
+						'method' => 'ReadernautBooks',
 						'username' => 'READERNAUT_USERNAME_HERE',
 						'total' => 9,
 						'size' => 50,

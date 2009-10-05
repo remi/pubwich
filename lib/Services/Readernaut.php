@@ -4,7 +4,7 @@
 	 * @description Fetch Readernaut books
 	 * @version 1.1 (20090929)
 	 * @author Rémi Prévost (exomel.com)
-	 * @methods None
+	 * @methods ReadernautBooks ReadernautNotes
 	 */
 
 	class Readernaut extends Service {

@@ -24,3 +24,5 @@
 [ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)
 
 [x] Créer un hook pour modifier, dans le thème, les populateItemTemplate.
+
+[ ] Ajouter un template de service (avec les méthodes de base, configuration, etc.)

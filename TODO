@@ -3,8 +3,8 @@
 
 [ ] Prévoire des "hooks" dans le thème pour appliquer seulement à une méthode d'un service.
     Et s'assurer que les hooks de services fonctionnent encore, mais ont une moins grande
-	priorité que ceux sur les méthodes. Exemple, on a un service "Flickr" avec la mÃ©thode "FlickrUser"
-	et l'identifiant "photos", les hooks s'exÃ©cutent dans cet ordre (le plus bas a la priorité) :
+	priorité que ceux sur les méthodes. Exemple, on a un service "Flickr" avec la méthode "FlickrUser"
+	et l'identifiant "photos", les hooks s'exécutent dans cet ordre (le plus bas a la priorité) :
 
 	1 Flickr_itemTemplate
 	2 Flickr_FlickrUser_itemTemplate

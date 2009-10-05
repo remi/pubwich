@@ -122,7 +122,7 @@
 				$this->albumdata[$id] = simplexml_load_string( $data );
 			} else {
 				$Cache_Lite->get( $id );
-				PubwichLog::log( 2, PubwichLog::log( 'Rebuilding cache for a Last.fm album' ) );
+				PubwichLog::log( 2, PubwichLog::_( 'Rebuilding cache for a Last.fm album' ) );
 				$url = sprintf( "http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=%s&artist=%s&album=%s", $this->key, urlencode( $album->artist ), urlencode( $album->name ) );
 				$data = FileFetcher::get( $url );
 				$cacheWrite = $Cache_Lite->save( $data );

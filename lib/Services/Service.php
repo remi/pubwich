@@ -47,8 +47,6 @@
 		}
 
 		/**
-		 * Retourne les options de cache pour le service
-		 *
 		 * @return array
 		 */
 		public function getCacheOptions() {
@@ -56,8 +54,6 @@
 		}
 
 		/**
-		 * Retourne l'URL à récupérer pour ce service
-		 *
 		 * @return string
 		 */
 		public function getURL() {
@@ -65,8 +61,6 @@
 		}
 
 		/**
-		 * Définit l'URL du service
-		 *
 		 * @param string $url
 		 * @return void
 		 */
@@ -76,9 +70,7 @@
 		}
 
 		/**
-		 * Initialise le service
-		 *
-		 * @param string $url L'URL à récupérer
+		 * @param string $url
 		 * @return Service
 		 */ 	
 		public function init() {
@@ -98,14 +90,11 @@
 		}
 
 		/**
-		 * Récupère les données du service et les met en cache
-		 *
-		 * @param string $url L'URL à récupérer
-		 * [@param Cache_Lite $Cache_Lite Un objet Cache_Lite si existant]
+		 * [@param Cache_Lite $Cache_Lite]
 		 * @return void
 		 */
 		public function buildCache( $Cache_Lite = null ) {
-			PubwichLog::log( 2, "Reconstruction de la cache du service " . get_class( $this ) );
+			PubwichLog::log( 2, sprintf( Pubwich::_('Rebuilding the cache for %s service' ), get_class( $this ) ) );
 			$url = $this->getURL();
 			if ( !$Cache_Lite ) {
 				$Cache_Lite = new Cache_Lite( $this->cache_options );
@@ -125,8 +114,6 @@
 		}
 
 		/**
-		 * Retourne les données du service
-		 *
 		 * @return string
 		 */	
 		public function getData() {
@@ -134,8 +121,6 @@
 		}
 
 		/**
-		 * Retourne le nom de la variable de l'instance
-		 *
 		 * return string
 		 */
 		public function getVariable() {
@@ -143,19 +128,14 @@
 		}
 
 		/**
-		 * Définit la variable de l'instance
-		 *
 		 * @param string $variable Le nom de la variable
 		 * @return void
 		 */
 		public function setVariable( $variable ) {
-			//$this->cache_id = $variable;
 			$this->variable = $variable;
 		}
 
 		/**
-		 * Définit le template de l'URL de profil du service
-		 *
 		 * @param string $template Le template
 		 * @return void
 		 */
@@ -164,8 +144,6 @@
 		}
 
 		/**
-		 * Définit le template à utiliser lors de l'affichage d'un item de ce service
-		 *
 		 * @param string $template Le template
 		 * @return void
 		 */
@@ -178,8 +156,6 @@
 		}
 
 		/**
-		 * Retourne le template des items
-		 *
 		 * @return PubwichTemplate
 		 */
 		public function getItemTemplate() {
@@ -187,8 +163,6 @@
 		}
 
 		/**
-		 * Définit le template à utiliser lors de l'affichage de ce service
-		 *
 		 * @param string $template Le template
 		 */
 		public function setBoxTemplate( $template ) {
@@ -200,8 +174,6 @@
 		}
 
 		/**
-		 * Retourne le template du service
-		 *
 		 * @return PubwichTemplate
 		 */
 		public function getBoxTemplate() {
@@ -209,8 +181,6 @@
 		}
 
 		/*
-		 * Affiche la boite d'une classe spécifique
-		 *
 		 * @param Service &$classe La référence de l’instancedu service à afficher
 		 * @return string
 		 */

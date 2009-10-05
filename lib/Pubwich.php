@@ -183,7 +183,7 @@
 		 * @return Service
 		 */
 		static public function loadService( $service, $config ) {
-			PubwichLog::log( 1, "Chargement du service " . $service );
+			PubwichLog::log( 1, sprintf( Pubwich::_('Chargement du service %s'), $service ) );
 
 			if ( file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
 				$fichier = 'Services/' . $service . '.php';
@@ -208,7 +208,7 @@
 		 */
 		static public function rebuildCache() {
 
-			PubwichLog::log( 1, "Building application cache" );
+			PubwichLog::log( 1, Pubwich::_("Building application cache") );
 
 			// On vide le contenu du dossier de cache
 			$fichiers = scandir(CACHE_LOCATION);

@@ -26,7 +26,6 @@
 			$this->auth = $config['authenticate'] ? $config['username'].':'.$config['password'].'@' : '';
 		}
 
-
 		/**
 		 * @return string
 		 */

@@ -28,7 +28,6 @@
 			$this->username = $config['username'];
 			$this->size = $config['size'];
 		}
-
 			
 	}
 

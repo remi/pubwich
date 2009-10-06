@@ -44,7 +44,8 @@
 
 			// Let’s modify the `include_path`
 			$path = dirname(__FILE__).'/';
-			set_include_path( get_include_path() . PATH_SEPARATOR . $path );
+			$path_pear = dirname(__FILE__).'/PEAR/';
+			set_include_path( get_include_path() . PATH_SEPARATOR . $path . PATH_SEPARATOR . $path_pear );
 
 			require_once( 'PEAR.php' );
 

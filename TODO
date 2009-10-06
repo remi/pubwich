@@ -1,28 +1,18 @@
-[ ] Permettre une plus grande personnalisation des services (eg. types de
-    statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
+------------------------------------------------------------------------------
 
-[ ] Prévoire des "hooks" dans le thème pour appliquer seulement à une méthode d'un service.
-    Et s'assurer que les hooks de services fonctionnent encore, mais ont une moins grande
-	priorité que ceux sur les méthodes. Exemple, on a un service "Flickr" avec la méthode "FlickrUser"
-	et l'identifiant "photos", les hooks s'exécutent dans cet ordre (le plus bas a la priorité) :
+	Pubwich TODO list, maintained by Remi Prevost
+	Suggestions for things to put on this list can be
+	made through http://dev.pubwich.org.
 
-	1 Flickr_itemTemplate
-	2 Flickr_FlickrUser_itemTemplate
-	3 Flickr_FlickrUser_photos_itemTemplate
+	$Id$
 
-	1 Flickr_boxTemplate
-	2 Flickr_FlickrUser_boxTemplate
-	3 Flickr_FlickrUser_photos_boxTemplate
+------------------------------------------------------------------------------
+[ ] Multi-method support.
 
-	1 Vimeo_boxTemplate
-	2 Vimeo_videos_boxTemplate
+[ ] Better sample configuration file.
 
-[ ] Prévoir un fallback pour l'absence de fonction json_encode native.
+[ ] Remove french usage in everything (documentation, code comments, etc.).
 
-[ ] Meilleure (et fonctionnelle!) configuration d'exemple.
+[ ] Create a sample service class.
 
-[ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)
-
-[x] Créer un hook pour modifier, dans le thème, les populateItemTemplate.
-
-[ ] Ajouter un template de service (avec les méthodes de base, configuration, etc.)
+[ ] Ensure that pubwich.pot and all .mo files are up-to-date with the codebase

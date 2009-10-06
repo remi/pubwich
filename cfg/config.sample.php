@@ -2,8 +2,8 @@
 
 	// Rename this file to config.php
 
-	error_reporting(E_ALL ^ E_NOTICE); // comment this line in production environment
-	// error_reporting(0); // comment this line in development environment
+	error_reporting(E_ALL ^ E_NOTICE); // uncomment this line in development environment
+	// error_reporting(0); // uncomment this line in production environment (prevent errors from showing up)
 
 	// Localisation
 	date_default_timezone_set( 'America/Montreal' );
@@ -54,16 +54,16 @@
 		array(
 			array(
 
-				array( 'Texte', 'intro', array(
+				array( 'Text', 'intro', array(
 						'title' => 'Introduction',
-						'text' => 'This is a short introduction text. To hide the "Introduction" title, all you have to is not specify a "title" item for the <strong>Texte</strong> box.',
+						'text' => 'This is a short introduction text. To hide the "Introduction" title, all you have to is not specify a "title" item for the <strong>Text</strong> box.',
 					)
 				),
 
 				array( 'Flickr', 'photos', array( 
 						'method' => 'FlickrUser',
 						'key' => 'FLICKR_KEY_HERE',
-						'userid' => 'FLICKER_USERID_HERE', // http://www.idgettr.com/
+						'userid' => 'FLICKER_USERID_HERE', // use http://www.idgettr.com to find it
 						'username' => 'FLICKR_USERNAME_HERE',
 						'total' => 12,
 						'title' => 'Flick<em>r</em>',

@@ -80,7 +80,7 @@
 
 			// Other classes
 			require( 'FileFetcher.php' );
-			require( 'PEAR/CacheLite/Lite.php' );
+			require( 'Cache/Lite.php' );
 
 			if ( !defined( 'PUBWICH_CRON' ) ) {
 				require_once( 'Savant/Savant3.php' );

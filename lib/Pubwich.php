@@ -1,6 +1,6 @@
 <?php
 
-	define( 'PUBWICH_VERSION', 'trunk' );
+	define( 'PUBWICH_VERSION', '1.1-RC1' );
 
 	/**
 	 * @classname Pubwich

@@ -1,36 +1,18 @@
+------------------------------------------------------------------------------
 
-[x] Meilleure gestion de la récupération des données
-    externes (dépendante de cURL présentement) via une
-    classe dédiée qui offre plusieurs alternatives. 
+	Pubwich TODO list, maintained by Remi Prevost
+	Suggestions for things to put on this list can be
+	made through http://dev.pubwich.org.
 
-[x] Meilleur système de  configuration (ne pas avoir à
-    saisir les URLS complètes, seulement les paramètres uniques).
-    Les passer lorsqu'on créé l'objet de service, via init().
+	$Id$
 
-[x] Utilisation d'une classe statique <code>Pubwich</code> pour éviter
-    de polluer le namespace global avec des fonctions
-    utilitaires.
+------------------------------------------------------------------------------
+[ ] Multi-method support.
 
-[x] Support de thèmes
+[ ] Better sample configuration file.
 
-[x] Plus de services (Facebook, RSS générique, etc.)
+[ ] Remove french usage in everything (documentation, code comments, etc.).
 
-[x] Meilleur système de configuration de service pour
-    permettre l'utilisation multiple d'un même service
-    avec des configurations différentes (comme RSS générique)
+[ ] Create a sample service class.
 
-[x] Décider d'un meilleur système de configuration/template. Est-ce que
-    lorsqu'on active un service, il se rajoute automatique dans le
-    template? Est-ce qu'on laisse le contrôle total sur le "markup"
-    à l'utilisateur?
-
-[x] Créer des répertoires <code>trunk</code>, <code>branches</code> et <code>tags</code> dans le dépot.
-
-[x] Apprendre à utiliser les "branches"
-
-[ ] Permettre une plus grande personnalisation des services (eg. types de
-    statistiques pour Last.fm, photos de groupes pour Flickr, etc.)
-
-[x] I18n des textes utilisés dans Pubwich
-
-[ ] Éliminer l’utilisation du francais dans le code (readme, documentation, commentaires, license, etc.)
+[ ] Ensure that pubwich.pot and all .mo files are up-to-date with the codebase

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://pubwich.com/\n"
-"POT-Creation-Date: 2009-08-13 20:06-0400\n"
+"POT-Creation-Date: 2009-10-04 21:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,54 +16,73 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Pubwich.php:82
+#: lib/Pubwich.php:70
 msgid "Pubwich object initialization"
 msgstr ""
 
-#: lib/Pubwich.php:150
+#: lib/Pubwich.php:132
 #, php-format
 msgid "The file <code>%s</code> was not found. It has to be there."
 msgstr ""
 
-#: lib/Pubwich.php:221
+#: lib/Pubwich.php:186
+#, php-format
+msgid "Chargement du service %s"
+msgstr ""
+
+#: lib/Pubwich.php:193
 #, php-format
 msgid "You told Pubwich to use the %s service, but either the file <code>%s</code> or <code>%s</code> cannot be found."
 msgstr ""
 
-#: lib/Pubwich.php:324
+#: lib/Pubwich.php:200
+#, php-format
+msgid "The class %s doesn't exist. Check your configuration file for inexistent services or methods."
+msgstr ""
+
+#: lib/Pubwich.php:211
+msgid "Building application cache"
+msgstr ""
+
+#: lib/Pubwich.php:313
 msgid "year"
 msgstr ""
 
-#: lib/Pubwich.php:325
+#: lib/Pubwich.php:314
 msgid "month"
 msgstr ""
 
-#: lib/Pubwich.php:326
+#: lib/Pubwich.php:315
 msgid "week"
 msgstr ""
 
-#: lib/Pubwich.php:327
+#: lib/Pubwich.php:316
 msgid "day"
 msgstr ""
 
-#: lib/Pubwich.php:328
+#: lib/Pubwich.php:317
 msgid "hour"
 msgstr ""
 
-#: lib/Pubwich.php:329
+#: lib/Pubwich.php:318
 msgid "minute"
 msgstr ""
 
-#: lib/Pubwich.php:336
+#: lib/Pubwich.php:325
+#, php-format
+msgid "just moments ago"
+msgstr ""
+
+#: lib/Pubwich.php:329
 #, php-format
 msgid "%d seconds ago"
 msgstr ""
 
-#: lib/Pubwich.php:340
+#: lib/Pubwich.php:333
 msgid "%e %B at %H:%M"
 msgstr ""
 
-#: lib/Pubwich.php:355
+#: lib/Pubwich.php:348
 #, php-format
 msgid "%s ago"
 msgstr ""
@@ -72,22 +91,32 @@ msgstr ""
 msgid "Erreur"
 msgstr ""
 
-#: lib/Services/Service.php:17
+#: lib/Services/Service.php:15
 #, php-format
 msgid "Creating an instance of %s"
 msgstr ""
 
-#: lib/Services/Service.php:78
+#: lib/Services/Service.php:68
+#, php-format
+msgid "Setting the URL for %s: %s"
+msgstr ""
+
+#: lib/Services/Service.php:77
 #, php-format
 msgid "Initializing instance of %s"
 msgstr ""
 
-#: lib/Services/Service.php:218
+#: lib/Services/Service.php:97
+#, php-format
+msgid "Rebuilding the cache for %s service"
+msgstr ""
+
+#: lib/Services/Service.php:194
 #, php-format
 msgid "An error occured with the %s API. The data is therefore unavailable."
 msgstr ""
 
-#: themes/default/index.tpl.php:22
+#: themes/default/index.tpl.php:20
 #, php-format
 msgid "All data is &copy; copyright %s. Proudly powered by <a class=\"pubwich\" href=\"http://www.pubwich.com/\">Pubwich %s</a>"
 msgstr ""

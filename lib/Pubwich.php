@@ -8,43 +8,31 @@
 	class Pubwich {
 
 		/**
-		 * Contient le tableau des services utilisés sur Pubwich
-		 *
 		 * @var $services
 		 */
 		static private $services;
 
 		/**
-		 * Contient un tableau d'objets PHP représentant chaque service utilisé
-		 *
 		 * @var $classes
 		 */
 		static private $classes;
 
 		/**
-		 * Contient les colonnes avec les instances de classe
-		 *
 		 * @var $columns
 		 */
 		static private $columns;
 
 		/**
-		 * Contient l’URL vers les fichiers du thème
-		 *
 		 * @var $theme_url
 		 */
 		static private $theme_url;
 
 		/**
-		 * Contient le chemin absolu vers les fichiers du thème
-		 *
 		 * @var $theme_path
 		 */
 		static private $theme_path;
 
 		/**
-		 * Instance of gettext_reader class to reads localized strings
-		 *
 		 * @var $gettext
 		 */
 		static private $gettext = null;
@@ -56,7 +44,8 @@
 
 			// Let’s modify the `include_path`
 			$path = dirname(__FILE__).'/';
-			set_include_path( get_include_path() . PATH_SEPARATOR . $path );
+			$path_pear = dirname(__FILE__).'/PEAR/';
+			set_include_path( get_include_path() . PATH_SEPARATOR . $path . PATH_SEPARATOR . $path_pear );
 
 			require_once( 'PEAR.php' );
 
@@ -91,12 +80,10 @@
 
 			// Other classes
 			require( 'FileFetcher.php' );
-			require( 'CacheLite/Lite.php' );
+			require( 'Cache/Lite.php' );
 
 			if ( !defined( 'PUBWICH_CRON' ) ) {
 				require_once( 'Savant/Savant3.php' );
-				require( 'Markup/Markdown/Markdown.php' );
-				require( 'Markup/Smartypants/Smartypants.php' );
 			}
 
 		}
@@ -112,8 +99,6 @@
 		}
 
 		/**
-		 * Crée un tableau qui contient les instances des objets de Services
-		 *
 		 * @return void
 		 */
 		static public function setClasses() {
@@ -136,8 +121,6 @@
 		}
 
 		/**
-		 * Creation and display of the HTML document
-		 *
 		 * @return void
 		 */
 		static public function renderTemplate() {
@@ -167,8 +150,6 @@
 		}
 
 		/**
-		 * Définit le chemin vers les fichiers du thème
-		 *
 		 * @return string
 		 */
 		static public function getThemePath() {
@@ -176,8 +157,6 @@
 		}
 
 		/**
-		 * Définit l'URL  vers les fichiers du thème
-		 *
 		 * @return string
 		 */
 		static public function getThemeUrl() {
@@ -185,9 +164,7 @@
 		}
 
 		/**
-		 * Définit les services utilisés sur Pubwich
-		 *
-		 * @param array $services Le tableau de services
+		 * @param array $services
 		 * @return void
 		 */
 		static public function setServices( $services = array() ) {
@@ -195,8 +172,6 @@
 		}
 
 		/**
-		 * Récupère les services utilisés sur Pubwich
-		 *
 		 * @return array
 		 */
 		static public function getServices( ) {
@@ -204,14 +179,12 @@
 		}
 
 		/**
-		 * Charge la classe d'un service
-		 *
 		 * @param string $service Le nom du service (et de la classe)
 		 * @param array $config Le tableau de configuration
 		 * @return Service
 		 */
 		static public function loadService( $service, $config ) {
-			PubwichLog::log( 1, "Chargement du service " . $service );
+			PubwichLog::log( 1, sprintf( Pubwich::_('Chargement du service %s'), $service ) );
 
 			if ( file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
 				$fichier = 'Services/' . $service . '.php';
@@ -222,17 +195,21 @@
 			}
 
 			require_once( $fichier );
-			return new $service( $config );
+			
+			$classname = ( $config['method'] ) ? $config['method'] : $service;
+			if ( !class_exists( $classname ) ) {
+				throw new PubwichErreur( sprintf( Pubwich::_( 'The class %s doesn\'t exist. Check your configuration file for inexistent services or methods.' ), $classname ) );
+			}
+
+			return new $classname( $config );
 		}
 
 		/**
-		 * Reconstruit toute la cache de l'application
-		 *
 		 * @return void
 		 */
 		static public function rebuildCache() {
 
-			PubwichLog::log( 1, "Building application cache" );
+			PubwichLog::log( 1, Pubwich::_("Building application cache") );
 
 			// On vide le contenu du dossier de cache
 			$fichiers = scandir(CACHE_LOCATION);
@@ -259,32 +236,45 @@
 
 			if ( function_exists( 'boxTemplate' ) ) {
 				$boxTemplate = call_user_func( 'boxTemplate' );
+			} else {
+				throw new PubwichErreur( Pubwich::__('You must define a boxTemplate function in your theme\'s functions.php file.') );
 			}
 
 			foreach( self::$classes as $classe ) {
+
+				$functions = array();
+				$parent = get_parent_class( $classe );
+				$classname = get_class( $classe );
+				$variable = $classe->getVariable();
 
 				if ( !$classe->getBoxTemplate()->hasTemplate() && $boxTemplate ) {
 					$classe->setBoxTemplate( $boxTemplate );
 				}
 
-				$boxFunction = get_class( $classe ) . '_boxTemplate';
-				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxFunction ) ) {
-					$classe->setBoxTemplate( call_user_func( $boxFunction ) );
+				if ( $parent != 'Service' ) {
+					$functions = array(
+						$parent,
+						$parent . '_' . $classname,
+						$parent . '_' . $classname . '_' . $variable,
+					);
+				} else {
+					$functions = array(
+						$classname,
+						$classname . '_' . $variable,
+					);
 				}
 
-				$boxVariableFunction = get_class( $classe ) . '_' . $classe->getVariable() . '_boxTemplate';
-				if ( !$classe->getBoxTemplate()->hasTemplate() && function_exists( $boxVariableFunction ) ) {
-					$classe->setBoxTemplate( call_user_func( $boxVariableFunction ) );
-				}
+				foreach ( $functions as $f ) {
+					$box_f = $f . '_boxTemplate';
+					$item_f = $f . '_itemTemplate';
 
-				$classFunction = get_class( $classe ) . '_itemTemplate';
-				if ( function_exists( $classFunction ) ) {
-					$classe->setItemTemplate( call_user_func( $classFunction ) );
-				}
+					if ( function_exists( $box_f ) ) {
+						$classe->setBoxTemplate( call_user_func( $box_f ) );
+					}
 
-				$variableFunction = get_class( $classe ) . '_'.$classe->getVariable().'_itemTemplate';
-				if ( function_exists( $variableFunction ) ) {
-					$classe->setItemTemplate( call_user_func( $variableFunction ) );
+					if ( function_exists( $item_f ) ) {
+						$classe->setItemTemplate( call_user_func( $item_f ) );
+					}
 				}
 			}
 		}
@@ -331,6 +321,10 @@
 			
 			$today = time();
 			$since = $today - $original;
+
+			if ( $since < 0 ) {
+				return sprintf( Pubwich::_('just moments ago'), $since );
+			}
 		
 			if ( $since < 60 ) {
 				return sprintf( Pubwich::_('%d seconds ago'), $since );
@@ -354,6 +348,18 @@
 
 			return sprintf( Pubwich::_('%s ago'), $print );
 
+		}
+
+		/**
+		 * @param string $str JSON-encoded object
+		 * @return object PHP object
+		 */
+		public function json_decode( $str ) {
+			if ( function_exists( 'json_decode' ) ) {
+				return json_decode( $str );
+			} else {
+				return Zend_Json::decode( $str, Zend_Json::TYPE_OBJECT );
+			}
 		}
 
 	}

@@ -1,0 +1,15 @@
+
+Pubwich 1.1 (?)
+---------------------------------------------------------------------------------------
++ Added multi-methods support for services. For example, the Flickr
+  service now has FlickrUser, FlickrGroup and FlickrTags methods.
+* Removed PEAR dependency.
++ Added Zend_Json library, in case PHP's json extension is not enabled.
+- Removed PHP Smartypants and PHP Markdown.
+* Services that use RSS and Atom feeds are now extending RSS or Atom service class
+! Fixed Twitter negative time bug (#19)
+
+
+Pubwich 1.0 (2009-09-20)
+---------------------------------------------------------------------------------------
+* Initial release

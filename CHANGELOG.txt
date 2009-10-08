@@ -1,4 +1,13 @@
 
+Pubwich’s changelog
+---------------------------------------------------------------------------------------
++ Added feature
+- Removed feature
+* Modified feature
+! Fixed bug
+$ Other information
+---------------------------------------------------------------------------------------
+
 Pubwich 1.1 (?)
 ---------------------------------------------------------------------------------------
 + Added multi-methods support for services. For example, the Flickr
@@ -17,4 +26,4 @@ Pubwich 1.1 (?)
 
 Pubwich 1.0 (2009-09-20)
 ---------------------------------------------------------------------------------------
-* Initial release
+$ Initial release

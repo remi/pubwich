@@ -300,6 +300,7 @@ h1 a:hover {
 	margin: 0 0 5px;
 }
 
+.twitter li span.image, 
 .twitter li span.date {
 	display: block;
 	float: left;
@@ -307,6 +308,11 @@ h1 a:hover {
 	margin-right: 10px;
 }
 
+.twitter li span.image {
+	width: 48px;
+}
+
+.twitter li span.image a, 
 .twitter li span.date a {
 	text-decoration: none;
 	border: none;
@@ -319,6 +325,20 @@ h1 a:hover {
 
 .twitter li em.from {
 	display: none;
+}
+
+.twittersearch li p {
+	margin-left: 65px;
+}
+
+.twittersearch li p.date {
+	margin-top: 3px;
+	color: rgba(0,0,0,0.4);
+}
+
+.twittersearch li p.date a {
+	color: rgba(0,0,0,0.4);
+	border-bottom: none;
 }
 
 /**

@@ -17,7 +17,7 @@
 			<div id="footer">
 				<div class="footer-inner">
 					<hr>
-					<?php echo sprintf( Pubwich::_('All data is &copy; copyright %s. Proudly powered by <a class="pubwich" href="http://pubwich.org/">Pubwich</a>.'), date('Y') )?>
+					<?php echo sprintf( Pubwich::_('All data is &copy; copyright %s. Proudly powered by %s.'), date('Y'), '<a class="pubwich" href="http://pubwich.org/">Pubwich</a>'  )?>
 				</div>
 			</div>
 		</div>

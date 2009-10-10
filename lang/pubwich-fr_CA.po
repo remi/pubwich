@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pubwich\n"
 "Report-Msgid-Bugs-To: http://pubwich.com/\n"
-"POT-Creation-Date: 2009-10-10 07:58-0400\n"
+"POT-Creation-Date: 2009-10-10 14:52-0400\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Rémi Prévost <remi@exomel.com>\n"
 "Language-Team: \n"
@@ -118,8 +118,8 @@ msgstr "Une erreur est survenue avec l’API de %s. Les données ne sont donc pa
 
 #: themes/default/index.tpl.php:20
 #, php-format
-msgid "All data is &copy; copyright %s. Proudly powered by <a class=\"pubwich\" href=\"http://pubwich.org/\">Pubwich</a>."
-msgstr "Toutes les données sont &copy; copyright %s. Propulsé fièrement par <a class=\"pubwich\" href=\"http://www.pubwich.com/\">Pubwich %s</a>."
+msgid "All data is &copy; copyright %s. Proudly powered by %s."
+msgstr "Toutes les données sont &copy; copyright %s. Propulsé fièrement par %s."
 
 #~ msgid "il y a quelques secondes"
 #~ msgstr "just moments ago"

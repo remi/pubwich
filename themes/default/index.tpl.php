@@ -2,22 +2,22 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title><?=PUBWICH_TITLE?></title>
-		<link rel="stylesheet" media="screen" href="<?=Pubwich::getThemeUrl()?>/style.css" type="text/css">
+		<title><?php echo PUBWICH_TITLE?></title>
+		<link rel="stylesheet" media="screen" href="<?php echo Pubwich::getThemeUrl()?>/style.css" type="text/css">
 	</head>
 	<body>
 		<div id="wrap">
-			<h1><a href="/" rel="me"><?=PUBWICH_TITLE?></a></h1>
+			<h1><a href="/" rel="me"><?php echo PUBWICH_TITLE?></a></h1>
 			<hr>
 			<div class="clearfix">
 
-			<?=Pubwich::getLoop()?>
+			<?php echo Pubwich::getLoop()?>
 
 			</div>
 			<div id="footer">
 				<div class="footer-inner">
 					<hr>
-					<?=sprintf( Pubwich::_('All data is &copy; copyright %s. Proudly powered by <a class="pubwich" href="http://pubwich.org/">Pubwich</a>.'), date('Y') )?>
+					<?php echo sprintf( Pubwich::_('All data is &copy; copyright %s. Proudly powered by <a class="pubwich" href="http://pubwich.org/">Pubwich</a>.'), date('Y') )?>
 				</div>
 			</div>
 		</div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://pubwich.com/\n"
-"POT-Creation-Date: 2009-10-04 21:34-0400\n"
+"POT-Creation-Date: 2009-10-10 07:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,79 +16,83 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: lib/Pubwich.php:70
+#: lib/Pubwich.php:71
 msgid "Pubwich object initialization"
 msgstr ""
 
-#: lib/Pubwich.php:132
+#: lib/Pubwich.php:133
 #, php-format
 msgid "The file <code>%s</code> was not found. It has to be there."
 msgstr ""
 
-#: lib/Pubwich.php:186
+#: lib/Pubwich.php:187
 #, php-format
 msgid "Chargement du service %s"
 msgstr ""
 
-#: lib/Pubwich.php:193
+#: lib/Pubwich.php:194
 #, php-format
 msgid "You told Pubwich to use the %s service, but either the file <code>%s</code> or <code>%s</code> cannot be found."
 msgstr ""
 
-#: lib/Pubwich.php:200
+#: lib/Pubwich.php:201
 #, php-format
 msgid "The class %s doesn't exist. Check your configuration file for inexistent services or methods."
 msgstr ""
 
-#: lib/Pubwich.php:211
+#: lib/Pubwich.php:212
 msgid "Building application cache"
 msgstr ""
 
-#: lib/Pubwich.php:313
+#: lib/Pubwich.php:314
 msgid "year"
 msgstr ""
 
-#: lib/Pubwich.php:314
+#: lib/Pubwich.php:315
 msgid "month"
 msgstr ""
 
-#: lib/Pubwich.php:315
+#: lib/Pubwich.php:316
 msgid "week"
 msgstr ""
 
-#: lib/Pubwich.php:316
+#: lib/Pubwich.php:317
 msgid "day"
 msgstr ""
 
-#: lib/Pubwich.php:317
+#: lib/Pubwich.php:318
 msgid "hour"
 msgstr ""
 
-#: lib/Pubwich.php:318
+#: lib/Pubwich.php:319
 msgid "minute"
 msgstr ""
 
-#: lib/Pubwich.php:325
+#: lib/Pubwich.php:326
 #, php-format
 msgid "just moments ago"
 msgstr ""
 
-#: lib/Pubwich.php:329
+#: lib/Pubwich.php:330
 #, php-format
 msgid "%d seconds ago"
 msgstr ""
 
-#: lib/Pubwich.php:333
+#: lib/Pubwich.php:334
 msgid "%e %B at %H:%M"
 msgstr ""
 
-#: lib/Pubwich.php:348
+#: lib/Pubwich.php:349
 #, php-format
 msgid "%s ago"
 msgstr ""
 
 #: lib/PubwichErreur.php:13
 msgid "Erreur"
+msgstr ""
+
+#: lib/Services/Lastfm.php:125
+msgid "Rebuilding cache for a Last.fm album"
 msgstr ""
 
 #: lib/Services/Service.php:15
@@ -118,5 +122,5 @@ msgstr ""
 
 #: themes/default/index.tpl.php:20
 #, php-format
-msgid "All data is &copy; copyright %s. Proudly powered by <a class=\"pubwich\" href=\"http://www.pubwich.com/\">Pubwich %s</a>"
+msgid "All data is &copy; copyright %s. Proudly powered by <a class=\"pubwich\" href=\"http://pubwich.org/\">Pubwich</a>."
 msgstr ""

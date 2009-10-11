@@ -92,7 +92,7 @@
 
 		<table>
 			<tr><td><code>&lt;service&gt;</code></td><td>the service name (<code>'Flickr'</code>, <code>'Twitter'</code>, etc.)</td></tr>
-			<tr><td><code>&lt;variable&gt;</code></td><td>the box’s unique name (<code>'photos'</code>, <code>'statues'</code>, etc.)</td> </tr>
+			<tr><td><code>&lt;variable&gt;</code></td><td>the box’s unique name (<code>'photos'</code>, <code>'statuses'</code>, etc.)</td> </tr>
 			<tr><td><code>&lt;config&gt;</code></td><td>an array of <a href="#configuration-elements">configuration elements</a></td></tr>
 		</table>
 
@@ -131,15 +131,19 @@
 		<h3>Flickr service configuration elements</h3>
 
 		<table>
+			<tr><td><code>method</code></td><td><code>FlickrUser</code>, <code>FlickrGroup</code> or <code>FlickrTags</code></td></tr>
 			<tr><td><code>key</code></td><td>Your API key</td></tr>
 			<tr><td><code>userid</code></td><td>Your user id (you will have to use <a href="http://idgettr.com/">http://idgettr.com</a> to find it easily)</td></tr>
 			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>groupid</code></td><td>Your group id</td></tr>
+			<tr><td><code>tags</code></td><td>Your tags (eg. <code>array('blue', 'sky')</code> or <code>'blue,sky'</code></td></tr>
 			<tr><td><code>row</code></td><td>The number of photos by row. Pubwich will add the class <code>derniere</code> to each end-of-row photo.</td></tr>
 		</table>
 
 		<h3>Lastfm service configuration elements</h3>
 
 		<table>
+			<tr><td><code>method</code></td><td><code>LastFMWeeklyAlbums</code> or <code>LastFMRecentTracks</code></td></tr>
 			<tr><td><code>key</code></td><td>Your API key (<a href="http://www.last.fm/api/account">get an API key</a>)</td></tr>
 			<tr><td><code>username</code></td><td>Your username</td></tr>
 			<tr><td><code>size</code></td><td>The width of the album covers</td></tr>
@@ -148,6 +152,7 @@
 		<h3>Readernaut service configuration elements</h3>
 
 		<table>
+			<tr><td><code>method</code></td><td><code>ReadernautBooks</code> or <code>ReadernautNotes</code></td></tr>
 			<tr><td><code>username</code></td><td>Your username</td></tr>
 			<tr><td><code>size</code></td><td>The width of the book covers</td></tr>
 		</table>
@@ -168,8 +173,10 @@
 		<h3>Twitter service configuration elements</h3>
 
 		<table>
+			<tr><td><code>method</code></td><td><code>TwitterUser</code> or <code>TwitterSearch</code></td></tr>
 			<tr><td><code>id</code></td><td>Your user id</td></tr>
 			<tr><td><code>username</code></td><td>Your username</td></tr>
+			<tr><td><code>terms</code></td><td>Your search terms</td></tr>
 		</table>
 
 		<h3>Vimeo service configuration elements</h3>
@@ -203,9 +210,19 @@
 	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
 }</code></pre>
 
+		<p>To only modify the item template of a particular service method, you must add the following line (and replacing <code>Service</code> by the service name, and <code>method</code> by the method name defined in your configuration file)</p>
+
+		<pre><code>function Service_ServiceMethod_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
 		<p>To only modify the item template of a particular service instance, you must add the following line (and replacing <code>Service</code> by the service name, and <code>variable</code> by the variable name defined in your configuration file)</p>
 
 		<pre><code>function Service_variable_itemTemplate() {
+	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
+}</code></pre>
+
+		<pre><code>function Service_ServiceMethod_variable_itemTemplate() {
 	return '&lt;li&gt;&lt;a href="{%link%}"&gt;{%title%}&lt;/a&gt;&lt;/li&gt;';
 }</code></pre>
 

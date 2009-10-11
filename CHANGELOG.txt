@@ -8,7 +8,7 @@ Pubwich’s changelog
 $ Other information
 ---------------------------------------------------------------------------------------
 
-Pubwich 1.1 (?)
+Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------
 + Added multi-methods support for services. For example, the Flickr
   service now has FlickrUser, FlickrGroup and FlickrTags methods.

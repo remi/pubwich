@@ -1,4 +1,5 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
 
 	define( 'PUBWICH_VERSION', 'trunk' );
 
@@ -68,6 +69,7 @@
 
 			// Events logger (and first message)
 			require('PubwichLog.php');
+			PubwichLog::init();
 			PubwichLog::log( 1, Pubwich::_("Pubwich object initialization") );
 
 			// Theme

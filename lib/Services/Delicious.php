@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Delicious
 	 * @description Fetch Del.icio.us bookmarks

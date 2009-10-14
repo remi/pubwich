@@ -1,5 +1,13 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
 
+	/**
+	 * @classname Text
+	 * @description Display a simple text block
+	 * @version 1.1 (20090929)
+	 * @author Rémi Prévost (exomel.com)
+	 * @methods None
+	 */
 	class Text extends Service {
 	
 		public function __construct( $config ){
@@ -18,7 +26,6 @@
 		}
 
 		/**
-		 * Surcharge de parent::getData()
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -26,7 +33,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

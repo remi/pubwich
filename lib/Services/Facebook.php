@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Facebook
 	 * @description Fetch Facebook statuses

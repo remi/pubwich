@@ -1,4 +1,5 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
 
 	/**
 	 * @classname Service
@@ -128,7 +129,7 @@
 		}
 
 		/**
-		 * @param string $variable Le nom de la variable
+		 * @param string $variable
 		 * @return void
 		 */
 		public function setVariable( $variable ) {
@@ -136,7 +137,7 @@
 		}
 
 		/**
-		 * @param string $template Le template
+		 * @param string $template
 		 * @return void
 		 */
 		public function setURLTemplate( $template ) {
@@ -144,7 +145,7 @@
 		}
 
 		/**
-		 * @param string $template Le template
+		 * @param string $template
 		 * @return void
 		 */
 		public function setItemTemplate( $template ) {
@@ -163,7 +164,7 @@
 		}
 
 		/**
-		 * @param string $template Le template
+		 * @param string $template
 		 */
 		public function setBoxTemplate( $template ) {
 			if ( !$this->boxTemplate ) {
@@ -181,7 +182,7 @@
 		}
 
 		/*
-		 * @param Service &$classe La référence de l’instancedu service à afficher
+		 * @param Service &$classe
 		 * @return string
 		 */
 		public function renderBox( ) {

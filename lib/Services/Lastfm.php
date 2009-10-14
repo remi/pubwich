@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname LastFM
 	 * @description Fetch data from Last.fm
@@ -95,7 +97,7 @@
 		}
 
 		/**
-		 * @param bool $rebuildCache Si vrai, force la reconstruction du cache
+		 * @param bool $rebuildCache Force cache rebuild
 		 * @return void
 		 */
 		public function buildAlbumCache( $rebuildCache ) {
@@ -112,7 +114,7 @@
 
 		/**
 		 * @param SimpleXMLElement $album
-		 * [@param bool $rebuildCache Si vrai, force la reconstruction du cache]
+		 * [@param bool $rebuildCache]
 		 * @return void
 		 */
 		public function fetchAlbum($album, $rebuildCache=false) {
@@ -174,7 +176,7 @@
 		}
 
 		/**
-		 * @var $albumdata Contient les informations relatives aux albums
+		 * @var $albumdata
 		 */
 		public $albumdata;
 
@@ -205,6 +207,5 @@
 			$this->buildAlbumCache( false );
 			return $this;
 		}
-
 
 	}

@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname RSS
 	 * @description Fetch RSS feeds
@@ -12,15 +14,12 @@
 		public function __construct( $config ){
 			$this->setURL( $config['url'] );
 			$this->total = $config['total'];
-
 			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a> {%date%}</li>'."\n");
 			$this->setURLTemplate( $config['link'] );
-
 			parent::__construct( $config );
 		}
 
 		/**
-		 * Surcharge de parent::getData()
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -29,7 +28,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

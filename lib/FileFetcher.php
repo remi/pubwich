@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
     /**
 	 * Récupérateur de contenu provenant de fichiers à distance
 	 *

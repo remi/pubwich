@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Atom
 	 * @description Fetch Atom feeds
@@ -18,7 +20,6 @@
 		}
 
 		/**
-		 * Surcharge de parent::getData()
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -27,7 +28,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

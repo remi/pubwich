@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Readernaut
 	 * @description Fetch Readernaut books
@@ -39,10 +41,8 @@
 		public function __construct( $config ){
 			parent::setVariables( $config );
 			$this->setURL( sprintf( 'http://readernaut.com/api/v1/xml/%s/books/?order_by=-created', $config['username'] ) );
-
 			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
 			$this->setURLTemplate('http://www.readernaut.com/'.$config['username'].'/books/');
-
 			parent::__construct( $config );
 		}
 
@@ -55,7 +55,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
@@ -85,10 +84,8 @@
 		public function __construct( $config ){
 			parent::setVariables( $config );
 			$this->setURL( sprintf( 'http://readernaut.com/api/v1/xml/%s/notes/?order_by=-created', $config['username'] ) );
-
 			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a>{%body%}</li>'."\n");
 			$this->setURLTemplate('http://www.readernaut.com/'.$config['username'].'/notes/');
-
 			parent::__construct( $config );
 		}
 
@@ -101,10 +98,10 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
+			// yep, this is actually book_edtion. Readernaut's creator Nathan Borror has been notified about this type :)
 			return array(
 						'id' => $item->reader_book_id,
 						'link' => $item->book_edtion->permalink, 

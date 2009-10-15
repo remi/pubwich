@@ -179,6 +179,17 @@ h1 a:hover {
 .boite.no-title .boite-inner {
 }
 
+/**
+ *	Text box
+ ******************************************************************/
+
+.text .boite-inner {
+	padding-bottom: 1px;
+}
+
+.text .boite-inner p {
+	margin: 0 0 1em;
+}
 
 /**
  *	RSS & Atom

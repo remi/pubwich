@@ -7,7 +7,7 @@
 	$Id$
 
 ------------------------------------------------------------------------------
-[ ] Multi-method support.
+[x] Multi-method support.
 
 [ ] Better sample configuration file.
 
@@ -15,4 +15,11 @@
 
 [ ] Create a sample service class.
 
-[ ] Ensure that pubwich.pot and all .mo files are up-to-date with the codebase
+[ ] Remove all .mo and .po (not .pot) files from Pubwich's repository and
+    move them to svn://svn.pubwich.org/pubwich-i18n/
+
+[ ] Create a service class for:
+    [ ] Digg
+	[ ] reddit
+	[ ] StumbleUpon
+	[ ] Facebook (create a Pubwich Facebook application to fetch data easily)

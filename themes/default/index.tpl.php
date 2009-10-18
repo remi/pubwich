@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title><?php echo PUBWICH_TITLE?></title>
 		<link rel="stylesheet" media="screen" href="<?php echo Pubwich::getThemeUrl()?>/style.css" type="text/css">
+<?php echo Pubwich::getHeader() ?>
 	</head>
 	<body>
 		<div id="wrap">
@@ -11,7 +12,7 @@
 			<hr>
 			<div class="clearfix">
 
-			<?php echo Pubwich::getLoop()?>
+<?php echo Pubwich::getLoop()?>
 
 			</div>
 			<div id="footer">
@@ -21,5 +22,6 @@
 				</div>
 			</div>
 		</div>
+<?php echo Pubwich::getFooter() ?>
 	</body>
 </html>

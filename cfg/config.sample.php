@@ -1,4 +1,5 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
 
 	// Rename this file to config.php
 

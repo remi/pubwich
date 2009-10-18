@@ -6,7 +6,7 @@
 	 */ 
 	class Service {
 
-		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function;
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function, $header_link;
 		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**
@@ -17,6 +17,7 @@
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
+			$this->headerLink = null;
 
 			$id = md5( $this->getURL() ); 
 			$this->cache_id = $id; 
@@ -224,6 +225,14 @@
 
 			$this->getBoxTemplate()->populate( $data );
 			return $this->getBoxTemplate()->output();
+		}
+
+		public function setHeaderLink( $link ) {
+			$this->header_link = $link;
+		}
+
+		public function getHeaderLink() {
+			return $this->header_link;
 		}
 
 	}

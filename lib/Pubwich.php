@@ -34,6 +34,11 @@
 		static private $theme_path;
 
 		/**
+		 * @var $header_links
+		 */
+		static private $header_links;
+
+		/**
 		 * @var $gettext
 		 */
 		static private $gettext = null;
@@ -186,7 +191,7 @@
 		 * @return Service
 		 */
 		static public function loadService( $service, $config ) {
-			PubwichLog::log( 1, sprintf( Pubwich::_('Chargement du service %s'), $service ) );
+			PubwichLog::log( 1, sprintf( Pubwich::_('Loading %s service'), $service ) );
 
 			if ( file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
 				$fichier = 'Services/' . $service . '.php';
@@ -296,6 +301,21 @@
 				$output .= '</div>';
 			}
 			return $output;
+		}
+
+		static public function getHeader() {
+			$output = '';
+			foreach ( self::$classes as $class ) {
+				$link = $class->getHeaderLink();
+				if ( $link ) {
+					$output .= '		<link rel="alternate" title="'.$class->title.' - '.$class->description.'" href="'.$link['url'].'" type="'.$link['type'].'">'."\n";
+				}
+			}
+			return $output;
+		}
+
+		static public function getFooter() {
+			return '';
 		}
 
 		/**

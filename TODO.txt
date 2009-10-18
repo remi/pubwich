@@ -15,7 +15,7 @@
 
 [ ] Create a sample service class.
 
-[ ] Remove all .mo and .po (not .pot) files from Pubwich's repository and
+[x] Remove all .mo and .po (not .pot) files from Pubwich's repository and
     move them to svn://svn.pubwich.org/pubwich-i18n/
 
 [ ] Create a service class for:

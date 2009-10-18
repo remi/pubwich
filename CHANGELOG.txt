@@ -8,6 +8,10 @@ Pubwich’s changelog
 $ Other information
 ---------------------------------------------------------------------------------------
 
+Pubwich 1.2 (?)
+---------------------------------------------------------------------------------------
++ Added support to add <head> links for services.
+
 Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------
 + Added multi-methods support for services. For example, the Flickr

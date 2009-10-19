@@ -18,8 +18,10 @@
 [x] Remove all .mo and .po (not .pot) files from Pubwich's repository and
     move them to svn://svn.pubwich.org/pubwich-i18n/
 
+[ ] Add @license (and other @stuff) statements to Pubwich's PHP files.
+	
 [ ] Create a service class for:
     [ ] Digg
 	[ ] reddit
 	[ ] StumbleUpon
-	[ ] Facebook (create a Pubwich Facebook application to fetch data easily)
+	[ ] Facebook (create a Pubwich Facebook application to fetch data easily?)

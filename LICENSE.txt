@@ -14,7 +14,8 @@ if you want to distribute your modified code, you must release it under the same
 
 External libraries
 ============================================================================================
-Cache_Lite, Savant3 and PHP Gettext libraries are included with their respective licenses.
+Cache_Lite, Savant3, PHP Gettext and Zend_Json libraries are included with their
+respective copyright notices.
 
 
 Links

@@ -17,7 +17,6 @@
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
-			$this->headerLink = null;
 
 			$id = md5( $this->getURL() ); 
 			$this->cache_id = $id; 
@@ -182,6 +181,18 @@
 			return $this->boxTemplate;
 		}
 
+		/**
+		 * return @array
+		 */
+		public function populateBoxTemplate() {
+			return array(
+				'id' => $this->getVariable(),
+				'url' => $this->urlTemplate,
+				'title' => $this->title,
+				'description' => $this->description,
+			);
+		}
+
 		/*
 		 * @param Service &$classe
 		 * @return string
@@ -212,13 +223,13 @@
 
 			$data = array(
 				'class' => $htmlClass,
-				'id' => $this->getVariable(),
-				'url' => $this->urlTemplate,
-				'title' => $this->title,
-				'description' => $this->description,
 				'items' => $items	
 			);
 
+			// Let the service override it
+			$data = $this->populateBoxTemplate() + $data;
+
+			// Let the theme override it
 			if ( function_exists( 'populateBoxTemplate' ) ) {
 				$data = call_user_func( 'populateBoxTemplate', $this ) + $data;
 			}

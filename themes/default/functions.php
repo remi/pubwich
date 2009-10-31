@@ -6,16 +6,27 @@
 				<h2><a rel="me" href="{%url%}">{%title%}</a> <span>{%description%}</span></h2>
 				<div class="boite-inner">
 					<ul class="clearfix">
-			{%items%}
+						{%items%}
 					</ul>
 				</div>
-			</div>';
+			</div>
+	';
+	}
 
+	function Text_boxTemplate() {
+		return '
+			<div class="boite {%class%}" id="{%id%}">
+				<h2>{%title%} <span>{%description%}</span></h2>
+				<div class="boite-inner">
+					{%items%}
+				</div>
+			</div>
+	';
 	}
 
 	/****************************************************
 	 *
-	 * Peut-être que ces fonctions vous seront utiles...
+	 * Maybe these will be useful...
 	 *
 	 ****************************************************/
 	/*

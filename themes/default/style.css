@@ -176,7 +176,8 @@ h1 a:hover {
 	padding: 10px;
 }
 
-.boite.no-title .boite-inner {
+.boite.no-title h2 {
+	display: none;
 }
 
 /**

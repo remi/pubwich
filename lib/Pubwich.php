@@ -132,7 +132,6 @@
 		 */
 		static public function renderTemplate() {
 
-			// Création de l'objet Savant3
 			$tpl =& new Savant3();
 			$tpl->addPath( 'template', self::getThemePath() );
 
@@ -140,11 +139,8 @@
 				throw new PubwichErreur( sprintf( Pubwich::_( 'The file <code>%s</code> was not found. It has to be there.' ), '/themes/'.PUBWICH_THEME.'/index.tpl.php' ) );
 			}
 
-			// Assignation des références aux objets pour utilisation dans le template
 			foreach (self::$classes as &$classe) {
-				// on récupère les données du service
 				$classe->init();
-				$tpl->assignRef( strtolower( $classe->variable ), $classe );
 			}
 
 			if ( file_exists( self::getThemePath()."/functions.php" ) ) {
@@ -152,7 +148,6 @@
 				self::applyTheme();
 			}
 
-			// Affichage du template
 			$tpl->display('index.tpl.php');
 		}
 

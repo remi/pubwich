@@ -11,11 +11,12 @@ $ Other information
 Pubwich 1.2 (?)
 ---------------------------------------------------------------------------------------
 + Added support to add <head> links for services.
-+ Added some .htaccess files to prevent from loading PHP files from the browser
++ Added some .htaccess files to prevent from loading PHP files from the browser.
++ Added {%content%} tag for the RSS service.
 
 Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------
-+ Added multi-methods support for services. For example, the Flickr
++ Added multi-methods support for services. For example, the Flickr.
   service now has FlickrUser, FlickrGroup and FlickrTags methods.
 + Added custom callback support for services that might not use XML (like JSON).
   Default callback is still `simplexml_load_string`.

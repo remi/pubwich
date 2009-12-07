@@ -16,9 +16,9 @@ Pubwich 1.2 (?)
 
 Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------
-+ Added multi-methods support for services. For example, the Flickr.
++ Added multi-methods support for services. For example, the Flickr
   service now has FlickrUser, FlickrGroup and FlickrTags methods.
-+ Added custom callback support for services that might not use XML (like JSON).
++ Added custom callback support for services that might not use XML (like JSON)
   Default callback is still `simplexml_load_string`.
 + Added Zend_Json library, in case PHP's json extension is not enabled.
 - Removed PHP Smartypants and PHP Markdown.

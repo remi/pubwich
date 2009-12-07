@@ -33,6 +33,7 @@
 		 */
 		public function populateItemTemplate( &$item ) {
 			$comments_count = $item->children('http://purl.org/rss/1.0/modules/slash/')->comments;
+			$content = $item->children('http://purl.org/rss/1.0/modules/content/')->encoded;
 			return array(
 						'link' => htmlspecialchars( $item->link ),
 						'title' => trim( $item->title ),
@@ -40,6 +41,7 @@
 						'comments_link' => $item->comments,
 						'comments_count' => $comments_count,
 						'description' => $item->description,
+						'content' => $content,
 						'author' => $item->author,
 			);
 		}

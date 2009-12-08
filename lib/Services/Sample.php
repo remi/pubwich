@@ -23,8 +23,8 @@
 	class SampleDays extends Sample {
 
 		public function __construct( $config ) {
-			$this->setURL( sprintf('http://pubwich-api/days/?total=%d', $config['total'] ) );
-			$this->setURLTemplate('http://pubwich-api/days/');
+			$this->setURL( sprintf('http://api.pubwich.org/days/?total=%d', $config['total'] ) );
+			$this->setURLTemplate('http://api.pubwich.org/days/');
 			$this->setItemTemplate('<li>{%year%}/{%month%}/{%day%}</li>');
 			parent::__construct( $config );
 		}
@@ -47,8 +47,8 @@
 	class SampleRandom extends Sample {
 
 		public function __construct( $config ) {
-			$this->setURL( sprintf('http://pubwich-api/random/?min=%d&max=%d', $config['min'], $config['max'] ) );
-			$this->setURLTemplate('http://pubwich-api/random/');
+			$this->setURL( sprintf('http://api.pubwich.org/random/?min=%d&max=%d', $config['min'], $config['max'] ) );
+			$this->setURLTemplate('http://api.pubwich.org/random/');
 			$this->setItemTemplate( '<li><strong>{%number%}</strong></li>' );
 			parent::__construct( $config );
 		}

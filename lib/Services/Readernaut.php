@@ -101,7 +101,7 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
-			// yep, this is actually book_edtion. Readernaut's creator Nathan Borror has been notified about this type :)
+			// yep, this is actually book_edtion. Readernaut's creator Nathan Borror has been notified about this typo :)
 			return array(
 						'id' => $item->reader_book_id,
 						'link' => $item->book_edtion->permalink, 

@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Youtube
 	 * @description Fetch Youtube videos
@@ -21,8 +23,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
-		 *
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

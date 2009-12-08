@@ -1,4 +1,6 @@
 <?php
+	defined('PUBWICH') or die('No direct access allowed.');
+
 	/**
 	 * @classname Vimeo
 	 * @description Fetch Vimeo videos
@@ -21,7 +23,6 @@
 		}
 
 		/**
-		 * Surcharge de parent::getData()
 		 * @return SimpleXMLElement
 		 */
 		public function getData() {
@@ -30,7 +31,6 @@
 		}
 
 		/**
-		 * Retourne un item formatté selon le gabarit
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

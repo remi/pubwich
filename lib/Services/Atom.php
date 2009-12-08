@@ -32,8 +32,7 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
-			$link = $item->link->attributes();
-			$link = $link->href;
+			$link = $item->link->attributes()->href;
 			return array(
 						'link' => htmlspecialchars( $link ),
 						'title' => trim( $item->title ),

@@ -13,6 +13,7 @@ Pubwich 1.2 (?)
 + Added support to add <head> links for services.
 + Added some .htaccess files to prevent from loading PHP files from the browser.
 + Added {%content%} tag for the RSS service.
++ Added Sample service (Sample.php)
 
 Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-# Pubwich 1.1
+# Pubwich
 
 ## Required components
 

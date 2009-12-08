@@ -8,7 +8,7 @@ Pubwich’s changelog
 $ Other information
 ---------------------------------------------------------------------------------------
 
-Pubwich 1.2 (?)
+Pubwich 1.2 (2009-12-08)
 ---------------------------------------------------------------------------------------
 + Added support to add <head> links for services.
 + Added some .htaccess files to prevent from loading PHP files from the browser.

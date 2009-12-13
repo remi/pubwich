@@ -188,16 +188,28 @@
 		static public function loadService( $service, $config ) {
 			PubwichLog::log( 1, sprintf( Pubwich::_('Loading %s service'), $service ) );
 
-			if ( file_exists( dirname(__FILE__).'/Services/' . $service . '.php' ) ) {
-				$fichier = 'Services/' . $service . '.php';
-			} elseif ( file_exists( dirname(__FILE__).'/Services/Custom/' . $service . '.php' ) ) {
-				$fichier = 'Services/Custom/' . $service . '.php';
-			} else {
-				throw new PubwichErreur( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but either the file <code>%s</code> or <code>%s</code> cannot be found.' ), $service, '/lib/Services/'.$service.'.php', '/lib/Services/Custom/'.$service.'.php' ) );
+			$files = array(
+				// theme-specific service
+				self::$theme_path . '/lib/Services/' . $service . '.php',
+				// pubwich default service
+				dirname(__FILE__).'/Services/' . $service . '.php',
+				// pubwich custom service
+				dirname(__FILE__).'/Services/Custom/' . $service . '.php',
+			);
+
+			$file_included = false;
+			foreach( $files as $file ) {
+				if ( file_exists( $file ) ) {
+					require_once( $file );
+					$file_included = true;
+					break;
+				}
 			}
 
-			require_once( $fichier );
-			
+			if ( !$file_included ) {
+				throw new PubwichErreur( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but the file <code>%s</code> couldn’t be found.' ), $service, $service.'.php' ) );
+			}
+
 			$classname = ( $config['method'] ) ? $config['method'] : $service;
 			if ( !class_exists( $classname ) ) {
 				throw new PubwichErreur( sprintf( Pubwich::_( 'The class %s doesn\'t exist. Check your configuration file for inexistent services or methods.' ), $classname ) );

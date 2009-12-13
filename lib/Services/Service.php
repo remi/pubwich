@@ -194,7 +194,6 @@
 		}
 
 		/*
-		 * @param Service &$classe
 		 * @return string
 		 */
 		public function renderBox( ) {

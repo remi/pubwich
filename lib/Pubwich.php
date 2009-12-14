@@ -191,10 +191,10 @@
 			$files = array(
 				// theme-specific service
 				self::$theme_path . '/lib/Services/' . $service . '.php',
-				// pubwich default service
-				dirname(__FILE__).'/Services/' . $service . '.php',
 				// pubwich custom service
 				dirname(__FILE__).'/Services/Custom/' . $service . '.php',
+				// pubwich default service
+				dirname(__FILE__).'/Services/' . $service . '.php'
 			);
 
 			$file_included = false;

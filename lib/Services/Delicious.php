@@ -9,7 +9,7 @@
 	 * @methods None
 	 */
 
-	require_once( dirname(__FILE__) . '/RSS.php' );
+	Pubwich::requireServiceFile( 'RSS' );
 	class Delicious extends RSS {
 	
 		public function __construct( $config ){

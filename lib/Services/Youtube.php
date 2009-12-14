@@ -9,7 +9,7 @@
 	 * @methods None
 	 */
 
-	require_once( dirname(__FILE__) . '/Atom.php' );
+	Pubwich::requireServiceFile( 'Atom' );
 	class Youtube extends Atom {
 	
 		private $size;

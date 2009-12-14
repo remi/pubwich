@@ -181,13 +181,9 @@
 		}
 
 		/**
-		 * @param string $service Le nom du service (et de la classe)
-		 * @param array $config Le tableau de configuration
-		 * @return Service
+		 * @return bool
 		 */
-		static public function loadService( $service, $config ) {
-			PubwichLog::log( 1, sprintf( Pubwich::_('Loading %s service'), $service ) );
-
+		static public function requireServiceFile( $service ) {
 			$files = array(
 				// theme-specific service
 				self::$theme_path . '/lib/Services/' . $service . '.php',
@@ -205,6 +201,18 @@
 					break;
 				}
 			}
+			return $file_included;
+		}
+
+		/**
+		 * @param string $service Le nom du service (et de la classe)
+		 * @param array $config Le tableau de configuration
+		 * @return Service
+		 */
+		static public function loadService( $service, $config ) {
+			PubwichLog::log( 1, sprintf( Pubwich::_('Loading %s service'), $service ) );
+
+			$file_included = self::requireServiceFile( $service );
 
 			if ( !$file_included ) {
 				throw new PubwichErreur( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but the file <code>%s</code> couldn’t be found.' ), $service, $service.'.php' ) );

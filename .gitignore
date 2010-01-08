@@ -3,3 +3,4 @@ cache/cache_*
 lib/Services/Custom/*.php
 logs/*.log
 themes/user
+themes/default/lib/Services/*.php

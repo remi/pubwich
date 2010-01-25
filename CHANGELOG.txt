@@ -8,12 +8,21 @@ Pubwich’s changelog
 $ Other information
 ---------------------------------------------------------------------------------------
 
+Pubwich 1.3 (in progress…)
+---------------------------------------------------------------------------------------
++ Added support for custom services in `/themes/theme_name/lib/Services`.
++ Added GitHub service.
+* Modified the standard way to extend existing services, with the
+  `requireServiceFile` method.
+* Merged pubwich-i18n repository into core.
+* Modified the default theme to add `box-shadow` to individual service boxes.
+
 Pubwich 1.2 (2009-12-08)
 ---------------------------------------------------------------------------------------
 + Added support to add <head> links for services.
 + Added some .htaccess files to prevent from loading PHP files from the browser.
 + Added {%content%} tag for the RSS service.
-+ Added Sample service (Sample.php)
++ Added Sample service (Sample.php).
 
 Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------------------------
@@ -29,7 +38,6 @@ Pubwich 1.1 (2009-10-11)
 * Services that use RSS (like Del.icio.us) and Atom (like YouTube) feeds are now
   extending RSS or Atom service class.
 ! Fixed Twitter negative time bug (#19).
-
 
 Pubwich 1.0 (2009-09-20)
 ---------------------------------------------------------------------------------------

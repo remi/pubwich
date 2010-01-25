@@ -3,13 +3,16 @@
 /* ****************************************************
 
 	@file:		  style.css
-	@cescription: Feuille de style d'écran
+	@cescription: Screen stylesheet
 	@author:      remi (exomel.com)
-	@updated:	  20090704
+	@updated:	  20100114
 
-	@notes:       Vous pouvez vous servir de ce fichier
-	              pour créer un nouveau thème pour
-				  Pubwich.
+	@notes:       You can use this stylesheet to create
+	              a custom Pubwich theme. You should
+				  duplicate the `themes/default/`
+				  directory, though, and then change
+				  the `PUBWICH_THEME` constant in your 
+				  configuration file.
 
 ******************************************************/
 
@@ -139,6 +142,9 @@ h1 a:hover {
 	margin: 0 0 18px;	
 	border: 1px solid #dfd3ac;
 	background: #fffcf1;
+	box-shadow: 0 0 8px rgba( 0, 0, 0, 0.1 );
+	-moz-box-shadow: 0 0 8px rgba( 0, 0, 0, 0.1 );
+	-webkit-box-shadow: 0 0 8px rgba( 0, 0, 0, 0.1);
 }
 
 .boite.nodata {

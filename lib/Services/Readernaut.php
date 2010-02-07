@@ -11,7 +11,7 @@
 
 	class Readernaut extends Service {
 		
-		private $size;
+		public $size;
 
 		public function buildCache() {
 			parent::buildCache();

@@ -94,11 +94,6 @@
 			$this->setItemTemplate( '<li class="clearfix"><span class="image"><a href="{%user_link%}"><img width="48" src="{%user_image%}" alt="{%user_nickname%}" /></a></span>{%text%}<p class="date"><a href="{%link%}">{%date%}</a></p></li>'."\n" );
 			$this->setURLTemplate( 'http://search.twitter.com/search?q='.$config['terms'] );
 
-			if ( !function_exists( 'json_decode' ) ) {
-				// only include the zend_json library if php json support is not enabled (php < 5.2)
-				require_once( dirname(__FILE__) . '/../Zend/Json.php' );
-			}
-
 			$this->callback_function = array(Pubwich, 'json_decode');
 
 			parent::__construct( $config );

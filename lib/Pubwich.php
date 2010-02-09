@@ -72,6 +72,10 @@
 				self::$gettext = new gettext_reader( new FileReader( dirname(__FILE__).'/../lang/'.PUBWICH_LANG.'/pubwich-'.PUBWICH_LANG.'.mo' ) );
 			}
 
+			// JSON support
+			if ( !function_exists( 'json_decode' ) ) {
+				require_once( dirname(__FILE__) . '/../Zend/Json.php' );
+			}
 			// Events logger (and first message)
 			require('PubwichLog.php');
 			PubwichLog::init();

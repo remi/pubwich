@@ -6,7 +6,7 @@
 	 */ 
 	class Service {
 
-		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function, $header_link;
+		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function, $header_link, $http_headers;
 		private $url, $itemTemplate, $tmpTemplate, $boxTemplate, $tmpBoxTemplate;
 
 		/**
@@ -101,7 +101,7 @@
 				$Cache_Lite = new Cache_Lite( $this->cache_options );
 				$Cache_Lite->get( $this->cache_id );
 			}
-			$content = FileFetcher::get( $url );
+			$content = FileFetcher::get( $url, $this->http_headers );
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
 				if ( PEAR::isError($cacheWrite) ) {

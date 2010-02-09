@@ -15,12 +15,12 @@
 		 * @param string $url L'URL du fichier
 		 * @return mixed Le contenu du fichier en cas de succès. FALSE en cas d'échec
 		 */
-		static function get($url) {
+		static function get( $url, $headers ) {
 			if ( function_exists('curl_init') ) {
-				return self::getCurl($url);
+				return self::getCurl( $url, $headers );
 			}
 			if ( ini_get('allow_url_fopen') ) {
-				return self::getRemote($url);
+				return self::getRemote( $url );
 			}
 			return false;
 		}
@@ -41,10 +41,13 @@
 		 * @param string $url L'URL du fichier
 		 * @return string Le contenu du fichier
 		 */
-		static function getCurl($url) {
+		static function getCurl( $url, $headers ) {
 			$ch = curl_init();
 			$timeout = 10;
 			curl_setopt ($ch, CURLOPT_URL, $url);
+			if ( $headers ) {
+				curl_setopt ($ch, CURLOPT_HTTPHEADER, $headers );
+			}
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 			curl_setopt ($ch, CURLOPT_USERAGENT, "Pubwich ".PUBWICH_VERSION." - http://www.pubwich.org/");

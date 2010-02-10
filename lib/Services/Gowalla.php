@@ -3,10 +3,10 @@
 
 	/**
 	 * @classname Gowalla
-	 * @description Get last check-in from Gowalla
-	 * @version 1.05 (20100210)
+	 * @description Get last check-ins from Gowalla
+	 * @version 1.1 (20100210)
 	 * @author Rémi Prévost (exomel.com)
-	 * @methods none
+	 * @methods GowallaUser GowallaUserStamps
 	 */
 
 	class Gowalla extends Service {
@@ -17,9 +17,7 @@
 		 * @constructor
 		 */
 		public function __construct( $config ) {
-			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s', $config['username'], $config['password'], $config['username'] ) );
 			$this->username = $config['username'];
-			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a><span class="comment">{%comment%}</span></li>'."\n" );
 			$this->setURLTemplate( $this->base.'/users/'.$config['username'].'/' );
 			$this->callback_function = array( Pubwich, 'json_decode' );
 			$this->http_headers = array(
@@ -33,6 +31,24 @@
 			parent::__construct( $config );
 		}
 
+	}
+
+	class GowallaUser extends Gowalla {
+
+		/**
+		 * @constructor
+		 */
+		public function __construct( $config ) {
+			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s', $config['username'], $config['password'], $config['username'] ) );
+			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a><span class="comment">{%comment%}</span></li>'."\n" );
+			parent::__construct( $config );
+		}
+
+		public function getData() {
+			$data = parent::getData();
+			return array( $data->last_visit );
+		}
+
 		public function populateItemTemplate( &$item ) {
 			return array(
 				'comment' => $item->comment,
@@ -44,21 +60,31 @@
 			);
 		}
 
-		public function getData() {
-			$data = parent::getData();
-			return array( $data->last_visit );
+	}
+
+	class GowallaUserStamps extends Gowalla {
+
+		/**
+		 * @constructor
+		 */
+		public function __construct( $config ) {
+			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s/stamps?limit=%d', $config['username'], $config['password'], $config['username'], $config['total'] ) );
+			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a><span class="comment">{%comment%}</span></li>'."\n" );
+			parent::__construct( $config );
 		}
 
-	}
+		public function getData() {
+			return parent::getData();
+		}
 
-	/**
-	 * @TODO http://api.gowalla.com/users/<username>
-	 */
-	class GowallaUser extends Gowalla {
-	}
+		public function populateItemTemplate( &$item ) {
+			return array(
+				'date' => Pubwich::time_since( $item->last_visited_at ),
+				'image' => $item->image_url,
+				'name' => $item->name,
+				'url' => $this->base.$item->spot->url,
+				'visits' => $item->visits_count,
+			);
+		}
 
-	/**
-	 * @TODO http://api.gowalla.com/users/<username>/stamps?limit=<total>
-	 */
-	class GowallaStamps extends Gowalla {
 	}

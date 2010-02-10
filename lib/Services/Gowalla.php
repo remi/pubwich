@@ -68,8 +68,9 @@
 		 * @constructor
 		 */
 		public function __construct( $config ) {
+			$this->total = $config['total'];
 			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s/stamps?limit=%d', $config['username'], $config['password'], $config['username'], $config['total'] ) );
-			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a><span class="comment">{%comment%}</span></li>'."\n" );
+			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a></li>'."\n" );
 			parent::__construct( $config );
 		}
 
@@ -80,6 +81,33 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 				'date' => Pubwich::time_since( $item->last_visited_at ),
+				'image' => $item->image_url,
+				'name' => $item->name,
+				'url' => $this->base.$item->url,
+				'visits' => $item->visits_count,
+			);
+		}
+
+	}
+
+	class GowallaUserTopSpots extends Gowalla {
+
+		/**
+		 * @constructor
+		 */
+		public function __construct( $config ) {
+			$this->total = $config['total'];
+			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s/top_spots', $config['username'], $config['password'], $config['username'] ) );
+			$this->setItemTemplate( '<li class="clearfix"><span class="visits">{%visits%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a></li>'."\n" );
+			parent::__construct( $config );
+		}
+
+		public function getData() {
+			return parent::getData();
+		}
+
+		public function populateItemTemplate( &$item ) {
+			return array(
 				'image' => $item->image_url,
 				'name' => $item->name,
 				'url' => $this->base.$item->url,

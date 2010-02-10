@@ -4,14 +4,14 @@
 	/**
 	 * @classname Gowalla
 	 * @description Get last check-in from Gowalla
-	 * @version 1.0 (20100209)
+	 * @version 1.05 (20100210)
 	 * @author Rémi Prévost (exomel.com)
 	 * @methods none
 	 */
 
 	class Gowalla extends Service {
 
-		public $http_headers;
+		public $base = 'http://gowalla.com';
 
 		/**
 		 * @constructor
@@ -20,11 +20,16 @@
 			$this->setURL( sprintf( 'http://%s:%s@api.gowalla.com/users/%s', $config['username'], $config['password'], $config['username'] ) );
 			$this->username = $config['username'];
 			$this->setItemTemplate( '<li class="clearfix"><span class="date">{%date%}</span><a class="spot" href="{%url%}"><strong>{%name%}</strong> <img src="{%image%}" alt="" /></a><span class="comment">{%comment%}</span></li>'."\n" );
-			$this->setURLTemplate( 'http://gowalla.com/users/'.$config['username'].'/' );
+			$this->setURLTemplate( $this->base.'/users/'.$config['username'].'/' );
 			$this->callback_function = array( Pubwich, 'json_decode' );
 			$this->http_headers = array(
 				'Accept: application/json'
 			);
+
+			if ( $config['key'] ) {
+				$this->http_headers[] = sprintf( 'X-Gowalla-API-Key: %s', $config['key'] );
+			}
+
 			parent::__construct( $config );
 		}
 
@@ -35,7 +40,7 @@
 				'image' => $item->spot->image_url,
 				'thumbnail' => $item->spot->small_image_url,
 				'name' => $item->spot->name,
-				'url' => 'http://gowalla.com'.$item->spot->url,
+				'url' => $this->base.$item->spot->url,
 			);
 		}
 
@@ -44,4 +49,16 @@
 			return array( $data->last_visit );
 		}
 
+	}
+
+	/**
+	 * @TODO http://api.gowalla.com/users/<username>
+	 */
+	class GowallaUser extends Gowalla {
+	}
+
+	/**
+	 * @TODO http://api.gowalla.com/users/<username>/stamps?limit=<total>
+	 */
+	class GowallaStamps extends Gowalla {
 	}

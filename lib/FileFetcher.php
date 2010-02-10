@@ -15,7 +15,7 @@
 		 * @param string $url L'URL du fichier
 		 * @return mixed Le contenu du fichier en cas de succès. FALSE en cas d'échec
 		 */
-		static function get( $url, $headers ) {
+		static function get( $url, $headers=null ) {
 			if ( function_exists('curl_init') ) {
 				return self::getCurl( $url, $headers );
 			}
@@ -41,7 +41,7 @@
 		 * @param string $url L'URL du fichier
 		 * @return string Le contenu du fichier
 		 */
-		static function getCurl( $url, $headers ) {
+		static function getCurl( $url, $headers=null ) {
 			$ch = curl_init();
 			$timeout = 10;
 			curl_setopt ($ch, CURLOPT_URL, $url);

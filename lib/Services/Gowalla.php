@@ -82,7 +82,7 @@
 				'date' => Pubwich::time_since( $item->last_visited_at ),
 				'image' => $item->image_url,
 				'name' => $item->name,
-				'url' => $this->base.$item->spot->url,
+				'url' => $this->base.$item->url,
 				'visits' => $item->visits_count,
 			);
 		}

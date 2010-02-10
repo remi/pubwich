@@ -31,10 +31,11 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 				'comment' => $item->comment,
-				'date' => $item->created_at,
+				'date' => Pubwich::time_since( $item->created_at ),
 				'image' => $item->spot->image_url,
+				'thumbnail' => $item->spot->small_image_url,
 				'name' => $item->spot->name,
-				'url' => 'http://gowalla.com/'.$item->spot->url,
+				'url' => 'http://gowalla.com'.$item->spot->url,
 			);
 		}
 

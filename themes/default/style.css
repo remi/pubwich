@@ -528,3 +528,39 @@ h1 a:hover {
 
 .credits a.pubwich strong {
 }
+
+/**
+ *	Gowalla
+ ******************************************************************/
+
+.gowalla h2 a { color: #FF4400; }
+
+.gowalla .boite-inner {
+	padding: 10px 8px 2px;
+}
+
+.gowalla .boite-inner a {
+	border: none;
+}
+
+.gowalla .boite-inner a img {
+	float: left;
+	margin: 7px 0 0 5px;
+	-ms-interpolation-mode:bicubic; /* propriété propriétaire (!) d'IE7 */
+}
+
+.gowalla .boite-inner a strong {
+	display: block;
+	margin: 0 0 0 36px;
+}
+
+.gowalla .boite-inner small {
+	display: block;
+	margin: 0 0 0 36px;
+	color: rgba(0,0,0,0.5);
+}
+
+.gowalla .boite-inner li {
+	margin: 0 0 0.9em;
+}
+

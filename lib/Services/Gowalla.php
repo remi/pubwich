@@ -75,7 +75,7 @@
 		}
 
 		public function getData() {
-			return parent::getData();
+			return parent::getData()->stamps;
 		}
 
 		public function populateItemTemplate( &$item ) {

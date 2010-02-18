@@ -1,7 +1,7 @@
 Pubwich’s changelog
 ===================
 
-Pubwich 1.3 (in progress… last updated: 20100218)
+Pubwich 1.3 (2010-02-18)
 -------------------------------------------------
 * Added GitHub service.
 * Added Gowalla service.

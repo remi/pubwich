@@ -50,13 +50,15 @@
 		}
 
 		public function populateItemTemplate( &$item ) {
+			$last_spot = $item->last_checkin[0];
 			return array(
-				'comment' => $item->comment,
-				'date' => Pubwich::time_since( $item->created_at ),
-				'image' => $item->spot->image_url,
-				'thumbnail' => $item->spot->small_image_url,
-				'name' => $item->spot->name,
-				'url' => $this->base.$item->spot->url,
+				'first_name' => $item->first_name,
+				'last_name' => $item->last_name,
+				'comment' => $last_spot->message,
+				'date' => Pubwich::time_since( $last_spot->created_at ),
+				'image' => $last_spot->image_url,
+				'name' => $last_spot->name,
+				'url' => $this->base.$last_spot->url,
 			);
 		}
 
@@ -80,11 +82,11 @@
 
 		public function populateItemTemplate( &$item ) {
 			return array(
-				'date' => Pubwich::time_since( $item->last_visited_at ),
-				'image' => $item->image_url,
-				'name' => $item->name,
+				'date' => Pubwich::time_since( $item->last_checkin_at ),
+				'image' => $item->spot->image_url,
+				'name' => $item->spot->name,
 				'url' => $this->base.$item->url,
-				'visits' => $item->visits_count,
+				'visits' => $item->checkins_count,
 			);
 		}
 
@@ -111,7 +113,7 @@
 				'image' => $item->image_url,
 				'name' => $item->name,
 				'url' => $this->base.$item->url,
-				'visits' => $item->visits_count,
+				'visits' => $item->user_checkins_count,
 			);
 		}
 

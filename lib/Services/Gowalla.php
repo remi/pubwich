@@ -85,7 +85,7 @@
 				'date' => Pubwich::time_since( $item->last_checkin_at ),
 				'image' => $item->spot->image_url,
 				'name' => $item->spot->name,
-				'url' => $this->base.$item->url,
+				'url' => $this->base.$item->spot->url,
 				'visits' => $item->checkins_count,
 			);
 		}

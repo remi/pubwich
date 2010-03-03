@@ -1,7 +1,7 @@
 <?php
 	defined('PUBWICH') or die('No direct access allowed.');
 
-	define( 'PUBWICH_VERSION', 'trunk' );
+	define( 'PUBWICH_VERSION', '1.3' );
 
 	/**
 	 * @classname Pubwich
@@ -51,7 +51,7 @@
 			// Let’s modify the `include_path`
 			$path = dirname(__FILE__).'/';
 			$path_pear = dirname(__FILE__).'/PEAR/';
-			set_include_path( get_include_path() . PATH_SEPARATOR . $path . PATH_SEPARATOR . $path_pear );
+			set_include_path( $path . PATH_SEPARATOR . $path_pear . PATH_SEPARATOR . get_include_path() );
 
 			require_once( 'PEAR.php' );
 

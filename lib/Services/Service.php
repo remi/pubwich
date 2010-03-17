@@ -226,11 +226,11 @@
 			);
 
 			// Let the service override it
-			$data = $this->populateBoxTemplate() + $data;
+			$data = $this->populateBoxTemplate( $data ) + $data;
 
 			// Let the theme override it
 			if ( function_exists( 'populateBoxTemplate' ) ) {
-				$data = call_user_func( 'populateBoxTemplate', $this ) + $data;
+				$data = call_user_func( 'populateBoxTemplate', $this, $data ) + $data;
 			}
 
 			$this->getBoxTemplate()->populate( $data );

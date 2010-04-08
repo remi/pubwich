@@ -104,9 +104,6 @@
 			$content = FileFetcher::get( $url, $this->http_headers );
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
-				if ( PEAR::isError($cacheWrite) ) {
-					/*var_dump( $cacheWrite->getMessage() );*/
-				}
 				libxml_use_internal_errors( true );
 				$this->data = call_user_func( $this->callback_function, $content );
 			} else {

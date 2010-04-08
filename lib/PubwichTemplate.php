@@ -8,7 +8,7 @@
 	class PubwichTemplate {
 
 		private $template = null, $output;
-	
+
 		/**
 		 * @constructor
 		 */

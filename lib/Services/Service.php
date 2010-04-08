@@ -3,7 +3,7 @@
 
 	/**
 	 * @classname Service
-	 */ 
+	 */
 	class Service {
 
 		public $data, $cache_id, $cache_options, $title, $description, $urlTemplate, $username, $total, $method, $callback_function, $header_link, $http_headers;
@@ -11,22 +11,22 @@
 
 		/**
 		 * @constructor
-		 */ 
+		 */
 		public function __construct( $config=null ) {
 			PubwichLog::log( 2, sprintf( Pubwich::_("Creating an instance of %s"), get_class( $this ) ) );
 
 			$this->title = $config['title'];
 			$this->description = $config['description'];
 
-			$id = md5( $this->getURL() ); 
-			$this->cache_id = $id; 
+			$id = md5( $this->getURL() );
+			$this->cache_id = $id;
 
 			if ( !$this->callback_function ) {
 				$this->callback_function = 'simplexml_load_string';
 			}
 
-			$this->cache_options = array( 
-				'cacheDir' => CACHE_LOCATION, 
+			$this->cache_options = array(
+				'cacheDir' => CACHE_LOCATION,
 				'lifeTime' => CACHE_LIMIT,
 				'readControl' => true,
 				'readControlType' => 'strlen',
@@ -73,7 +73,7 @@
 		/**
 		 * @param string $url
 		 * @return Service
-		 */ 	
+		 */
 		public function init() {
 			PubwichLog::log( 2, sprintf( Pubwich::_("Initializing instance of %s"), get_class( $this ) ) );
 			$url = $this->getURL();
@@ -113,7 +113,7 @@
 
 		/**
 		 * @return string
-		 */	
+		 */
 		public function getData() {
 			return $this->data;
 		}
@@ -166,7 +166,7 @@
 		public function setBoxTemplate( $template ) {
 			if ( !$this->boxTemplate ) {
 				$this->tmpBoxTemplate = $template;
-			} else {	
+			} else {
 				$this->boxTemplate->setTemplate( $template );
 			}
 		}
@@ -205,7 +205,7 @@
 			} else {
 				foreach( $classData as $item ) {
 					$compteur++;
-					if ($this->total && $compteur > $this->total) { break; }  
+					if ($this->total && $compteur > $this->total) { break; }
 					$populate = $this->populateItemTemplate( $item );
 
 					if ( function_exists( get_class( $this ) . '_populateItemTemplate' ) ) {
@@ -219,7 +219,7 @@
 
 			$data = array(
 				'class' => $htmlClass,
-				'items' => $items	
+				'items' => $items
 			);
 
 			// Let the service override it

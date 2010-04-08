@@ -33,13 +33,13 @@
 		public function init() {
 			parent::init();
 		}
-					
+
 	}
 
 	class LastFMRecentTracks extends LastFM {
-		
+
 		public function __construct( $config ) {
-			parent::setVariables( $config );	
+			parent::setVariables( $config );
 
 			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&api_key=%s&user=%s&limit=%d', $this->key, $this->username, $this->total ) );
 			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}">{%artist%} — {%track%}</a></li>'."\n");

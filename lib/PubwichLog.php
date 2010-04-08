@@ -21,7 +21,7 @@
 					mkdir( $log_dir );
 				}
 				$log_file = $log_dir . '/pubwich-'.date('Y-m-d').'.log';
-				self::$file = fopen($log_file, 'a+');		
+				self::$file = fopen($log_file, 'a+');
 				// what will happen if several sessions are started simultaneously?
 				//self::log( 0, '----[ Log for Pubwich session ('.date('Y-m-d h:i:s').') ]-----------------------------', true );
 			}
@@ -29,7 +29,7 @@
 		}
 
 		static public function log( $level, $msg, $nodate=false ) {
-			
+
 			if ( $level <= PUBWICH_LOGLEVEL ) {
 				if ( !PUBWICH_LOGTOFILE ) {
 					echo $msg . "<br />\n";

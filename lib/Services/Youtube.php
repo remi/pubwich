@@ -11,7 +11,7 @@
 
 	Pubwich::requireServiceFile( 'Atom' );
 	class Youtube extends Atom {
-	
+
 		private $size;
 
 		public function __construct( $config ){
@@ -32,7 +32,7 @@
 			$description = (string) $media->group->description;
 			$url_attrs = $media->group->player->attributes();
 			$url = $url_attrs['url'];
-	
+
 			return parent::populateItemTemplate( $item ) + array(
 						'title' => $title,
 						'description' => $description,

@@ -11,7 +11,7 @@
 
 	Pubwich::requireServiceFile( 'RSS' );
 	class Delicious extends RSS {
-	
+
 		public function __construct( $config ){
 			$config['link'] = 'http://del.icio.us/'.$config['username'].'/';
 			$config['url'] = sprintf( 'http://feeds.delicious.com/v2/rss/%s?count=%s', $config['username'], $config['total'] );

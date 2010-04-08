@@ -9,7 +9,7 @@
 	 * @methods None
 	 */
 	class Text extends Service {
-	
+
 		public function __construct( $config ){
 			$this->text = $config['text'];
 			$this->setItemTemplate('{%text%}'."\n");

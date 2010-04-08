@@ -10,7 +10,7 @@
 	 */
 
 	class Atom extends Service {
-	
+
 		public function __construct( $config ){
 			$this->total = $config['total'];
 			$this->setURL( $config['url'] );

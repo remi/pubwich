@@ -10,7 +10,7 @@
 	 */
 
 	class Readernaut extends Service {
-		
+
 		public $size;
 
 		public function buildCache() {
@@ -30,7 +30,7 @@
 			$this->username = $config['username'];
 			$this->size = $config['size'];
 		}
-			
+
 	}
 
 	class ReadernautBooks extends Readernaut {
@@ -60,10 +60,10 @@
 		public function populateItemTemplate( &$item ) {
 			return array(
 						'id' => $item->reader_book_id,
-						'link' => $item->book_edition->permalink, 
+						'link' => $item->book_edition->permalink,
 						'title' => $item->book_edition->title,
 						'subtitle' => $item->book_edition->subtitle,
-						'author' => $item->book_edition->authors->author, 
+						'author' => $item->book_edition->authors->author,
 						'image' => $item->book_edition->covers->cover_small,
 						'image_medium' => $item->book_edition->covers->cover_medium,
 						'image_large' => $item->book_edition->covers->cover_large,
@@ -104,10 +104,10 @@
 			// yep, this is actually book_edtion. Readernaut's creator Nathan Borror has been notified about this typo :)
 			return array(
 						'id' => $item->reader_book_id,
-						'link' => $item->book_edtion->permalink, 
+						'link' => $item->book_edtion->permalink,
 						'title' => $item->book_edtion->title,
 						'subtitle' => $item->book_edtion->subtitle,
-						'author' => $item->book_edtion->authors->author, 
+						'author' => $item->book_edtion->authors->author,
 						'image' => $item->book_edtion->covers->cover_small,
 						'image_medium' => $item->book_edtion->covers->cover_medium,
 						'image_large' => $item->book_edtion->covers->cover_large,

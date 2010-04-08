@@ -10,7 +10,7 @@
 	 */
 
 	class RSS extends Service {
-	
+
 		public function __construct( $config ){
 			$this->setURL( $config['url'] );
 			$this->total = $config['total'];

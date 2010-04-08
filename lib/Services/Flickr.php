@@ -51,7 +51,7 @@
 		 * Return a Flickr photo URL
 		 * @param array $photo Photo item
 		 * @return string
-		 */	
+		 */
 		public function getAbsoluteUrl( $photo, $size= 's' ) {
 			return sprintf( 'http://farm%d.static.flickr.com/%s/%s_%s_%s.jpg',
 				$photo['farm'],

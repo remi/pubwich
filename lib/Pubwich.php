@@ -102,7 +102,7 @@
 		/**
 		 * Translate a string according to the defined locale/
 		 *
-		 * @param string $string 
+		 * @param string $string
 		 * @return string
 		 */
 		public function _( $string ) {
@@ -313,7 +313,7 @@
 		static public function getLoop() {
 			$output = '';
 			foreach( self::$columns as $col => $classes ) {
-				$output .= '<div class="col'.$col.'">';	
+				$output .= '<div class="col'.$col.'">';
 				foreach( $classes as $classe ) {
 					$output .= $classe->renderBox();
 				}
@@ -359,23 +359,23 @@
 				array( 60 * 60 , Pubwich::_('hour') ),
 				array( 60 , Pubwich::_('minute') ),
 			);
-			
+
 			$today = time();
 			$since = $today - $original;
 
 			if ( $since < 0 ) {
 				return sprintf( Pubwich::_('just moments ago'), $since );
 			}
-		
+
 			if ( $since < 60 ) {
 				return sprintf( Pubwich::_('%d seconds ago'), $since );
 			}
-			
+
 			if ( $since > ( 7 * 24 * 60 * 60 ) ) {
-				$print =  strftime( Pubwich::_('%e %B at %H:%M'), $original ); 
+				$print =  strftime( Pubwich::_('%e %B at %H:%M'), $original );
 				return $print;
 			}
-			
+
 			for ( $i = 0, $j = count( $chunks ); $i < $j; $i++ ) {
 				$seconds = $chunks[$i][0];
 				$name = $chunks[$i][1];

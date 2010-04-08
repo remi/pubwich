@@ -10,7 +10,7 @@
 	 */
 
 	class Vimeo extends Service {
-	
+
 		public function __construct( $config ){
 			$this->setURL( sprintf( 'http://vimeo.com/api/%s/clips.xml', $config['username'] ) );
 			$this->total = $config['total'];
@@ -47,6 +47,6 @@
 						'image_large' => $item->thumbnail_large,
 			);
 		}
-			
+
 	}
 

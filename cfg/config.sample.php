@@ -152,16 +152,6 @@
 					)
                 ),
 
-				array( 'Goodreads', 'livres', array(
-						'method' => 'GoodreadsBooks',
-						'username' => 'GOODREADS_USERID_HERE',
-						'total' => 9,
-						'size' => 50,
-						'title' => 'Goodreads',
-						'description' => 'latest books'
-					)
-                ),
-
 				array( 'Lastfm', 'albums', array(
 						'method' => 'LastFMWeeklyAlbums',
 						'key' => 'LASTFM_KEY_HERE',

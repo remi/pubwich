@@ -101,11 +101,18 @@
 				$Cache_Lite = new Cache_Lite( $this->cache_options );
 				$Cache_Lite->get( $this->cache_id );
 			}
-			$content = FileFetcher::get( $url, $this->http_headers );
+			if ( !$this->callback_getdata ) {
+				$content = FileFetcher::get( $url, $this->http_headers );
+			} else {
+				$content = call_user_func( $this->callback_getdata[0], $this->callback_getdata[1] );
+			}
 			if ( $content !== false ) {
 				$cacheWrite = $Cache_Lite->save( $content );
 				libxml_use_internal_errors( true );
-				$this->data = call_user_func( $this->callback_function, $content );
+				if ( is_string( $content ) ) {
+					$this->data = call_user_func( $this->callback_function, $content );
+				}
+				$this->data = $content;
 			} else {
 				$this->data = false;
 			}

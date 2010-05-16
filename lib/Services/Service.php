@@ -110,12 +110,13 @@
 				$content = call_user_func( $this->callback_getdata[0], $this->callback_getdata[1] );
 			}
 			if ( $content !== false ) {
-				$cacheWrite = $Cache_Lite->save( $content );
+				$cache_content = is_string( $content ) ? $content : serialize( $content );
+				$cacheWrite = $Cache_Lite->save( $cache_content );
 				libxml_use_internal_errors( true );
-				if ( is_string( $content ) ) {
-					$this->data = call_user_func( $this->callback_function, $content );
-				}
 				$this->data = $content;
+				if ( is_string( $this->data ) ) {
+					$this->data = call_user_func( $this->callback_function, $this->data );
+				}
 			} else {
 				$this->data = false;
 			}

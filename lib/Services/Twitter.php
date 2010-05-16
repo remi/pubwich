@@ -65,7 +65,7 @@
 		public function __construct( $config ) {
 			parent::setVariables( $config );
 
-			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'statuses/user_timeline' ) );
+			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'statuses/user_timeline', array('count'=>$config['total']) ) );
 			$this->username = $config['username'];
 			$this->setItemTemplate('<li class="clearfix"><span class="date"><a href="{%link%}">{%date%}</a></span>{%text%}</li>'."\n");
 			$this->setURLTemplate('http://www.twitter.com/'.$config['username'].'/');
@@ -91,7 +91,7 @@
 		public function __construct( $config ) {
 			parent::setVariables( $config );
 
-			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'search', array('q'=>$config['terms'] ) ) );
+			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'search', array('q'=>$config['terms'], 'rpp'=>$config['total'] ) ) );
 			$this->setItemTemplate( '<li class="clearfix"><span class="image"><a href="{%user_link%}"><img width="48" src="{%user_image%}" alt="{%user_nickname%}" /></a></span>{%text%}<p class="date"><a href="{%link%}">{%date%}</a></p></li>'."\n" );
 			$this->setURLTemplate( 'http://search.twitter.com/search?q='.$config['terms'] );
 

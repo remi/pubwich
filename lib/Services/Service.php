@@ -110,8 +110,7 @@
 				$content = call_user_func( $this->callback_getdata[0], $this->callback_getdata[1] );
 			}
 			if ( $content !== false ) {
-				$cache_content = is_string( $content ) ? $content : serialize( $content );
-				$cacheWrite = $Cache_Lite->save( $cache_content );
+				$cacheWrite = $Cache_Lite->save( $content );
 				libxml_use_internal_errors( true );
 				$this->data = $content;
 				if ( is_string( $this->data ) ) {

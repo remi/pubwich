@@ -19,7 +19,7 @@
 		 */
 		public function __construct( $config ) {
 			parent::__construct( $config );
-			$this->callback_function = 'unserialize';
+			$this->callback_function = array(Pubwich, 'json_decode');
 		}
 
 		/**
@@ -55,6 +55,7 @@
 			$method = $params[0];
 			$additional_params = isset( $params[1] ) ? $params[1] : array();
 			$connection = new TwitterOAuth( $this->oauth['app_consumer_key'], $this->oauth['app_consumer_secret'], $this->oauth['user_access_token'], $this->oauth['user_access_token_secret'] );
+			$connection->decode_json = false;
 			$content = $connection->get( $method, $additional_params );
 			return $content;
 		}

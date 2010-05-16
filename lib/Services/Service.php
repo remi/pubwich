@@ -81,7 +81,10 @@
 
 			if ($data = $Cache_Lite->get( $this->cache_id) ) {
 				libxml_use_internal_errors( true );
-				$this->data = call_user_func( $this->callback_function, $data );
+				$this->data = $data;
+				if ( is_string( $data ) ) {
+					$this->data = call_user_func( $this->callback_function, $this->data );
+				}
 				libxml_clear_errors();
 			}
 			else {

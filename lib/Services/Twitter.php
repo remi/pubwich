@@ -9,7 +9,7 @@
 	 * @methods TwitterUser TwitterSearch
 	 */
 
-	require_once( dirname(__FILE__) . '/../twitteroauth/twitteroauth.php' );
+	require_once( dirname(__FILE__) . '/../OAuth/OAuth.php' );
 	class Twitter extends Service {
 
 		private $oauth;
@@ -54,10 +54,15 @@
 		public function oauthRequest( $params=array() ) {
 			$method = $params[0];
 			$additional_params = isset( $params[1] ) ? $params[1] : array();
-			$connection = new TwitterOAuth( $this->oauth['app_consumer_key'], $this->oauth['app_consumer_secret'], $this->oauth['user_access_token'], $this->oauth['user_access_token_secret'] );
-			$connection->decode_json = false;
-			$content = $connection->get( $method, $additional_params );
-			return $content;
+
+			$sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
+			$consumer = new OAuthConsumer( $this->oauth['app_consumer_key'], $this->oauth['app_consumer_secret'] );
+			$token = new OAuthConsumer( $this->oauth['user_access_token'], $this->oauth['user_access_token_secret'] );
+			
+			$request = OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', 'http://api.twitter.com/1/'.$method.'.json', $additional_params);
+			$request->sign_request($sha1_method, $consumer, $token);
+
+			return FileFetcher::get($request->to_url());
 		}
 
 	}

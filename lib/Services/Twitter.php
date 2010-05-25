@@ -88,6 +88,7 @@
 					'user_name' => $item->user->name,
 					'user_nickname' => $item->user->screen_name,
 					'user_link' => sprintf( 'http://www.twitter.com/%s/', $item->user->screen_name ),
+					'in_reply_to_screen_name' => $item->in_reply_to_screen_name,
 			);
 		}
 

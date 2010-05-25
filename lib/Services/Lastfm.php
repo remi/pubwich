@@ -42,7 +42,7 @@
 			parent::setVariables( $config );
 
 			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&api_key=%s&user=%s&limit=%d', $this->key, $this->username, $this->total ) );
-			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}">{%artist%} — {%track%}</a></li>'."\n");
+			$this->setItemTemplate('<li{{{classe}}}><a class="clearfix" href="{{{link}}}">{{{artist}}} — {{{track}}}</a></li>'."\n");
 
 			parent::__construct( $config );
 		}
@@ -82,7 +82,7 @@
 
 			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.getweeklyalbumchart&api_key=%s&user=%s', $this->key, $this->username ) );
 			$this->classes = array( 'premier', 'deuxieme', 'troisieme', 'quatrieme' );
-			$this->setItemTemplate('<li{%classe%}><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" height="{%size%}" alt="{%title%}"><strong><span>{%artist%}</span> {%album%}</strong></a></li>'."\n");
+			$this->setItemTemplate('<li{{{classe}}}><a class="clearfix" href="{{{link}}}"><img src="{{{image}}}" width="{{{size}}}" height="{{{size}}}" alt="{{{title}}}"><strong><span>{{{artist}}}</span> {{{album}}}</strong></a></li>'."\n");
 
 			parent::__construct( $config );
 		}

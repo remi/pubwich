@@ -14,7 +14,7 @@
 		public function __construct( $config ) {
 			$this->setVariables( $config );
 			$this->setUrl( sprintf( 'http://www.goodreads.com/review/list_rss/%d', $config['userid'] ));
-			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image%}" width="{%size%}" alt="{%title%}" /><strong><span>{%title%}</span> {%author%}</strong></a></li>'."\n");
+			$this->setItemTemplate('<li><a class="clearfix" href="{{{link}}}"><img src="{{{image}}}" width="{{{size}}}" alt="{{{title}}}" /><strong><span>{{{title}}}</span> {{{author}}}</strong></a></li>'."\n");
 			$this->setUrlTemplate( sprintf( 'http://www.goodreads.com/user/show/%d', $config['userid'] ));
 			parent::__construct( $config );
 		}

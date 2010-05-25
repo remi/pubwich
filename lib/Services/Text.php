@@ -12,7 +12,7 @@
 
 		public function __construct( $config ){
 			$this->text = $config['text'];
-			$this->setItemTemplate('{%text%}'."\n");
+			$this->setItemTemplate('{{{text}}}'."\n");
 			parent::__construct( $config );
 		}
 

@@ -16,7 +16,7 @@
 			$config['link'] = 'http://www.facebook.com/'.$config['username'].'/';
 			$config['url'] = sprintf( 'http://www.facebook.com/feeds/status.php?id=%d&viewer=%d&key=%s&format=rss20', $config['id'], $config['id'], $config['key'] );
 			parent::__construct( $config );
-			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a> {%date%}</li>'."\n");
+			$this->setItemTemplate('<li><a href="{{{link}}}">{{{title}}}</a> {{{date}}}</li>'."\n");
 		}
 
 	}

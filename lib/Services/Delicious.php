@@ -16,7 +16,7 @@
 			$config['link'] = 'http://del.icio.us/'.$config['username'].'/';
 			$config['url'] = sprintf( 'http://feeds.delicious.com/v2/rss/%s?count=%s', $config['username'], $config['total'] );
 			parent::__construct( $config );
-			$this->setItemTemplate('<li><a href="{%link%}">{%title%}</a></li>'."\n");
+			$this->setItemTemplate('<li><a href="{{{link}}}">{{{title}}}</a></li>'."\n");
 		}
 
 	}

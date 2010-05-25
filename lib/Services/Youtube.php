@@ -19,7 +19,7 @@
 			$config['link'] = 'http://www.youtube.com/user/'.$config['username'].'/';
 			parent::__construct( $config );
 			$this->size = $config['size'];
-			$this->setItemTemplate('<li class="clearfix"><a href="{%link%}"><img src="{%image%}" alt="{%title%}" /><strong>{%title%}</strong></a></li>'."\n");
+			$this->setItemTemplate('<li class="clearfix"><a href="{{{link}}}"><img src="{{{image}}}" alt="{{{title}}}" /><strong>{{{title}}}</strong></a></li>'."\n");
 		}
 
 		/**

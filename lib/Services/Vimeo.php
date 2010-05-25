@@ -16,7 +16,7 @@
 			$this->total = $config['total'];
 			$this->username = $config['username'];
 
-			$this->setItemTemplate('<li><a class="clearfix" href="{%link%}"><img src="{%image_small%}" alt="{%title%}" /><span>{%title%}</span></a></li>'."\n");
+			$this->setItemTemplate('<li><a class="clearfix" href="{{{link}}}"><img src="{{{image_small}}}" alt="{{{title}}}" /><span>{{{title}}}</span></a></li>'."\n");
 			$this->setURLTemplate('http://www.vimeo.com/'.$config['username'].'/');
 
 			parent::__construct( $config );

@@ -94,7 +94,7 @@
 			require( 'Cache/Lite.php' );
 
 			if ( !defined( 'PUBWICH_CRON' ) ) {
-				require_once( 'Savant/Savant3.php' );
+				require_once( 'Mustache.php/Mustache.php' );
 			}
 
 		}
@@ -136,9 +136,6 @@
 		 */
 		static public function renderTemplate() {
 
-			$tpl =& new Savant3();
-			$tpl->addPath( 'template', self::getThemePath() );
-
 			if ( !file_exists(self::getThemePath()."/index.tpl.php") ) {
 				throw new PubwichErreur( sprintf( Pubwich::_( 'The file <code>%s</code> was not found. It has to be there.' ), '/themes/'.PUBWICH_THEME.'/index.tpl.php' ) );
 			}
@@ -152,7 +149,7 @@
 				self::applyTheme();
 			}
 
-			$tpl->display('index.tpl.php');
+			include (self::getThemePath() . '/index.tpl.php' );
 		}
 
 		/**

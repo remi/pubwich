@@ -19,7 +19,7 @@
 			$config['url'] = sprintf( 'http://github.com/%s.atom', $config['username'] );
 			$config['link'] = 'http://github.com/'.$config['username'].'/';
 			parent::__construct( $config );
-			$this->setItemTemplate('<li class="clearfix"><a href="{%link%}">{%title%}</a></li>'."\n");
+			$this->setItemTemplate('<li class="clearfix"><a href="{{{link}}}">{{{title}}}</a></li>'."\n");
 		}
 
 		/**
@@ -48,7 +48,7 @@
 		public function __construct( $config ){
 			$this->setURL( sprintf( 'http://github.com/api/v2/xml/repos/show/%s', $config['username'] ) );
 			$this->setURLTemplate( 'http://github.com/'.$config['username'].'/' );
-			$this->setItemTemplate('<li class="clearfix"><div class="metadata"><a href="{%url%}"><strong>{%name%}</strong></a></div><div class="infos">{%description%}</div></li>'."\n");
+			$this->setItemTemplate('<li class="clearfix"><div class="metadata"><a href="{{{url}}}"><strong>{{{name}}}</strong></a>{{#fork}}<span class="fork">(fork)</span>{{/fork}}</div><div class="infos">{{{description}}}</div></li>'."\n");
 			parent::__construct( $config );
 		}
 
@@ -56,14 +56,16 @@
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {
+			$fork = $item->fork == 'true';
+			$private = $item->private == 'true';
 			return array(
 				'description' => $item->description,
 				'forks' => $item->forks,
 				'name' => $item->name,
 				'watchers' => $item->watchers,
-				'private' => $item->private,
+				'private' => $private,
 				'url' => $item->url,
-				'fork' => $item->fork,
+				'fork' => $fork,
 				'owner' => $item->owner,
 				'homepage' => $item->homepage,
 			);

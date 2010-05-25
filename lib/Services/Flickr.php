@@ -29,7 +29,7 @@
 			$this->row = $config['row'];
 			$this->sort = isset( $config['sort'] ) ? $config['sort'] : 'date-posted-desc';
 			$this->compteur = 0;
-			$this->setItemTemplate('<li{%classe%}><a href="{%link%}"><img src="{%photo%}" alt="{%title%}" /></a></li>'."\n");
+			$this->setItemTemplate('<li{{{classe}}}><a href="{{{link}}}"><img src="{{{photo}}}" alt="{{{title}}}" /></a></li>'."\n");
 		}
 
 		/**

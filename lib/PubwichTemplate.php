@@ -44,14 +44,7 @@
 		 * @return void
 		 */
 		public function populate( $data ) {
-			require_once('Mustache.php/Mustache.php');
 			$m = new Mustache;
-
-			//$this->output = $this->template;
-			//foreach ($data as $key=>$value) {
-				//$this->output = str_replace( '{%'.$key.'%}', $value, $this->output );
-			//}
-
 			$this->output = $m->render($this->template, $data);
 		}
 

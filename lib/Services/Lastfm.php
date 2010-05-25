@@ -209,3 +209,44 @@
 		}
 
 	}
+
+	class LastFMTopAlbums extends LastFM {
+		public function __construct( $config ) {
+			parent::setVariables( $config );
+			$period = $config['period'] ? $config['period'] : 'overall';
+			$this->classes = array( 'premier', 'deuxieme', 'troisieme', 'quatrieme' );
+			$this->setURL( sprintf( 'http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&api_key=%s&user=%s&period=%s', $this->key, $this->username, $period ) );
+			$this->setItemTemplate('<li{{{classe}}}><a class="clearfix" href="{{{link}}}"><img src="{{{image_medium}}}" width="{{{size}}}" height="{{{size}}}" alt="{{{title}}}"><strong><span>{{{artist}}}</span> {{{album}}}</strong></a></li>'."\n");
+			parent::__construct( $config );
+		}
+
+		/**
+		 * @return SimpleXMLElement
+		 */
+		public function getData() {
+			$data = parent::getData();
+			return $data->topalbums->album;
+		}
+
+		/**
+		 * @return array
+		 */
+		public function populateItemTemplate( &$item ) {
+			$images = new StdClass;
+			foreach( $item->image as $k=>$i ) {
+				$images->{$i['size']->__toString()} = $i->__toString();
+			}
+			return array(
+						'size' => $this->size,
+						'url' => $item->url,
+						'playcount' => $item->playcount,
+						'album' => $item->name,
+						'artist' => $item->artist->name,
+						'image_small' => $images->small,
+						'image_medium' => $images->medium,
+						'image_large' => $images->large,
+						'image_extralarge' => $images->extralarge,
+						'classe' => isset($this->classes[intval($item['rank'])-1]) ? ' class="'.$this->classes[intval($item['rank'])-1].'"' : '',
+						);
+		}
+	}

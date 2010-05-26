@@ -1,3 +1,232 @@
-# Pubwich
+# Pubwich 1.4
 
-Please see [the wiki](http://pubwich.org/wiki/) for documentation (installation, configuration, etc.).
+Pubwich is an open-source PHP Web application that allows you to aggregate your published data from multiple Websites and services into a single HTML page.
+
+## Installation
+
+1. Duplicate `cfg/config.sample.php` to `cfg/config.php`
+   (optional: if you want to use a custom theme, duplicate `themes/default` to `themes/your_theme_name` and edit the `PUBWICH_THEME` constant in `cfg/config.php` to `"your_theme_name"`.
+2. Edit the newly created config.php to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to `Pubwich::setServices()`. See the *Services configuration* section of this file.
+3. Modify your crontab file (by running `crontab -e`) and add the following line:
+   `*/<N> * * * * <PHP> -f <ABSOLUTE_PATH>/cron/cron.php`
+
+   Then replace the following elements:
+   `<N>` → Cache expiration (in minutes)
+   `<PHP>` → The path to PHP executable binary (usually `/usr/bin/php` or `/usr/local/bin/php`, use `which php` to find it)
+   `<ABSOLUTE_PATH>` → Absolute path to Pubwich directory
+
+   Example:
+
+   `*/10 * * * * /usr/bin/php -f /home/myusername/public_html/pubwich/cron/cron.php`
+4. Change the permissions on the cache directory to make it writeable for all (`chmod -R 0777 cache`).
+5. Everything should be working now (when browsing to your server!).
+
+## Upgrading to Pubwich 1.4
+
+There are a few things that you’ll need to consider when upgrading to Pubwich 1.4; Notably, Twitter OAuth support and a new templating language.
+
+### Twitter & OAuth
+
+Before Pubwich 1.4, you needed to enter your Twitter username and password in order to make request to its API. This is called “*Basic Authentication*”. But since Twitter [dropped support](http://www.countdowntooauth.com/) for this kind of authentication in june 2010, Pubwich doesn’t support it anymore. A [small tutorial](http://pubwich.org/wiki/Using_Twitter_with_Pubwich) is available to show you how to create a Twitter application, get OAuth application keys and access tokens.
+
+After you are done configuring Pubwich 1.4 to work with Twitter, you can remove your Twitter `username` and `password` parameters from your configuration file.
+
+### Custom item templates in your theme
+
+Every theme has a `functions.php` file that contains at least the basic template for what Pubwich calls a “*box*”. Along with that `boxTemplate` function, you can define other templates, such as how an item is rendered for a specific service. Before Pubwich 1.4, you could use this template syntax:
+
+    function Atom_myblog_itemTemplate() {
+      return '<li><a href="{%url%}">{%title%}</a> - {%content%}</li>'."\n";
+    }
+
+But now, with the new Mustache.php template engine, you have to use this syntax:
+
+    function Atom_myblog_itemTemplate() {
+      return '<li><a href="{{{url}}}">{{{title}}}</a> - {{{content}}}</li>'."\n";
+    }
+
+So, basically, instead of `{%variable%}`, you have to use `{{{variable}}}`. The new template engine allows us to use conditionnals, loops and other kinds of cool stuff.
+
+## Service configuration
+
+These parameters can be used for all services:
+
+* `title` → The box title.
+* `description` → The box description.
+* `total` → The number of items to display.
+
+### Atom
+
+* `url` → The feed URL.
+* `link` → The website URL.
+
+### Delicious
+
+* `username` → The Delicious.com username.
+
+### Facebook
+
+* `id` → The Facebook user ID.
+* `key` → The Facebook API key.
+* `username` → The Facebook username.
+
+### Flickr
+
+* `row` → The number of photos per row. Pubwich adds the class `derniere` to each row’s last photo.
+* `sort` → The order in which to sort the photos. See [this page](http://www.flickr.com/services/api/flickr.photos.search.html) for all the possible values.
+* `key` → The Flickr API key.
+
+#### FlickrUser
+
+* `userid` → The Flickr user ID. Use [this page](http://idgettr.com/) to find it.
+
+#### FlickrGroup
+
+* `groupid` → The Flickr group ID. Use [this page](http://idgettr.com/) to find it.
+
+#### FlickrTags
+
+* `tags` → The tags as an `array()` or a string with comma separated values.
+
+### GitHub
+
+* `username` → The GitHub username
+
+#### GithubRecentActivity
+
+*No specific parameter*
+
+#### GithubRepositories
+
+*No specific parameter*
+
+### Goodreads
+
+* `userid` → The Goodreads user ID.
+* `size` → The size for each book cover.
+
+### Gowalla
+
+* `username` → The Gowalla username.
+* `password` → The Gowalla password.
+* `key` → The Gowalla API key.
+
+#### GowallaUser
+
+*No specific parameters*
+
+#### GowallaUserStamps
+
+*No specific parameters*
+
+#### GowallaUserTopSpots
+
+*No specific parameters*
+
+### Lastfm
+
+* `username` → The Last.fm username.
+* `key` → The Last.fm API key.
+
+#### LastFMRecentTracks
+
+*No specific parameters*
+
+#### LastFMWeeklyAlbums
+
+* `size` → The size of each album covers.
+
+#### LastFMTopAlbums
+
+* `size` → The size of each album covers.
+
+### Readernaut
+
+* `username` → The Readernaut username.
+
+#### ReadernautBooks
+
+* `size` → The size of each book covers.
+
+#### ReadernautNotes
+
+*No specific parameters*
+
+### RSS
+
+* `url` → The feed URL.
+* `link` → The website URL.
+
+### Text
+
+* `text` → The text to display.
+
+### Twitter
+
+* `oauth` → The OAuth configuration array. Example:
+
+        'oauth' => array(
+            'app_consumer_key' => '',
+            'app_consumer_secret' => '',
+            'user_access_token' => '',
+            'user_access_token_secret' => ''
+        ),
+
+#### TwitterUser
+
+* `username` → The Twitter username.
+
+#### TwitterSearch
+
+* `terms` → The search query.
+
+### Vimeo
+
+* `username` → The Vimeo username.
+
+### YouTube
+
+* `username` → The YouTube username.
+
+## Custom templates
+
+When Pubwich is ready to display its data, it first looks into the theme’s `functions.php` file to see if custom template functions are defined. There are currently two kinds of template functions: box templates and item templates.
+
+### Box templates
+
+Box templates control the way whole boxes are displayed. There are a few different ways to define them:
+
+* `boxTemplate()` (applies to all boxes, **must** be defined in `functions.php`)
+* `<Service>_boxTemplate()`
+* `<Service>_<Method>_boxTemplate()`
+* `<Service>_<Variable>_boxTemplate()`
+* `<Service>_<Method>_<Variable>_boxTemplate()`
+
+Example:
+
+    function boxTemplate() {
+        return '
+            <div class="boite {{class}}" id="{{id}}">
+                <h2><a rel="me" href="{{{url}}}">{{{title}}}</a> <span>{{{description}}}</span></h2>
+                <div class="boite-inner">
+                    <ul class="clearfix">
+                        {{{items}}}
+                    </ul>
+                </div>
+            </div>';
+    }
+
+### Item templates
+
+Item templates control the way each box item is displayed. There are a few different ways to define them:
+
+* `<Service>_itemTemplate()`
+* `<Service>_<Method>_itemTemplate()`
+* `<Service>_<Variable>_itemTemplate()`
+* `<Service>_<Method>_<Variable>_itemTemplate()`
+
+Example:
+
+    function Twitter_TwitterUser_itemTemplate() {
+        return '<li class="clearfix {{#in_reply_to_screen_name}}reply{{/in_reply_to_screen_name}}"><span class="date"><a href="{{{link}}}">{{{date}}}</a></span>{{{text}}}</li>'."\n";
+    }

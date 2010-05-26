@@ -4,22 +4,23 @@ Pubwich is an open-source PHP Web application that allows you to aggregate your 
 
 ## Installation
 
-* Duplicate `cfg/config.sample.php` to `cfg/config.php`
-   (optional: if you want to use a custom theme, duplicate `themes/default` to `themes/your_theme_name` and edit the `PUBWICH_THEME` constant in `cfg/config.php` to `"your_theme_name"`.
-* Edit the newly created config.php to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to `Pubwich::setServices()`. See the *Services configuration* section of this file.
-* Modify your crontab file (by running `crontab -e`) and add the following line:
-   `*/<N> * * * * <PHP> -f <ABSOLUTE_PATH>/cron/cron.php`
-   
-   Then replace the following elements:
-   `<N>` → Cache expiration (in minutes)
-   `<PHP>` → The path to PHP executable binary (usually `/usr/bin/php` or `/usr/local/bin/php`, use `which php` to find it)
-   `<ABSOLUTE_PATH>` → Absolute path to Pubwich directory
-   
-   Example:
-   
-   `*/10 * * * * /usr/bin/php -f /home/myusername/public_html/pubwich/cron/cron.php`
-* Change the permissions on the cache directory to make it writeable for all (`chmod -R 0777 cache`).
-* Everything should be working now (when browsing to your server!).
+Duplicate `cfg/config.sample.php` to `cfg/config.php`. (Optional: if you want to use a custom theme, duplicate `themes/default` to `themes/your_theme_name` and edit the `PUBWICH_THEME` constant in `cfg/config.php` to `"your_theme_name"`.
+
+Edit the newly created config.php to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to `Pubwich::setServices()`. See the *Services configuration* section of this file.
+
+Modify your crontab file (by running `crontab -e`) and add the following line:
+`*/<N> * * * * <PHP> -f <ABSOLUTE_PATH>/cron/cron.php`
+
+Then replace the following elements:
+`<N>` → Cache expiration (in minutes)
+`<PHP>` → The path to PHP executable binary (usually `/usr/bin/php` or `/usr/local/bin/php`, use `which php` to find it)
+`<ABSOLUTE_PATH>` → Absolute path to Pubwich directory
+
+Example: `*/10 * * * * /usr/bin/php -f /home/myusername/public_html/pubwich/cron/cron.php`
+
+Change the permissions on the cache directory to make it writeable for all (`chmod -R 0777 cache`).
+
+Everything should be working now (when browsing to your server!).
 
 ## Upgrading to Pubwich 1.4
 
@@ -49,6 +50,20 @@ So, basically, instead of `{%variable%}`, you have to use `{{{variable}}}`. The 
 
 ## Service configuration
 
+In Pubwich’s `config.php` file, a service looks like this:
+
+    array( 'Flickr', 'photos', array(
+            'method' => 'FlickrUser',
+            'title' => 'Flick<em>r</em>',
+            'description' => 'latest photos',
+            'total' => 16,
+            'key' => '________',
+            'userid' => '________',
+            'username' => '__________',
+            'row' => 4,
+        )
+    ),
+
 These parameters can be used for all services:
 
 * `title` → The box title.
@@ -75,6 +90,7 @@ These parameters can be used for all services:
 * `row` → The number of photos per row. Pubwich adds the class `derniere` to each row’s last photo.
 * `sort` → The order in which to sort the photos. See [this page](http://www.flickr.com/services/api/flickr.photos.search.html) for all the possible values.
 * `key` → The Flickr API key.
+* `method` → Either `FlickrUser`, `FlickrGroup`, `FlickrTags`
 
 #### FlickrUser
 
@@ -91,6 +107,7 @@ These parameters can be used for all services:
 ### GitHub
 
 * `username` → The GitHub username
+* `method` → Either `GithubRecentActivity`, `GithubRepositories`
 
 #### GithubRecentActivity
 
@@ -110,6 +127,7 @@ These parameters can be used for all services:
 * `username` → The Gowalla username.
 * `password` → The Gowalla password.
 * `key` → The Gowalla API key.
+* `method` → Either `GowallaUser`, `GowallaUserStamps`, `GowallaUserTopSpots`
 
 #### GowallaUser
 
@@ -127,6 +145,7 @@ These parameters can be used for all services:
 
 * `username` → The Last.fm username.
 * `key` → The Last.fm API key.
+* `method` → Either `LastFMRecentTracks`, `LastFMWeeklyAlbums`, `LastFMTopAlbums`
 
 #### LastFMRecentTracks
 
@@ -143,6 +162,7 @@ These parameters can be used for all services:
 ### Readernaut
 
 * `username` → The Readernaut username.
+* `method` → Either `ReadernautBooks`, `ReadernautNotes`
 
 #### ReadernautBooks
 
@@ -163,6 +183,7 @@ These parameters can be used for all services:
 
 ### Twitter
 
+* `method` → Either `TwitterUser`, `TwitterSearch`
 * `oauth` → The OAuth configuration array. Example:
 
         'oauth' => array(

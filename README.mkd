@@ -9,14 +9,14 @@ Pubwich is an open-source PHP Web application that allows you to aggregate your 
 2. Edit the newly created config.php to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to `Pubwich::setServices()`. See the *Services configuration* section of this file.
 3. Modify your crontab file (by running `crontab -e`) and add the following line:
    `*/<N> * * * * <PHP> -f <ABSOLUTE_PATH>/cron/cron.php`
-
+   
    Then replace the following elements:
    `<N>` → Cache expiration (in minutes)
    `<PHP>` → The path to PHP executable binary (usually `/usr/bin/php` or `/usr/local/bin/php`, use `which php` to find it)
    `<ABSOLUTE_PATH>` → Absolute path to Pubwich directory
-
+   
    Example:
-
+   
    `*/10 * * * * /usr/bin/php -f /home/myusername/public_html/pubwich/cron/cron.php`
 4. Change the permissions on the cache directory to make it writeable for all (`chmod -R 0777 cache`).
 5. Everything should be working now (when browsing to your server!).

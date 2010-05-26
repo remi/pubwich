@@ -234,7 +234,9 @@
 		public function populateItemTemplate( &$item ) {
 			$images = new StdClass;
 			foreach( $item->image as $k=>$i ) {
-				$images->{$i['size']->__toString()} = $i->__toString();
+				$key = (string) $i['size'];
+				$val = (string) $i;
+				$images->{$key} = $val;
 			}
 			return array(
 						'size' => $this->size,

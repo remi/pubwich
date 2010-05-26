@@ -87,3 +87,48 @@
 		}
 
 	}
+
+	class GithubGists extends Service {
+
+		/**
+		 * @constructor
+		 */
+		public function __construct( $config ){
+			$this->setURL( sprintf( 'http://gist.github.com/api/v1/xml/gists/%s', $config['username'] ) );
+			$this->setURLTemplate( 'http://gist.github.com/'.$config['username'].'/' );
+			$this->setItemTemplate('<li class="clearfix"><a href="{{permalink}}">{{#files}}{{{file}}}{{/files}}</a> {{{description}}} {{{date}}}</li>'."\n");
+			parent::__construct( $config );
+		}
+
+		/**
+		 * @return array
+		 */
+		public function populateItemTemplate( &$item ) {
+			$public = $item->fork == 'true';
+			return array(
+				'description' => $item->description,
+				'repo' => $item->repo,
+				'permalink' => sprintf( 'http://gist.github.com/%s', $item->repo ),
+				'date' => Pubwich::time_since( $item->{'created-at'} ),
+				'owner' => $item->owner,
+				'files' => (array) $item->files->file,
+			);
+		}
+
+		/**
+		 * @return array
+		 */
+		public function getData() {
+			return parent::getData()->gist;
+		}
+
+		/**
+		 * Adds "github" to the box HTML class attribute
+		 * @return array
+		 */
+		public function populateBoxTemplate( $data ) {
+			return parent::populateBoxTemplate( $data ) + array( 'class' => $data['class'].' github');
+		}
+
+	}
+

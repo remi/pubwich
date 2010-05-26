@@ -1,4 +1,4 @@
-# Pubwich 1.4
+# Pubwich
 
 Pubwich is an open-source PHP Web application that allows you to aggregate your published data from multiple Websites and services into a single HTML page.
 
@@ -63,6 +63,8 @@ In Pubwich’s `config.php` file, a service looks like this:
             'row' => 4,
         )
     ),
+
+Where `Flickr` is the *service*, `photos` is the *variable* and `FlickrUser` is the *method*.
 
 These parameters can be used for all services:
 
@@ -251,3 +253,5 @@ Example:
     function Twitter_TwitterUser_itemTemplate() {
         return '<li class="clearfix {{#in_reply_to_screen_name}}reply{{/in_reply_to_screen_name}}"><span class="date"><a href="{{{link}}}">{{{date}}}</a></span>{{{text}}}</li>'."\n";
     }
+
+There’s currently no documentation about which tag you can put between `{{{}}}` braces for which service. In the meantime, you can check a service file (located in `lib/Services/<Service>.php`) and look for the `populateItemTemplate` function.

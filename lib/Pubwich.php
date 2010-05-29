@@ -260,7 +260,7 @@
 			if ( function_exists( 'boxTemplate' ) ) {
 				$boxTemplate = call_user_func( 'boxTemplate' );
 			} else {
-				throw new PubwichErreur( Pubwich::__('You must define a boxTemplate function in your theme\'s functions.php file.') );
+				throw new PubwichErreur( Pubwich::_('You must define a boxTemplate function in your theme\'s functions.php file.') );
 			}
 
 			foreach( self::$classes as $classe ) {
@@ -308,15 +308,31 @@
 		 * @return string
 		 */
 		static public function getLoop() {
-			$output = '';
-			foreach( self::$columns as $col => $classes ) {
-				$output .= '<div class="col'.$col.'">';
-				foreach( $classes as $classe ) {
-					$output .= $classe->renderBox();
-				}
-				$output .= '</div>';
+
+			$columnTemplate = function_exists( 'columnTemplate' ) ? call_user_func( 'columnTemplate' ) : '<div class="col{{{number}}}">{{{content}}}</div>';
+			$columnsTemplateDefined = false;
+
+			if ( function_exists( 'columnsTemplate' ) ) {
+				$columnsTemplate = call_user_func( 'columnsTemplate' );
+				$columnsTemplateDefined = true;
+			} else {
+				$columnsTemplate = '';
 			}
-			return $output;
+
+			$output_columns = array();
+			$m = new Mustache;
+			foreach( self::$columns as $col => $classes ) {
+				$boxes = '';
+				foreach( $classes as $classe ) {
+					$boxes .= $classe->renderBox();
+				}
+				$output_columns['col'.$col] = $m->render($columnTemplate, array('number'=>$col, 'content'=>$boxes));
+
+				if ( !$columnsTemplateDefined ) {
+					$columnsTemplate .= '{{{col'.$col.'}}} ';
+				}
+			}
+			return $m->render($columnsTemplate, $output_columns);
 		}
 
 		static public function getHeader() {

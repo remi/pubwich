@@ -240,7 +240,7 @@
 			}
 			return array(
 						'size' => $this->size,
-						'url' => $item->url,
+						'link' => $item->url,
 						'playcount' => $item->playcount,
 						'album' => $item->name,
 						'artist' => $item->artist->name,

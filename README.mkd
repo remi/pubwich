@@ -213,7 +213,7 @@ These parameters can be used for all services:
 
 ## Custom templates
 
-When Pubwich is ready to display its data, it first looks into the theme’s `functions.php` file to see if custom template functions are defined. There are currently two kinds of template functions: box templates and item templates.
+When Pubwich is ready to display its data, it first looks into the theme’s `functions.php` file to see if custom template functions are defined. There are currently four kinds of template functions: box templates, item templates, column templates and layout templates.
 
 ### Box templates
 
@@ -241,7 +241,7 @@ Example:
 
 ### Item templates
 
-Item templates control the way each box item is displayed. There are a few different ways to define them:
+Item templates control the way each box item is displayed. Each service has its own default templates, but using the following function names, you can redefine them:
 
 * `<Service>_itemTemplate()`
 * `<Service>_<Method>_itemTemplate()`
@@ -255,3 +255,27 @@ Example:
     }
 
 There’s currently no documentation about which tag you can put between `{{{}}}` braces for which service. In the meantime, you can check a service file (located in `lib/Services/<Service>.php`) and look for the `populateItemTemplate` function.
+
+### Column templates
+
+The column template defines how each column is rendered. You don’t have to define this template; the default used by Pubwich is this:
+
+    '<div class="col{{{number}}}">{{{content}}}</div>'
+
+Where `{{{number}}}` is replaced by the column number and `{{{content}}}` is replaced by the column content (the *boxes*). For instance, you could put this in your `functions.php` file:
+
+    funtion columnTemplate() {
+        '<div class="column column-{{{number}}}"><div class="column-inner">{{{content}}}</div></div>'
+    }
+
+### Layout templates
+
+The layout template defines the columns layout. Again, you don’t have to define this template; the default layout used by Pubwich is this (eg. if you defined 3 columns in your `config.php` file):
+
+    '{{{col1}}} {{{col2}}} {{{col3}}}'
+
+So each column is displayed one after the other. But if you’d like to change that layout, you can use this:
+
+    function layoutTemplate() {
+        return '<div class="first-column">{{{col1}}}</div><div class="other-columns">{{{col2}}} {{{col3}}}</div>';
+    }

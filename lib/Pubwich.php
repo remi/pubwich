@@ -310,13 +310,13 @@
 		static public function getLoop() {
 
 			$columnTemplate = function_exists( 'columnTemplate' ) ? call_user_func( 'columnTemplate' ) : '<div class="col{{{number}}}">{{{content}}}</div>';
-			$columnsTemplateDefined = false;
+			$layoutTemplateDefined = false;
 
-			if ( function_exists( 'columnsTemplate' ) ) {
-				$columnsTemplate = call_user_func( 'columnsTemplate' );
-				$columnsTemplateDefined = true;
+			if ( function_exists( 'layoutTemplate' ) ) {
+				$layoutTemplate = call_user_func( 'layoutTemplate' );
+				$layoutTemplateDefined = true;
 			} else {
-				$columnsTemplate = '';
+				$layoutTemplate = '';
 			}
 
 			$output_columns = array();
@@ -328,11 +328,11 @@
 				}
 				$output_columns['col'.$col] = $m->render($columnTemplate, array('number'=>$col, 'content'=>$boxes));
 
-				if ( !$columnsTemplateDefined ) {
-					$columnsTemplate .= '{{{col'.$col.'}}} ';
+				if ( !$layoutTemplateDefined ) {
+					$layoutTemplate .= '{{{col'.$col.'}}} ';
 				}
 			}
-			return $m->render($columnsTemplate, $output_columns);
+			return $m->render($layoutTemplate, $output_columns);
 		}
 
 		static public function getHeader() {

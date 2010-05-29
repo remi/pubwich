@@ -1,6 +1,16 @@
 Pubwich’s changelog
 ===================
 
+Pubwich 1.4 (2010-05-29)
+-------------------------------------------------
+* Added Goodreads service.
+* GitHub service now has 3 methods: GithubRecentActivity, GithubRepositories & GithubGists.
+* Added LastFMTopAlbums method to LastFM service.
+* Removed support for Twitter Basic Authentication — now using only OAuth
+* Removed phpsavant templating engine — now using Mustache.php
+* Added two new templates: `columnTemplate` and `layoutTemplate`
+* Fix several minor bugs
+
 Pubwich 1.3 (2010-02-18)
 -------------------------------------------------
 * Added GitHub service.
@@ -13,14 +23,14 @@ Pubwich 1.3 (2010-02-18)
 * Moved `Zend_Json` from Twitter service to the main Pubwich class, so other services can use it.
 * Fixed a bug in Readernaut service where `{%size%}` would not work properly.
 
-Pubwich 1.2 (2009-12-08) - `31db64390f9428389acef1c338426c6c7e2e7b2c`
+Pubwich 1.2 (2009-12-08)
 ---------------------------------------------------------------------
 * Added support to add `<head>` links for services.
 * Added some .htaccess files to prevent from loading PHP files from the browser.
 * Added `{%content%}` tag for the RSS service.
 * Added Sample service (Sample.php).
 
-Pubwich 1.1 (2009-10-11) - `7bfae13e74836981b2c4287d4786e37c39b66c7d`
+Pubwich 1.1 (2009-10-11)
 ---------------------------------------------------------------------
 * Added multi-methods support for services. For example, the Flickr service now has FlickrUser, FlickrGroup and FlickrTags methods.
 * Added custom callback support for services that might not use XML (like JSON) Default callback is still `simplexml_load_string`.
@@ -32,6 +42,6 @@ Pubwich 1.1 (2009-10-11) - `7bfae13e74836981b2c4287d4786e37c39b66c7d`
 * Services that use RSS (like Delicious) and Atom (like YouTube) feeds are now extending RSS or Atom service class.
 * Fixed Twitter negative time bug (#19).
 
-Pubwich 1.0 (2009-09-20) - `39f93374894ece0fcd552feb78a82c1654ded63d`
+Pubwich 1.0 (2009-09-20)
 ---------------------------------------------------------------------
 * Initial release

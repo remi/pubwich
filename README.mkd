@@ -119,6 +119,10 @@ These parameters can be used for all services:
 
 *No specific parameter*
 
+#### GithubGists
+
+*No specific parameter*
+
 ### Goodreads
 
 * `userid` → The Goodreads user ID.

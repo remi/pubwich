@@ -82,6 +82,7 @@
 				),
 
 				array( 'Youtube', 'youtube', array(
+						'method' => 'YoutubeVideos',
 						'username' => 'YOUTUBE_USERNAME_HERE',
 						'total' => 4,
 						'size' => 120,

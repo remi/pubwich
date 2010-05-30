@@ -45,7 +45,7 @@
 	class RedditLiked extends Reddit {
 		public function __construct( $config ){
 			$this->setURLTemplate('http://www.reddit.com/user/'.$config['username'].'/liked/');
-			$this->setURL( sprintf( 'http://www.reddit.com/user/remiprev/liked.json?feed=%s&user=%s', $config['key'], $config['username'] ) );
+			$this->setURL( sprintf( 'http://www.reddit.com/user/%s/liked.json?feed=%s&user=%s', $config['username'], $config['key'], $config['username'] ) );
 			$this->setItemTemplate('<li><a class="story" href="{{{url}}}">{{{title}}} <span>({{{domain}}})</span></a> <a href="{{{base}}}/r/{{{subreddit}}}/" class="subreddit">{{{subreddit}}} ∞</a> <a href="{{{link}}}" class="score">{{{score}}} ⇧</a> <a href="{{{link}}}" class="comments">{{{comments}}} ✎</a></li>'."\n");
 			parent::__construct( $config );
 		}

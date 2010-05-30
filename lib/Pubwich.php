@@ -56,11 +56,11 @@
 			require_once( 'PEAR.php' );
 
 			// Exception class
-			require( 'PubwichErreur.php' );
+			require( 'PubwichError.php' );
 
 			// Configuration files
 			if ( !file_exists( dirname(__FILE__)."/../cfg/config.php" ) ) {
-				throw new PubwichErreur( 'You must rename <code>/cfg/config.sample.php</code> to <code>/cfg/config.php</code> and edit the Web service configuration details.' );
+				throw new PubwichError( 'You must rename <code>/cfg/config.sample.php</code> to <code>/cfg/config.php</code> and edit the Web service configuration details.' );
 			} else {
 				require( dirname(__FILE__) . '/../cfg/config.php' );
 			}
@@ -137,7 +137,7 @@
 		static public function renderTemplate() {
 
 			if ( !file_exists(self::getThemePath()."/index.tpl.php") ) {
-				throw new PubwichErreur( sprintf( Pubwich::_( 'The file <code>%s</code> was not found. It has to be there.' ), '/themes/'.PUBWICH_THEME.'/index.tpl.php' ) );
+				throw new PubwichError( sprintf( Pubwich::_( 'The file <code>%s</code> was not found. It has to be there.' ), '/themes/'.PUBWICH_THEME.'/index.tpl.php' ) );
 			}
 
 			foreach (self::$classes as &$classe) {
@@ -260,7 +260,7 @@
 			if ( function_exists( 'boxTemplate' ) ) {
 				$boxTemplate = call_user_func( 'boxTemplate' );
 			} else {
-				throw new PubwichErreur( Pubwich::_('You must define a boxTemplate function in your theme\'s functions.php file.') );
+				throw new PubwichError( Pubwich::_('You must define a boxTemplate function in your theme\'s functions.php file.') );
 			}
 
 			foreach( self::$classes as $classe ) {

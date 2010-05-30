@@ -2,10 +2,10 @@
 	defined('PUBWICH') or die('No direct access allowed.');
 
 	/**
-	 * @classname PubwichErreur
+	 * @classname PubwichError
 	 * @extends Exception
 	 */
-	class PubwichErreur extends Exception {
+	class PubwichError extends Exception {
 
 		/**
 		 * @constructor

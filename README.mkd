@@ -182,7 +182,7 @@ These parameters can be used for all services:
 
 * `username` → The Readernaut username.
 * `key` → Your API key. Go to [this page](http://www.reddit.com/prefs/feeds/) and extract the key from one of the JSON feeds URL.
-* `method` → Either `ReadernautBooks`, `ReadernautNotes`
+* `method` → `RedditLiked`
 
 #### RedditLiked
 

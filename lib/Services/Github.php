@@ -4,7 +4,7 @@
 	/**
 	 * @classname GitHub
 	 * @description Fetch GitHub user public activity feed
-	 * @version 1.1 (20100317)
+	 * @version 1.2 (20100530)
 	 * @author Rémi Prévost (exomel.com)
 	 * @methods GithubRecentActivity GithubRepositories
 	 */

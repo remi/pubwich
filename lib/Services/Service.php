@@ -223,7 +223,7 @@
 					}
 
 					$this->getItemTemplate()->populate( $populate );
-					$items .= '		'.$this->getItemTemplate()->output();
+					$items .= $this->getItemTemplate()->output();
 				}
 			}
 

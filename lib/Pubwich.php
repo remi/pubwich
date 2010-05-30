@@ -8,40 +8,7 @@
 	 */
 	class Pubwich {
 
-		/**
-		 * @var $services
-		 */
-		static private $services;
-
-		/**
-		 * @var $classes
-		 */
-		static private $classes;
-
-		/**
-		 * @var $columns
-		 */
-		static private $columns;
-
-		/**
-		 * @var $theme_url
-		 */
-		static private $theme_url;
-
-		/**
-		 * @var $theme_path
-		 */
-		static private $theme_path;
-
-		/**
-		 * @var $header_links
-		 */
-		static private $header_links;
-
-		/**
-		 * @var $gettext
-		 */
-		static private $gettext = null;
+		static private $services, $classes, $columns, $theme_url, $theme_path, $header_links, $gettext = null;
 
 		/**
 		 * Application initialisation
@@ -110,6 +77,8 @@
 		}
 
 		/**
+		 * Set the $classes array
+		 *
 		 * @return void
 		 */
 		static public function setClasses() {
@@ -132,6 +101,8 @@
 		}
 
 		/**
+		 * Renders the template according to the current theme
+		 *
 		 * @return void
 		 */
 		static public function renderTemplate() {
@@ -167,6 +138,8 @@
 		}
 
 		/**
+		 * Set the services to use
+		 *
 		 * @param array $services
 		 * @return void
 		 */
@@ -182,6 +155,9 @@
 		}
 
 		/**
+		 * Require a service file (according to the “cascade”)
+		 *
+		 * @param string $service Service
 		 * @return bool
 		 */
 		static public function requireServiceFile( $service ) {
@@ -189,9 +165,9 @@
 				// theme-specific service
 				self::$theme_path . '/lib/Services/' . $service . '.php',
 				// pubwich custom service
-				dirname(__FILE__).'/Services/Custom/' . $service . '.php',
+				dirname(__FILE__) . '/Services/Custom/' . $service . '.php',
 				// pubwich default service
-				dirname(__FILE__).'/Services/' . $service . '.php'
+				dirname(__FILE__) . '/Services/' . $service . '.php'
 			);
 
 			$file_included = false;
@@ -206,8 +182,10 @@
 		}
 
 		/**
-		 * @param string $service Le nom du service (et de la classe)
-		 * @param array $config Le tableau de configuration
+		 * Load a service file
+		 *
+		 * @param string $service The service name
+		 * @param array $config The parameters
 		 * @return Service
 		 */
 		static public function loadService( $service, $config ) {
@@ -216,34 +194,35 @@
 			$file_included = self::requireServiceFile( $service );
 
 			if ( !$file_included ) {
-				throw new PubwichErreur( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but the file <code>%s</code> couldn’t be found.' ), $service, $service.'.php' ) );
+				throw new PubwichError( sprintf( Pubwich::_( 'You told Pubwich to use the %s service, but the file <code>%s</code> couldn’t be found.' ), $service, $service.'.php' ) );
 			}
 
 			$classname = ( $config['method'] ) ? $config['method'] : $service;
 			if ( !class_exists( $classname ) ) {
-				throw new PubwichErreur( sprintf( Pubwich::_( 'The class %s doesn\'t exist. Check your configuration file for inexistent services or methods.' ), $classname ) );
+				throw new PubwichError( sprintf( Pubwich::_( 'The class %s doesn\'t exist. Check your configuration file for inexistent services or methods.' ), $classname ) );
 			}
 
 			return new $classname( $config );
 		}
 
 		/**
+		 * Rebuild the cache for each defined service
+		 *
 		 * @return void
 		 */
 		static public function rebuildCache() {
 
 			PubwichLog::log( 1, Pubwich::_("Building application cache") );
 
-			// On vide le contenu du dossier de cache
-			$fichiers = scandir(CACHE_LOCATION);
-			foreach ( $fichiers as $fichier ) {
-				// on ne supprime pas les fichiers cachés...
-				if ( substr( $fichier, 0, 1 ) != "." ) {
-					unlink( CACHE_LOCATION . $fichier );
+			// First, let’s flush the cache directory
+			$files = scandir(CACHE_LOCATION);
+			foreach ( $files as $file ) {
+				if ( substr( $file, 0, 1 ) != "." ) {
+					unlink( CACHE_LOCATION . $file );
 				}
 			}
 
-			// On rebâtit tout!
+			// Then, we fetch everything
 			foreach ( self::$classes as &$classe ) {
 				$classe->buildCache();
 			}
@@ -251,7 +230,7 @@
 		}
 
 		/**
-		 * Applique les différents filtres du thème courant
+		 * Apply box and items templates
 		 *
 		 * @return void
 		 */
@@ -263,15 +242,15 @@
 				throw new PubwichError( Pubwich::_('You must define a boxTemplate function in your theme\'s functions.php file.') );
 			}
 
-			foreach( self::$classes as $classe ) {
+			foreach( self::$classes as $class ) {
 
 				$functions = array();
-				$parent = get_parent_class( $classe );
-				$classname = get_class( $classe );
-				$variable = $classe->getVariable();
+				$parent = get_parent_class( $class );
+				$classname = get_class( $class );
+				$variable = $class->getVariable();
 
-				if ( !$classe->getBoxTemplate()->hasTemplate() && $boxTemplate ) {
-					$classe->setBoxTemplate( $boxTemplate );
+				if ( !$class->getBoxTemplate()->hasTemplate() && $boxTemplate ) {
+					$class->setBoxTemplate( $boxTemplate );
 				}
 
 				if ( $parent != 'Service' ) {
@@ -292,18 +271,18 @@
 					$item_f = $f . '_itemTemplate';
 
 					if ( function_exists( $box_f ) ) {
-						$classe->setBoxTemplate( call_user_func( $box_f ) );
+						$class->setBoxTemplate( call_user_func( $box_f ) );
 					}
 
 					if ( function_exists( $item_f ) ) {
-						$classe->setItemTemplate( call_user_func( $item_f ) );
+						$class->setItemTemplate( call_user_func( $item_f ) );
 					}
 				}
 			}
 		}
 
 		/**
-		 * Affiche les données
+		 * Displays the generated HTML code
 		 *
 		 * @return string
 		 */
@@ -323,8 +302,8 @@
 			$m = new Mustache;
 			foreach( self::$columns as $col => $classes ) {
 				$boxes = '';
-				foreach( $classes as $classe ) {
-					$boxes .= $classe->renderBox();
+				foreach( $classes as $class ) {
+					$boxes .= $class->renderBox();
 				}
 				$output_columns['col'.$col] = $m->render($columnTemplate, array('number'=>$col, 'content'=>$boxes));
 
@@ -335,6 +314,11 @@
 			return $m->render($layoutTemplate, $output_columns);
 		}
 
+		/*
+		 * Header hook
+		 *
+		 * @return string
+		 */
 		static public function getHeader() {
 			$output = '';
 			foreach ( self::$classes as $class ) {
@@ -346,19 +330,21 @@
 			return $output;
 		}
 
+		/*
+		 * Footer hook
+		 *
+		 * @return string
+		 */
 		static public function getFooter() {
 			return '';
 		}
 
 		/**
-		 * time_since()
-		 * Retourne une date en format relatif, si possible
+		 * Return a date in a relative format
+		 * Based on: http://snippets.dzone.com/posts/show/5565
 		 *
-		 * Basé sur: http://snippets.dzone.com/posts/show/5565
-		 *
-		 * @param $original Le timestamp
+		 * @param $original Date timestamp
 		 * @return string
-		 *
 		 */
 		static public function time_since( $original ) {
 

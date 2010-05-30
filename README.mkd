@@ -87,7 +87,7 @@ These parameters can be used for all services:
 
 #### DribbbleShots
 
-*No specific parameter*
+*No specific parameters*
 
 ### Facebook
 
@@ -121,15 +121,15 @@ These parameters can be used for all services:
 
 #### GithubRecentActivity
 
-*No specific parameter*
+*No specific parameters*
 
 #### GithubRepositories
 
-*No specific parameter*
+*No specific parameters*
 
 #### GithubGists
 
-*No specific parameter*
+*No specific parameters*
 
 ### Goodreads
 

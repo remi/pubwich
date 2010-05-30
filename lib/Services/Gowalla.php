@@ -18,7 +18,7 @@
 		 */
 		public function __construct( $config ) {
 			$this->username = $config['username'];
-			$this->setURLTemplate( $this->base.'/users/'.$config['username'].'/' );
+			$this->setURLTemplate( $this->base.'/'.$config['username'].'/' );
 			$this->callback_function = array( Pubwich, 'json_decode' );
 			$this->http_headers = array(
 				'Accept: application/json'

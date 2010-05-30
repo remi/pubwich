@@ -81,6 +81,14 @@ These parameters can be used for all services:
 
 * `username` → The Delicious.com username.
 
+### Dribbble
+
+* `username` → The Dribbble username.
+
+#### DribbbleShots
+
+*No specific parameter*
+
 ### Facebook
 
 * `id` → The Facebook user ID.

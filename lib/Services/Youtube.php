@@ -4,9 +4,9 @@
 	/**
 	 * @classname Youtube
 	 * @description Fetch Youtube videos
-	 * @version 1.1 (20090929)
+	 * @version 1.2 (20100530)
 	 * @author Rémi Prévost (exomel.com)
-	 * @methods None
+	 * @methods YoutubeVideos YoutubeVideos
 	 */
 
 	Pubwich::requireServiceFile( 'Atom' );

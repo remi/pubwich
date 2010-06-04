@@ -287,7 +287,7 @@ The column template defines how each column is rendered. You don’t have to def
 Where `{{{number}}}` is replaced by the column number and `{{{content}}}` is replaced by the column content (the *boxes*). For instance, you could put this in your `functions.php` file:
 
     funtion columnTemplate() {
-        '<div class="column column-{{{number}}}"><div class="column-inner">{{{content}}}</div></div>'
+        '<div class="column column-{{{number}}}"><div class="column-inner">{{{content}}}</div></div>';
     }
 
 ### Layout templates

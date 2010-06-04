@@ -84,6 +84,7 @@ These parameters can be used for all services:
 ### Dribbble
 
 * `username` → The Dribbble username.
+* `method` → `DribbbleShots`.
 
 #### DribbbleShots
 
@@ -117,7 +118,7 @@ These parameters can be used for all services:
 ### GitHub
 
 * `username` → The GitHub username
-* `method` → Either `GithubRecentActivity`, `GithubRepositories`
+* `method` → Either `GithubRecentActivity`, `GithubRepositories` and `GithubGists`
 
 #### GithubRecentActivity
 

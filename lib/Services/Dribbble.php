@@ -29,7 +29,7 @@
 	class DribbbleShots extends Dribbble {
 
 		public function __construct( $config ){
-			$config['link'] = sprintf( 'http://dribbble.com/players/%s/', $config['username'].'/' );
+			$config['link'] = sprintf( 'http://dribbble.com/players/%s/', $config['username'] );
 			$config['url'] = sprintf( 'http://dribbble.com/players/%s/shots.rss', $config['username'] );
 			parent::__construct( $config );
 			$this->setItemTemplate('<li><a href="{{{link}}}"><strong>{{{title}}}</strong> <img src="{{{image}}}" alt="{{title}}" /></a></li>'."\n");

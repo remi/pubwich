@@ -18,7 +18,7 @@
 
 		public function populateItemTemplate( &$item ) {
 			$description = (string) $item->description;
-			preg_match('/src=\"(http.*(jpg|jpeg|gif|png))/', $description, $matches);
+			preg_match('/src=\"(http.*(jpg|jpeg|gif|png))/i', $description, $matches);
 			return parent::populateItemTemplate( $item ) + array(
 				'image' => count($matches) > 1 ? $matches[1] : ''
 			);

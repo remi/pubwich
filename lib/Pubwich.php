@@ -1,7 +1,7 @@
 <?php
 	defined('PUBWICH') or die('No direct access allowed.');
 
-	define( 'PUBWICH_VERSION', '1.4' );
+	define( 'PUBWICH_VERSION', '1.5' );
 
 	/**
 	 * @classname Pubwich

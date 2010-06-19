@@ -360,6 +360,60 @@ h1 a:hover {
 }
 
 /**
+ *	StatusNet
+ ******************************************************************/
+
+.statusnet h2 a {
+	color: #33CCFF;
+}
+
+.statusnet li {
+	padding: 5px 10px 7px;
+	margin: 0 0 5px;
+}
+
+.statusnet li span.image, 
+.statusnet li span.date {
+	display: block;
+	float: left;
+	width: 85px;
+	margin-right: 10px;
+}
+
+.statusnet li span.image {
+	width: 48px;
+}
+
+.statusnet li span.image a, 
+.statusnet li span.date a {
+	text-decoration: none;
+	border: none;
+}
+
+.statusnet li p {
+	display: block;
+	margin-left: 95px;
+}
+
+.statusnet li em.from {
+	display: none;
+}
+
+.statusnetsearch li p {
+	margin-left: 65px;
+}
+
+.statusnetsearch li p.date {
+	margin-top: 3px;
+	color: rgba(0,0,0,0.4);
+}
+
+.statusnetsearch li p.date a {
+	color: rgba(0,0,0,0.4);
+	border-bottom: none;
+}
+
+/**
  *	Del.icio.us
  ******************************************************************/
 

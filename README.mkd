@@ -202,6 +202,21 @@ These parameters can be used for all services:
 * `url` → The feed URL.
 * `link` → The website URL.
 
+### StatusNet
+
+* `method` → Either `StatusNetUser`, `StatusNetSearch`
+* `root` → The StatusNet root URL (default is `http://identi.ca`)
+* `username` → The StatusNet username.
+* `password` → The StatusNet password.
+
+#### StatusNetUser
+
+*No specific parameters*
+
+#### StatusNetSearch
+
+* `terms` → The search query.
+
 ### Text
 
 * `text` → The text to display.

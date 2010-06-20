@@ -1,6 +1,11 @@
 Pubwich’s changelog
 ===================
 
+Pubwich 1.6 (?)
+-------------------------------------------------
+* Added StatusNet service.
+* Fixed Dribbble image regex.
+
 Pubwich 1.5 (2010-06-04)
 -------------------------------------------------
 * Added Dribbble service.

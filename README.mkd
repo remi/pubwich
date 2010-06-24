@@ -202,6 +202,16 @@ These parameters can be used for all services:
 * `url` → The feed URL.
 * `link` → The website URL.
 
+### SlideShare
+
+* `method` → Either `SlideShareUserSlideshows`
+* `key` → The SlideShare API key
+* `secret` → The SlideShare shared secret
+
+#### SlideShareUserSlideshows
+
+* `username` → The SlideShare username.
+
 ### StatusNet
 
 * `method` → Either `StatusNetUser`, `StatusNetSearch`

@@ -4,7 +4,7 @@
 	/**
 	 * @classname SlideShare
 	 * @description Retrieves data from SlideShare
-	 * @version 1.0 (20100621)
+	 * @version 1.0 (20100624)
 	 * @author Rémi Prévost (exomel.com)
 	 * @methods SlideShareUserSlideshows
 	 */
@@ -23,7 +23,6 @@
 			$this->key = $config['key'];
 			$this->secret = $config['secret'];
 			$this->timestamp = $this->generateTimestamp();
-			echo $this->timestamp;
 			$this->hash = sha1( $this->secret . $this->timestamp );
 		}
 
@@ -37,10 +36,9 @@
 
 		public function __construct( $config ) {
 			parent::setVariables( $config );
-			# TODO Find a way to cache this damn URL!
 			$this->setURL( sprintf( 'http://www.slideshare.net/api/2/get_slideshows_by_user?username_for=%s&api_key=%s&ts=%s&hash=%s', $config['username'], $this->key, $this->timestamp, $this->hash ) );
 			$this->setURLTemplate( sprintf( 'http://www.slideshare.net/%s', $config['username'] ) );
-			$this->setItemTemplate( '<li class="clearfix"><a href="{{{link}}}"><strong>{{{title}}}</strong> {{{date}}} <img src="{{image}}" alt="{{title}}" /></a></li>' );
+			$this->setItemTemplate( '<li class="clearfix"><a href="{{{link}}}"><strong>{{{title}}}</strong> {{{date}}} <img src="{{thumbnail}}" alt="{{title}}" /></a></li>' );
 			parent::__construct( $config );
 		}
 

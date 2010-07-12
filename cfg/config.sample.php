@@ -98,6 +98,7 @@
 						'username' => 'TWITTER_USERNAME_HERE',
 						'oauth' => array(
 							// You have to create a new application at http://dev.twitter.com/apps to get these keys
+							// See the tutorial at http://pubwich.org/wiki/Using_Twitter_with_Pubwich
 							'app_consumer_key' => '',
 							'app_consumer_secret' => '',
 							'user_access_token' => '',

@@ -98,7 +98,7 @@ These parameters can be used for all services:
 
 ### Flickr
 
-* `row` → The number of photos per row. Pubwich adds the class `derniere` to each row’s last photo.
+* `row` → The number of photos per row. Pubwich adds the class `last-in-row` to each row’s last photo.
 * `sort` → The order in which to sort the photos. See [this page](http://www.flickr.com/services/api/flickr.photos.search.html) for all the possible values.
 * `key` → The Flickr API key.
 * `method` → Either `FlickrUser`, `FlickrGroup`, `FlickrTags`

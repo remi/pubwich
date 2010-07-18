@@ -29,7 +29,7 @@
 			$this->row = $config['row'];
 			$this->sort = isset( $config['sort'] ) ? $config['sort'] : 'date-posted-desc';
 			$this->compteur = 0;
-			$this->setItemTemplate('<li{{{classe}}}><a href="{{{link}}}"><img src="{{{photo}}}" alt="{{{title}}}" /></a></li>'."\n");
+			$this->setItemTemplate('<li {{#last_in_row}} class="last-in-row"{{/last_in_row}}><a title="{{title}}" href="{{link}}"><img src="{{photo}}" alt="{{title}}" /></a></li>'."\n");
 		}
 
 		/**
@@ -43,7 +43,7 @@
 						'link' => 'http://www.flickr.com/photos/'.$path.'/'.$item['id'].'/',
 						'title' => htmlspecialchars( $item['title'] ),
 						'photo' => $this->getAbsoluteUrl( $item ),
-						'classe' => ($this->compteur % $this->row == 0 ) ? ' class="derniere"' : ''
+						'last_in_row' => ($this->compteur % $this->row == 0 )
 			);
 		}
 

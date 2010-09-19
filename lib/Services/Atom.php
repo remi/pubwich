@@ -15,7 +15,7 @@
 			$this->total = $config['total'];
 			$this->setURL( $config['url'] );
 			$this->setHeaderLink( array( 'url' => $config['url'], 'type' => 'application/atom+xml' ) );
-			$this->setItemTemplate('<li><a href="{{link}}">{{{title}}}</a> {{date}}</li>'."\n");
+			$this->setItemTemplate('<li><a href="{{link}}">{{{title}}}</a> {{{date}}}</li>'."\n");
 			$this->setURLTemplate( $config['link'] );
 			parent::__construct( $config );
 		}
@@ -33,10 +33,11 @@
 		 */
 		public function populateItemTemplate( &$item ) {
 			$link = $item->link->attributes()->href;
+			$date = $item->published ? $item->published : $item->updated;
 			return array(
 						'link' => htmlspecialchars( $link ),
 						'title' => trim( $item->title ),
-						'date' => Pubwich::time_since( $item->published ),
+						'date' => Pubwich::time_since( $date ),
 						'content' => $item->content,
 			);
 		}

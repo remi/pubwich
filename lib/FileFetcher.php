@@ -32,6 +32,10 @@
 		 * @return string Le contenu du fichier
 		 */
 		static function getRemote($url) {
+			if (empty($url)) {
+				 return false;
+			}
+			
 			return file_get_contents($url);
 		}
 

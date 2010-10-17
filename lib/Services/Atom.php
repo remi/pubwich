@@ -11,8 +11,11 @@
 
 	class Atom extends Service {
 
+		private $dateFormat;
+
 		public function __construct( $config ){
 			$this->total = $config['total'];
+			$this->dateFormat = $config['date_format'];
 			$this->setURL( $config['url'] );
 			$this->setHeaderLink( array( 'url' => $config['url'], 'type' => 'application/atom+xml' ) );
 			$this->setItemTemplate('<li><a href="{{link}}">{{{title}}}</a> {{{date}}}</li>'."\n");
@@ -38,6 +41,7 @@
 						'link' => htmlspecialchars( $link ),
 						'title' => trim( $item->title ),
 						'date' => Pubwich::time_since( $date ),
+						'absolute_date' => date($this->dateFormat, strtotime($date)),
 						'content' => $item->content,
 			);
 		}

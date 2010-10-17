@@ -11,9 +11,12 @@
 
 	class RSS extends Service {
 
+		private $dateFormat;
+
 		public function __construct( $config ){
 			$this->setURL( $config['url'] );
 			$this->total = $config['total'];
+			$this->dateFormat = $config['date_format'];
 			$this->setItemTemplate('<li><a href="{{{link}}}">{{{title}}}</a> {{{date}}}</li>'."\n");
 			$this->setURLTemplate( $config['link'] );
 			$this->setHeaderLink( array( 'url' => $config['url'], 'type' => 'application/rss+xml' ) );
@@ -38,6 +41,7 @@
 						'link' => htmlspecialchars( $item->link ),
 						'title' => trim( $item->title ),
 						'date' => Pubwich::time_since( $item->pubDate ),
+						'absolute_date' => date($this->dateFormat, strtotime($item->pubDate)),
 						'comments_link' => $item->comments,
 						'comments_count' => $comments_count,
 						'description' => $item->description,

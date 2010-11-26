@@ -13,7 +13,7 @@
 	class Instapaper extends RSS {
 
 		public function __construct( $config ){
-			$config['link'] = 'http://del.icio.us/'.$config['username'].'/';
+			$config['link'] = 'http://www.instapaper.com/';
 			$config['url'] = sprintf( 'http://www.instapaper.com/archive/rss/%s/%s', $config['userid'], $config['token'] );
 			parent::__construct( $config );
 			$this->setItemTemplate('<li><a href="{{{link}}}">{{{title}}}</a></li>'."\n");

@@ -54,12 +54,13 @@
 		public function oauthRequest( $params=array() ) {
 			$method = $params[0];
 			$additional_params = isset( $params[1] ) ? $params[1] : array();
+			$base = $params[2] ? $params[2] : "http://api.twitter.com/1/";
 
 			$sha1_method = new OAuthSignatureMethod_HMAC_SHA1();
 			$consumer = new OAuthConsumer( $this->oauth['app_consumer_key'], $this->oauth['app_consumer_secret'] );
 			$token = new OAuthConsumer( $this->oauth['user_access_token'], $this->oauth['user_access_token_secret'] );
-			
-			$request = OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', 'http://api.twitter.com/1/'.$method.'.json', $additional_params);
+
+			$request = OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', $base.$method.'.json', $additional_params);
 			$request->sign_request($sha1_method, $consumer, $token);
 
 			return FileFetcher::get($request->to_url());
@@ -99,7 +100,7 @@
 		public function __construct( $config ) {
 			parent::setVariables( $config );
 
-			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'search', array('q'=>$config['terms'], 'rpp'=>$config['total'] ) ) );
+			$this->callback_getdata = array( array($this, 'oauthRequest'), array( 'search', array('q'=>$config['terms'], 'rpp'=>$config['total'], 'result_type'=>'recent' ), "http://search.twitter.com/" ) );
 			$this->setURL('http://search.twitter.com/'.$config['terms'].'/'.$config['total']);
 			$this->setItemTemplate( '<li class="clearfix"><span class="image"><a href="{{{user_link}}}"><img width="48" src="{{{user_image}}}" alt="{{{user_nickname}}}" /></a></span>{{{text}}}<p class="date"><a href="{{{link}}}">{{{date}}}</a></p></li>'."\n" );
 			$this->setURLTemplate( 'http://search.twitter.com/search?q='.$config['terms'] );

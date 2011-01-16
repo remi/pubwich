@@ -32,6 +32,13 @@
 		}
 
 		/**
+		 * @return SimpleXMLElement
+		 */
+		public function getParentData() {
+			return parent::getData();
+		}
+
+		/**
 		 * @return array
 		 */
 		public function populateItemTemplate( &$item ) {

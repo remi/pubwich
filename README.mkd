@@ -174,6 +174,11 @@ These parameters can be used for all services:
 
 * `size` → The size of each album covers.
 
+### Pinboard
+
+* `username` → The Pinboard username.
+* `secret` → The Pinboard secret token (grab it from your RSS feed URL).
+
 ### Readernaut
 
 * `username` → The Readernaut username.

@@ -1,0 +1,128 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pubwich\n"
+"Report-Msgid-Bugs-To: http://pubwich.com/\n"
+"POT-Creation-Date: 2009-10-18 12:37-0400\n"
+"PO-Revision-Date: \n"
+"Last-Translator: NumEricR <->\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: lib/Pubwich.php:78
+msgid "Pubwich object initialization"
+msgstr "Initialisation de l’objet Pubwich"
+
+#: lib/Pubwich.php:140
+#, php-format
+msgid "The file <code>%s</code> was not found. It has to be there."
+msgstr "Le fichier <code>%s</code> n’a pas été trouvé. Il doit être présent."
+
+#: lib/Pubwich.php:194
+#, php-format
+msgid "Loading %s service"
+msgstr "Chargement du service %s"
+
+#: lib/Pubwich.php:201
+#, php-format
+msgid "You told Pubwich to use the %s service, but either the file <code>%s</code> or <code>%s</code> cannot be found."
+msgstr "Vous avez dit à Pubwich d’utiliser le service %s, mais le fichier <code>%s</code> ou <code>%s</code> n’est pas disponible."
+
+#: lib/Pubwich.php:208
+#, php-format
+msgid "The class %s doesn't exist. Check your configuration file for inexistent services or methods."
+msgstr "La classe %s n’existe pas. Vérifiez que votre fichier de configuration ne contient pas de services ou de méthodes inexistants."
+
+#: lib/Pubwich.php:219
+msgid "Building application cache"
+msgstr "Reconstruction de la cache de l’application"
+
+#: lib/Pubwich.php:336
+msgid "year"
+msgstr "année"
+
+#: lib/Pubwich.php:337
+msgid "month"
+msgstr "mois"
+
+#: lib/Pubwich.php:338
+msgid "week"
+msgstr "semaine"
+
+#: lib/Pubwich.php:339
+msgid "day"
+msgstr "jour"
+
+#: lib/Pubwich.php:340
+msgid "hour"
+msgstr "heure"
+
+#: lib/Pubwich.php:341
+msgid "minute"
+msgstr "minute"
+
+#: lib/Pubwich.php:348
+#, php-format
+msgid "just moments ago"
+msgstr "il y a quelques secondes"
+
+#: lib/Pubwich.php:352
+#, php-format
+msgid "%d seconds ago"
+msgstr "Il y a %d secondes"
+
+#: lib/Pubwich.php:356
+msgid "%e %B at %H:%M"
+msgstr "%e %B à %H:%M"
+
+#: lib/Pubwich.php:371
+#, php-format
+msgid "%s ago"
+msgstr "Il y a %s"
+
+#: lib/PubwichErreur.php:14
+msgid "Erreur"
+msgstr "Error"
+
+#: lib/Services/Lastfm.php:127
+msgid "Rebuilding cache for a Last.fm album"
+msgstr "Reconstruction du cache pour un album Last.fm"
+
+#: lib/Services/Service.php:16
+#, php-format
+msgid "Creating an instance of %s"
+msgstr "Création d’une instance de %s"
+
+#: lib/Services/Service.php:70
+#, php-format
+msgid "Setting the URL for %s: %s"
+msgstr "Définition de l'URL pour %s : %s"
+
+#: lib/Services/Service.php:79
+#, php-format
+msgid "Initializing instance of %s"
+msgstr "Initialisation de l’instance de %s"
+
+#: lib/Services/Service.php:99
+#, php-format
+msgid "Rebuilding the cache for %s service"
+msgstr "Reconstruction du cache pour le service %s"
+
+#: lib/Services/Service.php:196
+#, php-format
+msgid "An error occured with the %s API. The data is therefore unavailable."
+msgstr "Une erreur est survenue avec l’API de %s. Les données ne sont donc pas disponibles. Veuillez réessayer plus tard."
+
+#: themes/default/index.tpl.php:21
+#, php-format
+msgid "All data is &copy; copyright %s. Proudly powered by %s."
+msgstr "Toutes les données sont &copy; copyright %s. Propulsé fièrement par %s."
+
+#~ msgid "Chargement du service %s"
+#~ msgstr "Loading %s service"
+
+#~ msgid "il y a quelques secondes"
+#~ msgstr "just moments ago"

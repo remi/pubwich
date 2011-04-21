@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<div id="wrap">
-			<h1><a href="/" rel="me"><?php echo PUBWICH_TITLE?></a></h1>
+			<h1><?php echo PUBWICH_TITLE?></h1>
 			<hr>
 			<div class="clearfix">
 

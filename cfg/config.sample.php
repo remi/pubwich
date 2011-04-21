@@ -176,3 +176,7 @@
 	// Caching system
 	define( 'CACHE_LOCATION', dirname(__FILE__) . '/../cache/' );
 	define( 'CACHE_LIMIT', 20 * 60 );
+	
+	
+	// Don't forget to fill informations in /humans.txt
+	

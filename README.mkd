@@ -8,6 +8,8 @@ Duplicate `cfg/config.sample.php` to `cfg/config.php`. (Optional: if you want to
 
 Edit the newly created config.php to fill the blank spaces with your informations (API keys, usernames, site’s URL, etc.) and to modify the arguments passed to `Pubwich::setServices()`. See the *Services configuration* section of this file.
 
+Edit the `/humans.txt` file to put your personal informations under `TEAM` title. You will find explanations and help about this initiative at www.humanstxt.org
+
 Modify your crontab file (by running `crontab -e`) and add the following line:
 `*/<N> * * * * <PHP> -f <ABSOLUTE_PATH>/cron/cron.php`
 

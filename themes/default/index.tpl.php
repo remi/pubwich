@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title><?php echo PUBWICH_TITLE?></title>
 		<link rel="stylesheet" media="screen" href="<?php echo Pubwich::getThemeUrl()?>/style.css" type="text/css">
+		<link type="text/plain" rel="author" href="<?php echo PUBWICH_URL ?>humans.txt" />
 <?php echo Pubwich::getHeader() ?>
 	</head>
 	<body>

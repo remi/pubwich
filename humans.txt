@@ -1,0 +1,18 @@
+﻿/* the humans responsible & colophon */
+/* humanstxt.org */
+
+
+/* TEAM */
+	Owner: 
+	Contact: 
+	Location:
+
+
+/* SITE */
+
+	This website use the "Pubwich" open-source web application created by Rémi Prévost.
+	You can find more informations on the official website at www.pubwich.org
+	And you're welcome to fork it on GitHub : http://github.com/remiprev/pubwich
+	
+	Doctype: HTML4
+	Components: JQuery, Cache_Lite, Mustache.php, PHP Gettext, PHP OAuth, Zend_Json

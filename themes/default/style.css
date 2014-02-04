@@ -99,7 +99,7 @@ h1 a:hover {
 }
 
 /**
- *	Pied de page
+ *	Footer
  ******************************************************************/
  
 #footer {
@@ -114,7 +114,7 @@ h1 a:hover {
 }
 
 /**
- *	Colonnes
+ *	Columns
  ******************************************************************/
  
 .col1 {
@@ -135,10 +135,10 @@ h1 a:hover {
 }
 
 /**
- * Boites
+ * Boxes
  ******************************************************************/
  
-.boite {
+.box {
 	margin: 0 0 18px;	
 	border: 1px solid #dfd3ac;
 	background: #fffcf1;
@@ -147,11 +147,11 @@ h1 a:hover {
 	-webkit-box-shadow: 0 0 8px rgba( 0, 0, 0, 0.1);
 }
 
-.boite.nodata {
+.box.nodata {
 	opacity: 0.5;
 }
 
-.boite h2 {
+.box h2 {
 	font-size: 130%;
 	padding: 8px 10px 9px;
 	color: #c5b78a;
@@ -160,29 +160,29 @@ h1 a:hover {
 	border-bottom: 1px solid #dfd3ac;
 }
 
-.boite h2 span {
+.box h2 span {
 	font-size: 80%;
 	font-weight: normal;
 }
 
-.boite h2 a {
+.box h2 a {
 	text-decoration: none;
 	border: none;
 }
 
-.boite ul li {
+.box ul li {
 	margin-bottom: 5px;
 }
 
-.boite ul li.nodata {
+.box ul li.nodata {
 	opacity: 0.5;
 }
 
-.boite .boite-inner {
+.box .boite-inner {
 	padding: 10px;
 }
 
-.boite.no-title h2 {
+.box.no-title h2 {
 	display: none;
 }
 
@@ -553,7 +553,7 @@ h1 a:hover {
 }
 
 /**
- *	WTF (aussi appelé "intro")
+ *	WTF (also called "intro")
  ******************************************************************/
 
 .wtf {
@@ -569,7 +569,7 @@ h1 a:hover {
 }
 
 /**
- *	Crédits
+ *	Credits
  ******************************************************************/
  
 .credits p {

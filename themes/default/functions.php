@@ -2,7 +2,7 @@
 	
 	function boxTemplate() {
 		return '
-			<div class="boite {{{class}}}" id="{{{id}}}">
+			<div class="box {{{class}}}" id="{{{id}}}">
 				<h2><a rel="me" href="{{{url}}}">{{{title}}}</a> <span>{{{description}}}</span></h2>
 				<div class="boite-inner">
 					<ul class="clearfix">
@@ -15,7 +15,7 @@
 
 	function Text_boxTemplate() {
 		return '
-			<div class="boite {{{class}}}" id="{{{id}}}">
+			<div class="box {{{class}}}" id="{{{id}}}">
 				<h2>{{{title}}} <span>{{{description}}}</span></h2>
 				<div class="boite-inner">
 					{{{items}}}
